@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moulpali&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moul&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+:root {
+  color-scheme: light;
+  --matcha-deep: #474f20;
+  --matcha-primary: #5f682a;
+  --matcha-leaf: #727c33;
+  --matcha-light: #eff2e4;
+  --matcha-cream: #f7f9f0;
+  
+  --red-primary: #330404;
+  --red-deep: #260202;
+  --red-wine: #330404;
+  --red-rose: #520909;
+  --red-blush: #faeded;
+
+  --gold-primary: #d4af37;
+  --gold-dark: #a67c1e;
+  --gold-light: #f6e6a6;
+  
+  --parchment: #faf7f2;
+  --parchment-warm: #f4ede1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #5f682a;
+  color: #330404;
+  overflow-x: hidden;
+}
+
+/* Typography Classes */
+@font-face {
+  font-family: 'Khmer OS Muol Light';
+  src: local('Khmer OS Muol Light'), local('Khmer OS Moul Light'), local('Khmer OS Muol'), local('Moul');
+  font-display: swap;
+}
+
+.font-moul-light,
+.font-moul {
+  font-family: 'Khmer OS Muol Light', 'Khmer OS Moul Light', 'Khmer OS Muol', 'Moul', 'Moulpali', cursive, serif !important;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.font-moulpali {
+  font-family: 'Moulpali', 'Khmer OS Moulpali', 'Khmer OS Muol Light', 'Moul', cursive, serif !important;
+  line-height: 1.65;
+}
+
+.font-great-vibes,
+.font-script {
+  font-family: 'Great Vibes', cursive !important;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.16em;
+}
+
+.font-editorial {
+  font-family: 'Playfair Display', Georgia, serif !important;
+}
+
+.font-sans-luxury {
+  font-family: 'Montserrat', sans-serif !important;
+  letter-spacing: 0.12em;
+}
+
+/* Scroll Animation Reveal Classes */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-zoom-in {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-zoom-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger Delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Gentle Float Micro-Animation */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-gentle-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Chandelier Sway Keyframe */
+@keyframes chandelierSway {
+  0% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+  100% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+.animate-chandelier {
+  transform-origin: top center;
+  animation: chandelierSway 6s ease-in-out infinite;
+}
+
+/* Wax Seal Pulsing Ring */
+@keyframes sealPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(51, 4, 4, 0.7), 0 0 0 0 rgba(95, 104, 42, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(51, 4, 4, 0), 0 0 0 10px rgba(95, 104, 42, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(51, 4, 4, 0), 0 0 0 0 rgba(95, 104, 42, 0);
+  }
+}
+
+.seal-pulse {
+  animation: sealPulse 2.4s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Seal Break Radiant Wave when clicked */
+@keyframes sealBreakWave {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.animate-seal-break {
+  animation: sealBreakWave 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Card Slide Up After Envelope Open */
+@keyframes cardSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-slide-up {
+  animation: cardSlideUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Crimson Ribbon Frame Styling */
+.couple-ribbon-card {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.couple-ribbon-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Filigree Section Separator */
+.filigree-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #330404;
+  margin: 1.25rem auto;
+}
+
+.filigree-divider::before,
+.filigree-divider::after {
+  content: '';
+  height: 1px;
+  width: 45px;
+  background: linear-gradient(90deg, transparent, #330404, transparent);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #474f20;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5f682a;
+  border-radius: 4px;
+  border: 1px solid #330404;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #330404;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-chandelier,
+  .seal-pulse {
+    animation: none;
+  }
+}
