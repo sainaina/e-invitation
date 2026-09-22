@@ -25,13 +25,14 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
   }
 
   return (
-    <div className="relative mx-auto w-full max-w-[530px] px-2 sm:px-3 py-6">
+    <div className="relative mx-auto w-full min-h-screen sm:min-h-0 sm:max-w-xl md:max-w-2xl lg:max-w-3xl px-0 sm:px-4 sm:py-8">
       {/* 
         Main Royal Invitation Card Container 
-        Curated colors: Primary #330404 (Deep Red) and #5f682a (Matcha Green)
+        Full-screen edge-to-edge on phone, luxury framed stationery on tablet/desktop.
+        Curated colors: Primary #330404 (Deep Red Wine) and #5f682a (Matcha Green)
       */}
-      <div className="relative overflow-hidden rounded-[32px] shadow-[0_30px_90px_-15px_rgba(25,5,5,0.8)] border-2 border-[#330404] bg-[#FAF7F2]">
-        
+      <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(25,5,5,0.85)] border-0 sm:border-2 sm:border-[#330404] bg-[#FAF7F2]">
+
         {/* Corner Filigree Accents in #330404 */}
         <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none">❧</div>
         <div className="pointer-events-none absolute top-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-x-[-1]">❧</div>
@@ -39,8 +40,8 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
         <div className="pointer-events-none absolute bottom-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none rotate-180">❧</div>
 
         {/* Double inner gold & crimson border */}
-        <div className="pointer-events-none absolute inset-2.5 z-20 rounded-[24px] border border-[#330404]/35" />
-        <div className="pointer-events-none absolute inset-3.5 z-20 rounded-[20px] border border-[#5f682a]/35" />
+        <div className="pointer-events-none absolute inset-2 sm:inset-2.5 z-20 rounded-none sm:rounded-[32px] border border-[#330404]/35" />
+        <div className="pointer-events-none absolute inset-3 sm:inset-3.5 z-20 rounded-none sm:rounded-[28px] border border-[#5f682a]/35" />
 
         {/* Invitation Content Layer */}
         <div className="relative z-10 font-moulpali">

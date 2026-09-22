@@ -78,7 +78,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
   return (
     <div className="space-y-6 px-3">
       {/* RSVP Form Card */}
-      <div className="rounded-2xl border-2 border-[#330404]/30 bg-white/90 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:border-[#330404]">
+      <div className="fade-left delay-100 rounded-2xl border-2 border-[#330404]/30 bg-white/90 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:border-[#330404]">
         <div className="text-center">
           <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#330404]/10 text-[#330404]">
             <MessageSquareHeart className="h-5 w-5" />
@@ -255,7 +255,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
       </div>
 
       {/* Digital Red Envelope / Wedding Gift Box */}
-      <div className="rounded-2xl border-2 border-[#330404]/30 bg-white/90 p-4 shadow-xs text-center">
+      <div className="fade-right delay-150 rounded-2xl border-2 border-[#330404]/30 bg-white/90 p-4 shadow-xs text-center">
         <div className="flex items-center justify-center gap-2 text-[#330404]">
           <Gift className="h-4 w-4" />
           <h4 className="font-moul text-sm tracking-wider text-[#330404]">
@@ -293,7 +293,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
       </div>
 
       {/* Guest Blessings Feed */}
-      <div className="space-y-2.5">
+      <div className="fade-left delay-200 space-y-2.5">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-1.5">
             <Heart className="h-4 w-4 fill-current text-[#330404]" />

@@ -56,7 +56,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         {items[0] && (
           <div
             onClick={() => openLightbox(0)}
-            className="group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#330404]"
+            className="fade-left delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#330404]"
           >
             <div className="aspect-[16/10] w-full overflow-hidden bg-stone-100">
               <img
@@ -85,11 +85,12 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         <div className="grid grid-cols-2 gap-3">
           {items.slice(1, 3).map((item, idx) => {
             const actualIdx = idx + 1
+            const animClass = idx === 0 ? 'fade-left delay-200' : 'fade-right delay-200'
             return (
               <div
                 key={item.id}
                 onClick={() => openLightbox(actualIdx)}
-                className="group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/40 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#330404]"
+                className={`${animClass} group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/40 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#330404]`}
               >
                 <div className="aspect-[4/5] w-full overflow-hidden bg-stone-100">
                   <img
@@ -113,7 +114,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         {items[3] && (
           <div
             onClick={() => openLightbox(3)}
-            className="group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#330404]"
+            className="fade-right delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#330404]"
           >
             <div className="aspect-[16/11] w-full overflow-hidden bg-stone-100">
               <img
