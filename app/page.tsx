@@ -258,55 +258,32 @@ END:VCALENDAR`
           </p>
 
           {/* =================================================================== */}
-          {/* CIRCULAR MATCHA MEDALLION (CHANGES BEIGE TO MATCHA, STAMP REMAINS RED) */}
+          {/* CIRCULAR MATCHA MEDALLION WITH RED WAX SEAL (ZERO BEIGE)             */}
           {/* =================================================================== */}
           <div className="my-6 sm:my-7 flex justify-center">
-            <div className="relative flex h-48 w-48 sm:h-56 sm:w-56 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_18px_40px_rgba(51,4,4,0.38)] ring-4 ring-[#5f682a]/30 overflow-hidden group/medallion">
-              
-              {/* Matcha Paper Texture Gradient inside the Circle (Changed from beige to matcha) */}
-              <div 
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: 'radial-gradient(circle at 50% 45%, #6d7934 0%, #5f682a 55%, #464e1c 100%)',
-                }}
+            <div
+              className={`group/seal relative flex h-48 w-48 sm:h-56 sm:w-56 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_18px_40px_rgba(51,4,4,0.38)] ring-4 ring-[#5f682a]/30 overflow-hidden cursor-pointer transition-all duration-700 ${
+                isOpeningAnim ? 'scale-115 rotate-6 ring-8 ring-[#330404]/60' : 'hover:scale-105 active:scale-95'
+              }`}
+            >
+              {/* Luminous Red Pulsing Halo */}
+              <div className="seal-pulse absolute inset-0 rounded-full bg-[#330404]/25" />
+
+              {/* Golden Shockwave Wave Burst on Click */}
+              {isOpeningAnim && (
+                <div className="animate-seal-break absolute inset-0 rounded-full border-4 border-[#330404] bg-radial-[circle,_rgba(51,4,4,0.4)_0%,_transparent_70%]" />
+              )}
+
+              {/* The Matcha Paper & Red Wax Seal Image (100% matcha, zero beige) */}
+              <img
+                src="/api/wax-seal"
+                alt="RN Royal Red Wax Seal on Matcha Paper"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover/seal:scale-105"
               />
 
-              {/* Envelope Flap Fold Lines on Matcha Paper */}
-              <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-45" viewBox="0 0 200 200">
-                {/* Diagonal envelope fold lines meeting in center behind seal */}
-                <line x1="28" y1="28" x2="100" y2="100" stroke="#330404" strokeWidth="1.75" strokeDasharray="3 2" />
-                <line x1="172" y1="28" x2="100" y2="100" stroke="#330404" strokeWidth="1.75" strokeDasharray="3 2" />
-                <line x1="28" y1="172" x2="100" y2="100" stroke="#330404" strokeWidth="1.75" strokeDasharray="3 2" />
-                <line x1="172" y1="172" x2="100" y2="100" stroke="#330404" strokeWidth="1.75" strokeDasharray="3 2" />
-              </svg>
-
-              {/* Inner Circular Stitch & Filigree Ring */}
-              <div className="pointer-events-none absolute inset-2 sm:inset-2.5 rounded-full border border-[#FAF7F2]/35" />
+              {/* Decorative Dual Inner Filigree Rings */}
+              <div className="pointer-events-none absolute inset-2 sm:inset-2.5 rounded-full border border-[#FAF7F2]/40" />
               <div className="pointer-events-none absolute inset-3 sm:inset-3.5 rounded-full border border-[#330404]/40" />
-
-              {/* The Stamp: Kept RED with Authentic Monogram */}
-              <div
-                className={`group/seal relative flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center rounded-full transition-all duration-700 z-10 ${
-                  isOpeningAnim ? 'scale-125 rotate-12 ring-8 ring-[#330404]/60' : 'hover:scale-110 active:scale-95'
-                }`}
-              >
-                {/* Luminous Red Pulsing Halo */}
-                <div className="seal-pulse absolute inset-0 rounded-full bg-[#330404]/40" />
-
-                {/* Golden Shockwave Wave Burst on Click */}
-                {isOpeningAnim && (
-                  <div className="animate-seal-break absolute inset-0 rounded-full border-4 border-[#330404] bg-radial-[circle,_rgba(51,4,4,0.5)_0%,_transparent_70%]" />
-                )}
-
-                {/* Red Wine Shimmer Ring */}
-                <div className="absolute -inset-1 rounded-full border border-[#330404] opacity-80 group-hover/seal:opacity-100 transition-opacity" />
-
-                <img
-                  src="/images/wax_seal_rn_1790042663814.jpg"
-                  alt="RN Royal Red Wax Seal"
-                  className="h-28 w-28 sm:h-32 sm:w-32 rounded-full object-cover shadow-[0_15px_30px_rgba(51,4,4,0.6)] ring-2 ring-[#330404]"
-                />
-              </div>
             </div>
           </div>
 
@@ -388,27 +365,39 @@ END:VCALENDAR`
               </p>
             </div>
 
-            {/* Modern Royal Cathedral Arch Portrait (Grand Redesign of Wedding Photo) */}
-            <div className="fade-right delay-200 relative z-10 my-6 flex justify-center w-full px-4">
-              <div className="group relative w-full max-w-[310px] sm:max-w-[350px] aspect-[3/4] rounded-t-[140px] sm:rounded-t-[160px] rounded-b-[24px] sm:rounded-b-[28px] p-2.5 sm:p-3 bg-[#FAF7F2] shadow-[0_20px_50px_-10px_rgba(51,4,4,0.3)] border-2 border-[#330404] ring-4 ring-[#5f682a]/20 transition-all duration-500 hover:shadow-[0_25px_60px_-10px_rgba(51,4,4,0.4)]">
-                {/* Inner Arch Matting with dual hairline borders */}
-                <div className="relative w-full h-full overflow-hidden rounded-t-[128px] sm:rounded-t-[146px] rounded-b-[18px] sm:rounded-b-[22px] border border-[#5f682a]/40 bg-stone-100 shadow-inner">
+            {/* Modern Luxury Editorial Wedding Portrait Frame */}
+            <div className="fade-right delay-200 relative z-10 my-6 sm:my-8 flex justify-center w-full px-4">
+              <div className="group relative w-full max-w-[320px] sm:max-w-[360px]">
+                {/* Ambient Soft Glow Behind Arch */}
+                <div className="absolute -inset-2 rounded-t-[160px] rounded-b-3xl bg-gradient-to-b from-[#5f682a]/15 via-[#330404]/10 to-transparent blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-700" />
+
+                {/* Main Architectural Arch Frame with Razor-Thin Luxury Hairlines */}
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-t-[150px] rounded-b-2xl border border-[#330404]/35 bg-stone-100 shadow-[0_22px_50px_-12px_rgba(51,4,4,0.25)] transition-all duration-700 hover:shadow-[0_28px_60px_-12px_rgba(51,4,4,0.35)] ring-1 ring-[#5f682a]/25">
+                  {/* The Wedding Photo */}
                   <img
                     src="/images/couple_hero_portrait_1790042546264.jpg"
-                    alt="Rithy & Nihyun Royal Wedding Portrait"
-                    className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-105"
+                    alt="Rithy & Nihyun Royal Wedding"
+                    className="h-full w-full object-cover object-[center_20%] transition-transform duration-1000 ease-out group-hover:scale-105"
                   />
-                  {/* Gentle Gradient at base to frame floating badge */}
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#330404]/55 via-[#330404]/10 to-transparent" />
+
+                  {/* Delicate Inner Glass Hairline Inset */}
+                  <div className="pointer-events-none absolute inset-2 rounded-t-[140px] rounded-b-[10px] border border-white/45 ring-1 ring-[#330404]/15" />
+
+                  {/* Soft bottom vignette for photo depth */}
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#330404]/45 via-transparent to-transparent" />
+
+                  {/* Minimalist Corner Sparkles */}
+                  <div className="pointer-events-none absolute top-4 left-5 font-cinzel text-[9px] text-[#FAF7F2]/80 select-none">✦</div>
+                  <div className="pointer-events-none absolute top-4 right-5 font-cinzel text-[9px] text-[#FAF7F2]/80 select-none">✦</div>
                 </div>
 
-                {/* Floating Calligraphic Badge at Arch Base */}
-                <div className="absolute -bottom-4 inset-x-0 mx-auto w-fit flex items-center gap-1.5 px-4 sm:px-5 py-1.5 rounded-full bg-[#FAF7F2] border-2 border-[#330404] text-[#330404] shadow-lg ring-2 ring-[#5f682a]/20 backdrop-blur-md">
-                  <span className="text-xs text-[#5f682a]">✦</span>
-                  <span className="font-great-vibes text-xl sm:text-2xl text-[#330404] tracking-wide">
-                    Rithy &amp; Nihyun
-                  </span>
-                  <span className="text-xs text-[#5f682a]">✦</span>
+                {/* Refined Minimalist Editorial Subscript Below Frame (Clean & Modern) */}
+                <div className="mt-3.5 flex items-center justify-center gap-3 text-center">
+                  <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#5f682a]/50" />
+                  <p className="font-cinzel text-[9px] sm:text-[10px] font-semibold tracking-[0.3em] text-[#5f682a] uppercase">
+                    PHNOM PENH • 2025
+                  </p>
+                  <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#5f682a]/50" />
                 </div>
               </div>
             </div>
