@@ -61,6 +61,7 @@ export default function Page() {
   const [isStampRotating, setIsStampRotating] = useState(false)
   const [isEnvelopeSliding, setIsEnvelopeSliding] = useState(false)
   const [isOpening, setIsOpening] = useState(false)
+  const [envelopeKey, setEnvelopeKey] = useState(0)
   const [copiedAddress, setCopiedAddress] = useState(false)
   const [activeChildhood, setActiveChildhood] = useState<{ groom: boolean; bride: boolean }>({
     groom: true,
@@ -101,6 +102,15 @@ export default function Page() {
 
   // Bi-directional scroll reveal observer (animates on scrolling up and down)
   useEffect(() => {
+    // If envelope is still closed, ensure all invitation elements are reset so they animate when unveiled
+    if (!isEnvelopeOpen && !isEnvelopeSliding) {
+      const elements = document.querySelectorAll(
+        '.fade-left, .fade-right, .reveal-slide-left, .reveal-slide-right, .reveal-on-scroll, .reveal-zoom-in'
+      )
+      elements.forEach((el) => el.classList.remove('is-visible'))
+      return
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -112,7 +122,7 @@ export default function Page() {
           }
         })
       },
-      { threshold: 0.1, rootMargin: '25px 0px -25px 0px' }
+      { threshold: 0.05, rootMargin: '10px 0px -20px 0px' }
     )
 
     const observeAll = () => {
@@ -122,10 +132,10 @@ export default function Page() {
       elements.forEach((el) => observer.observe(el))
     }
 
-    observeAll()
-    const timer1 = setTimeout(observeAll, 200)
-    const timer2 = setTimeout(observeAll, 600)
-    const timer3 = setTimeout(observeAll, 1200)
+    // Give a smooth stagger when the envelope dissolves
+    const timer1 = setTimeout(observeAll, 120)
+    const timer2 = setTimeout(observeAll, 450)
+    const timer3 = setTimeout(observeAll, 900)
 
     return () => {
       clearTimeout(timer1)
@@ -133,7 +143,7 @@ export default function Page() {
       clearTimeout(timer3)
       observer.disconnect()
     }
-  }, [isEnvelopeOpen])
+  }, [isEnvelopeOpen, isEnvelopeSliding])
 
   const copyAddressToClipboard = () => {
     navigator.clipboard.writeText(
@@ -223,6 +233,7 @@ END:VCALENDAR`
       {/* FULL-SCREEN ROYAL WELCOME ENVELOPE (ROYAL STATIONERY + RED STAMP)         */}
       {/* ========================================================================= */}
       <div
+        key={envelopeKey}
         onClick={triggerOpenInvitation}
         style={{
           background: 'transparent',
@@ -238,43 +249,43 @@ END:VCALENDAR`
         <div className="pointer-events-none absolute inset-0 bg-[#FFFFFF]/50" />
 
         {/* Full-Screen Royal Dual Hairline Framing (Red Wine & Matcha/20) */}
-        <div className="pointer-events-none fixed inset-3 sm:inset-5 rounded-2xl sm:rounded-3xl border-2 border-[#330404]/40" />
-        <div className="pointer-events-none fixed inset-4.5 sm:inset-7 rounded-xl sm:rounded-2xl border border-[#5f682a]/40 ring-1 ring-[#5f682a]/20" />
+        <div className="pointer-events-none fixed inset-3 sm:inset-5 rounded-2xl sm:rounded-3xl border-2 border-[#330404]/40 cover-fade-in cover-delay-100" />
+        <div className="pointer-events-none fixed inset-4.5 sm:inset-7 rounded-xl sm:rounded-2xl border border-[#5f682a]/40 ring-1 ring-[#5f682a]/20 cover-fade-in cover-delay-200" />
 
         {/* Royal Corner Filigrees */}
-        <div className="pointer-events-none absolute top-4 left-4 font-cinzel text-xs text-[#330404]/60">❧</div>
-        <div className="pointer-events-none absolute top-4 right-4 font-cinzel text-xs text-[#330404]/60 scale-x-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-4 left-4 font-cinzel text-xs text-[#330404]/60 scale-y-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-4 right-4 font-cinzel text-xs text-[#330404]/60 rotate-180">❧</div>
+        <div className="pointer-events-none absolute top-4 left-4 font-cinzel text-xs text-[#330404]/60 cover-fade-in cover-delay-200">❧</div>
+        <div className="pointer-events-none absolute top-4 right-4 font-cinzel text-xs text-[#330404]/60 scale-x-[-1] cover-fade-in cover-delay-200">❧</div>
+        <div className="pointer-events-none absolute bottom-4 left-4 font-cinzel text-xs text-[#330404]/60 scale-y-[-1] cover-fade-in cover-delay-200">❧</div>
+        <div className="pointer-events-none absolute bottom-4 right-4 font-cinzel text-xs text-[#330404]/60 rotate-180 cover-fade-in cover-delay-200">❧</div>
 
         {/* Top Eyebrow */}
         <div className="relative z-10 pt-2 sm:pt-4">
-          <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
+          <p className="cover-fade-left cover-delay-100 font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
             ROYAL WEDDING INVITATION
           </p>
-          <p className="font-moulpali text-base sm:text-lg text-[#330404] mt-1 drop-shadow-xs">
+          <p className="cover-fade-right cover-delay-200 font-moulpali text-base sm:text-lg text-[#330404] mt-1 drop-shadow-xs">
             សិរីសួស្តី អាពាហ៍ពិពាហ៍
           </p>
         </div>
 
         {/* Couple Calligraphy & Red Wax Seal Medallion in Center */}
         <div className="relative z-10 my-auto py-1 sm:py-2 w-full max-w-lg">
-          <h1 className="font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#330404] leading-tight drop-shadow-[0_2px_10px_rgba(250,247,242,0.9)]">
+          <h1 className="cover-fade-left cover-delay-300 font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#330404] leading-tight drop-shadow-[0_2px_10px_rgba(250,247,242,0.9)]">
             Rithy <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Nihyun
           </h1>
 
-          <p className="mt-1 font-moulpali text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
+          <p className="cover-fade-right cover-delay-400 mt-1 font-moulpali text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
             រីទ្ធី និង និគុណ
           </p>
 
-          <p className="mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#330404]/80 font-medium">
+          <p className="cover-fade-left cover-delay-500 mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#330404]/80 font-medium">
             18TH DECEMBER 2025 • PHNOM PENH
           </p>
 
           {/* =================================================================== */}
           {/* CIRCULAR MATCHA MEDALLION WITH RED WAX SEAL (SMALL & 180° ROTATION) */}
           {/* =================================================================== */}
-          <div className="my-4 sm:my-6 flex justify-center">
+          <div className="cover-scale-in cover-delay-650 my-4 sm:my-6 flex justify-center">
             <div
               className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_12px_28px_rgba(51,4,4,0.35)] ring-4 ring-[#5f682a]/30 overflow-hidden cursor-pointer transition-all duration-700 ${isStampRotating
                 ? 'animate-seal-rotate-180 ring-8 ring-[#330404]/60'
@@ -303,16 +314,16 @@ END:VCALENDAR`
           </div>
 
           {/* Tap Hint */}
-          <p className="font-moulpali text-xs sm:text-sm text-[#330404] animate-pulse drop-shadow-xs font-semibold">
+          <p className="cover-fade-left cover-delay-750 font-moulpali text-xs sm:text-sm text-[#330404] animate-pulse drop-shadow-xs font-semibold">
             សូមចុចលើត្រាដើម្បីបើកលិខិតអញ្ជើញ
           </p>
-          <p className="font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
+          <p className="cover-fade-right cover-delay-850 font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
             TAP SEAL TO UNVEIL INVITATION
           </p>
         </div>
 
         {/* Bottom Button */}
-        <div className="relative z-10 pb-2 sm:pb-4 w-full max-w-xs">
+        <div className="cover-fade-up cover-delay-950 relative z-10 pb-2 sm:pb-4 w-full max-w-xs">
           <button
             onClick={(e) => {
               e.stopPropagation()
@@ -340,6 +351,7 @@ END:VCALENDAR`
             setIsEnvelopeOpen(false)
             setIsEnvelopeSliding(false)
             setIsStampRotating(false)
+            setEnvelopeKey((prev) => prev + 1)
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
         >
@@ -355,11 +367,11 @@ END:VCALENDAR`
           <header className="relative w-full px-4 sm:px-8 pt-8 sm:pt-12 pb-10 text-center flex flex-col justify-between items-center rounded-none sm:rounded-t-[36px]">
             {/* Top Ornamental Header */}
             <div className="relative z-10 pt-2 sm:pt-4">
-              <span className="text-xs sm:text-sm text-[#5f682a] block select-none">❖ · ❦ · ❖</span>
-              <h1 className="font-moulpali text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
+              <span className="fade-left text-xs sm:text-sm text-[#5f682a] block select-none">❖ · ❦ · ❖</span>
+              <h1 className="fade-right delay-100 font-moulpali text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
                 សិរីសួស្តី អាពាហ៍ពិពាហ៍
               </h1>
-              <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] mt-1 uppercase">
+              <p className="fade-left delay-150 font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] mt-1 uppercase">
                 Royal Wedding Invitation
               </p>
             </div>
@@ -368,7 +380,7 @@ END:VCALENDAR`
             <div className="relative z-10 w-full max-w-lg my-4 sm:my-6 px-2">
               <div className="grid grid-cols-2 divide-x divide-[#5f682a]/30 text-center">
                 {/* Bride's Parents (Left) */}
-                <div className="px-2 sm:px-4">
+                <div className="fade-left delay-200 px-2 sm:px-4">
                   <p className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a]">
                     មាតាបិតាខាងស្រី
                   </p>
@@ -384,7 +396,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Groom's Parents (Right) */}
-                <div className="px-2 sm:px-4">
+                <div className="fade-right delay-200 px-2 sm:px-4">
                   <p className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a]">
                     មាតាបិតាខាងប្រុស
                   </p>
@@ -401,28 +413,28 @@ END:VCALENDAR`
               </div>
             </div>
 
-              {/* Delicate Matcha Divider */}
-              <div className="my-5 flex items-center justify-center gap-3">
-                <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#5f682a]/60" />
-                <span className="font-cinzel text-xs text-[#330404] select-none">✦ · ❧ · ✦</span>
-                <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#5f682a]/60" />
-              </div>
+            {/* Delicate Matcha Divider */}
+            <div className="reveal-zoom-in delay-150 my-5 flex items-center justify-center gap-3">
+              <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#5f682a]/60" />
+              <span className="font-cinzel text-xs text-[#330404] select-none">✦ · ❧ · ✦</span>
+              <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#5f682a]/60" />
+            </div>
 
-              {/* Formal Khmer Invitation Greeting & Body with Kantumruy Pro */}
-              <div className="text-center space-y-1.5 px-2">
-                <h2 className="font-moulpali text-base sm:text-xl text-[#330404] drop-shadow-xs">
-                  មានកិត្តិយសសូមគោរពអញ្ជើញ
-                </h2>
-                <p className="font-kantumruy text-xs sm:text-[13px] text-[#260202] font-medium leading-relaxed max-w-md mx-auto">
-                  ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា និងប្រិយមិត្តជិតឆ្ងាយ អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធពរជ័យសិរីសួស្តី ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រី របស់យើងខ្ញុំ។
-                </p>
-              </div>
+            {/* Formal Khmer Invitation Greeting & Body with Kantumruy Pro */}
+            <div className="text-center space-y-1.5 px-2">
+              <h2 className="fade-left delay-100 font-moulpali text-base sm:text-xl text-[#330404] drop-shadow-xs">
+                មានកិត្តិយសសូមគោរពអញ្ជើញ
+              </h2>
+              <p className="fade-right delay-150 font-kantumruy text-xs sm:text-[13px] text-[#260202] font-medium leading-relaxed max-w-md mx-auto">
+                ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា និងប្រិយមិត្តជិតឆ្ងាយ អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធពរជ័យសិរីសួស្តី ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រី របស់យើងខ្ញុំ។
+              </p>
+            </div>
 
             {/* The Couple with Center Royal Ampersand */}
             <div className="relative z-10 w-full max-w-xl my-4 sm:my-6 px-2">
               <div className="flex items-center justify-between sm:justify-center gap-2 sm:gap-6">
                 {/* Bride (Left) */}
-                <div className="flex-1 text-center sm:text-right">
+                <div className="fade-left delay-200 flex-1 text-center sm:text-right">
                   <span className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a] block">
                     កូនស្រីនាម
                   </span>
@@ -438,7 +450,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Central Royal Calligraphic Ampersand */}
-                <div className="flex-shrink-0 flex flex-col items-center justify-center px-2 sm:px-5 select-none">
+                <div className="reveal-zoom-in delay-150 flex-shrink-0 flex flex-col items-center justify-center px-2 sm:px-5 select-none">
                   <span className="font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#5f682a] leading-none drop-shadow-xs transition-transform duration-300 hover:scale-110">
                     &amp;
                   </span>
@@ -448,7 +460,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Groom (Right) */}
-                <div className="flex-1 text-center sm:text-left">
+                <div className="fade-right delay-200 flex-1 text-center sm:text-left">
                   <span className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a] block">
                     កូនប្រុសនាម
                   </span>
@@ -466,7 +478,7 @@ END:VCALENDAR`
             </div>
 
             {/* Event Date, Time & Venue in Khmer */}
-            <div className="relative z-10 w-full max-w-md mx-auto my-3 text-center space-y-1">
+            <div className="fade-left delay-250 relative z-10 w-full max-w-md mx-auto my-3 text-center space-y-1">
               <p className="font-moulpali text-xs sm:text-sm text-[#330404] leading-relaxed">
                 ថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែធ្នូ ឆ្នាំ ២០២៥ វេលាម៉ោង ៥:០០ រសៀល
               </p>
@@ -477,15 +489,15 @@ END:VCALENDAR`
 
             {/* Modern English Wedding Invitation Section */}
             <div className="relative z-10 w-full max-w-md mx-auto mt-2 pt-3 border-t border-[#5f682a]/30">
-              <h2 className="font-cinzel text-base sm:text-lg font-bold tracking-[0.25em] text-[#330404] uppercase">
+              <h2 className="fade-right delay-100 font-cinzel text-base sm:text-lg font-bold tracking-[0.25em] text-[#330404] uppercase">
                 Wedding Invitation
               </h2>
-              <p className="font-cinzel text-[10px] sm:text-[11px] tracking-wider text-[#330404]/90 mt-1 max-w-sm mx-auto leading-relaxed">
+              <p className="fade-left delay-150 font-cinzel text-[10px] sm:text-[11px] tracking-wider text-[#330404]/90 mt-1 max-w-sm mx-auto leading-relaxed">
                 Together with their families, the bride and groom respectfully invite you to celebrate their wedding and share in the joy of this special occasion.
               </p>
 
               {/* Date & Location Pill Badge */}
-              <div className="mt-3.5 inline-flex items-center gap-2 rounded-full border border-[#5f682a]/50 bg-[#FAF7F2]/90 px-5 py-2 shadow-xs">
+              <div className="fade-right delay-200 mt-3.5 inline-flex items-center gap-2 rounded-full border border-[#5f682a]/50 bg-[#FAF7F2]/90 px-5 py-2 shadow-xs">
                 <Calendar className="h-4 w-4 text-[#330404]" />
                 <span className="font-cinzel text-xs sm:text-sm font-bold tracking-wider text-[#260202]">
                   THURSDAY 18<sup>TH</sup> DECEMBER 2025 • 5:00 PM
@@ -497,7 +509,7 @@ END:VCALENDAR`
             <div className="relative z-10 mt-5 w-full flex flex-col items-center justify-center gap-3.5">
               <button
                 onClick={handleSaveCalendar}
-                className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#5f682a] bg-[#330404] px-8 py-3 shadow-[0_4px_18px_rgba(51,4,4,0.3)] hover:bg-[#5f682a] transition-all duration-300 hover:scale-105 active:scale-95 text-white ring-2 ring-[#5f682a]/30"
+                className="fade-left delay-200 group relative inline-flex items-center gap-2.5 rounded-full border border-[#5f682a] bg-[#330404] px-8 py-3 shadow-[0_4px_18px_rgba(51,4,4,0.3)] hover:bg-[#5f682a] transition-all duration-300 hover:scale-105 active:scale-95 text-white ring-2 ring-[#5f682a]/30"
               >
                 <span className="text-[#5f682a] group-hover:text-white transition-colors text-xs">✦</span>
                 <span className="font-great-vibes text-xl sm:text-2xl font-normal tracking-wide text-white drop-shadow-xs">
@@ -507,7 +519,7 @@ END:VCALENDAR`
               </button>
 
               {/* Countdown Timer with English & Kantumruy Pro */}
-              <div className="grid grid-cols-4 gap-2.5 text-center text-xs">
+              <div className="fade-right delay-250 grid grid-cols-4 gap-2.5 text-center text-xs">
                 <div className="rounded-2xl border border-[#5f682a]/40 bg-[#FAF7F2]/90 p-2.5 shadow-xs min-w-[62px] ring-1 ring-[#330404]/10 transition-transform hover:-translate-y-0.5">
                   <span className="block font-cinzel text-base sm:text-lg font-bold text-[#330404]">{timeLeft.days}</span>
                   <span className="block font-cinzel text-[8px] tracking-wider text-[#330404]/70 font-bold">DAYS</span>
@@ -720,7 +732,7 @@ END:VCALENDAR`
               <span className="text-xs text-[#330404]">• · •</span>
             </div>
 
-            <div className="fade-right delay-200 mt-5">
+            <div className="mt-5">
               <GalleryLightbox items={galleryList} lang="km" />
             </div>
           </section>
@@ -733,20 +745,20 @@ END:VCALENDAR`
           {/* ===================================================================== */}
           <section id="event" className="relative border-t border-[#330404]/20 px-3.5 sm:px-8 py-12 text-center overflow-hidden">
             {/* Consistent Section Header matching Bride & Groom / Gallery / Venue */}
-            <div className="reveal-on-scroll">
-              <div className="mb-3 flex items-center justify-center gap-3">
+            <div className="relative">
+              <div className="fade-left mb-3 flex items-center justify-center gap-3">
                 <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#5f682a]/50" />
                 <span className="font-cinzel text-xs text-[#5f682a] select-none">❖ · ❦ · ❖</span>
                 <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#5f682a]/50" />
               </div>
 
-              <p className="fade-left font-cinzel text-[10px] tracking-[0.3em] text-[#5f682a] uppercase">
+              <p className="fade-left delay-100 font-cinzel text-[10px] tracking-[0.3em] text-[#5f682a] uppercase">
                 WEDDING TIMELINE
               </p>
-              <h2 className="fade-right delay-100 mt-0.5 font-great-vibes text-5xl sm:text-6xl text-[#330404]">
+              <h2 className="fade-right delay-150 mt-0.5 font-great-vibes text-5xl sm:text-6xl text-[#330404]">
                 Wedding Events
               </h2>
-              <p className="fade-left delay-150 font-moulpali text-xs sm:text-sm text-[#5f682a] mt-0.5">
+              <p className="fade-left delay-200 font-moulpali text-xs sm:text-sm text-[#5f682a] mt-0.5">
                 ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៥
               </p>
 
@@ -755,10 +767,10 @@ END:VCALENDAR`
               </div>
             </div>
 
-            {/* Modern Wedding Event Schedule (No Scale Line, Sleek Luxury Cards) */}
+            {/* Modern Wedding Event Schedule (Bi-Directional Scroll Animations, Sleek Luxury Cards) */}
             <div className="relative mx-auto mt-7 max-w-lg px-2 sm:px-4">
               {/* Morning Ceremonies Header Chip */}
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="fade-left delay-100 flex items-center justify-center gap-3 mb-4">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#5f682a]/40" />
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/50 backdrop-blur-md border border-[#5f682a]/30 text-[#330404] font-kantumruy text-xs font-bold tracking-wide shadow-xs">
                   <Sun className="h-3.5 w-3.5 text-[#5f682a]" />
@@ -767,10 +779,10 @@ END:VCALENDAR`
                 <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#5f682a]/40" />
               </div>
 
-              {/* Morning Events Cards */}
+              {/* Morning Events Cards (Alternating fade-left & fade-right with staggered delays) */}
               <div className="space-y-2.5 sm:space-y-3">
                 {/* Event 1 */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
+                <div className="fade-left delay-100 group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[78px] py-1.5 px-2 rounded-xl bg-[#5f682a]/15 border border-[#5f682a]/25 group-hover:bg-[#5f682a]/25 transition-colors">
                       <span className="font-kantumruy text-sm sm:text-base font-bold text-[#330404]">
@@ -795,7 +807,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 2 */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
+                <div className="fade-right delay-150 group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[78px] py-1.5 px-2 rounded-xl bg-[#5f682a]/15 border border-[#5f682a]/25 group-hover:bg-[#5f682a]/25 transition-colors">
                       <span className="font-kantumruy text-sm sm:text-base font-bold text-[#330404]">
@@ -820,7 +832,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 3 */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
+                <div className="fade-left delay-200 group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[78px] py-1.5 px-2 rounded-xl bg-[#5f682a]/15 border border-[#5f682a]/25 group-hover:bg-[#5f682a]/25 transition-colors">
                       <span className="font-kantumruy text-sm sm:text-base font-bold text-[#330404]">
@@ -845,7 +857,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 4 */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
+                <div className="fade-right delay-250 group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[78px] py-1.5 px-2 rounded-xl bg-[#5f682a]/15 border border-[#5f682a]/25 group-hover:bg-[#5f682a]/25 transition-colors">
                       <span className="font-kantumruy text-sm sm:text-base font-bold text-[#330404]">
@@ -870,7 +882,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 5 */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
+                <div className="fade-left delay-100 group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[78px] py-1.5 px-2 rounded-xl bg-[#5f682a]/15 border border-[#5f682a]/25 group-hover:bg-[#5f682a]/25 transition-colors">
                       <span className="font-kantumruy text-sm sm:text-base font-bold text-[#330404]">
@@ -895,7 +907,7 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 6 */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
+                <div className="fade-right delay-150 group relative overflow-hidden rounded-2xl border border-[#5f682a]/30 bg-white/50 backdrop-blur-md p-3 sm:p-3.5 text-left shadow-xs transition-all duration-300 hover:border-[#5f682a]/60 hover:bg-white/70 hover:shadow-md">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[78px] py-1.5 px-2 rounded-xl bg-[#5f682a]/15 border border-[#5f682a]/25 group-hover:bg-[#5f682a]/25 transition-colors">
                       <span className="font-kantumruy text-sm sm:text-base font-bold text-[#330404]">
@@ -921,7 +933,7 @@ END:VCALENDAR`
               </div>
 
               {/* Evening Reception Header Chip */}
-              <div className="flex items-center justify-center gap-3 mt-6 mb-4">
+              <div className="fade-left delay-100 flex items-center justify-center gap-3 mt-6 mb-4">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#330404]/30" />
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/50 backdrop-blur-md border border-[#330404]/25 text-[#330404] font-kantumruy text-xs font-bold tracking-wide shadow-xs">
                   <Sparkles className="h-3.5 w-3.5 text-[#5f682a]" />
@@ -931,7 +943,7 @@ END:VCALENDAR`
               </div>
 
               {/* Featured Evening Reception Card */}
-              <div className="group relative overflow-hidden rounded-2xl border-2 border-[#5f682a]/60 bg-gradient-to-br from-[#330404] via-[#3d0505] to-[#4a0707] p-4 sm:p-5 shadow-lg text-left transition-all duration-300 hover:border-[#5f682a] hover:shadow-xl">
+              <div className="fade-right delay-200 group relative overflow-hidden rounded-2xl border-2 border-[#5f682a]/60 bg-gradient-to-br from-[#330404] via-[#3d0505] to-[#4a0707] p-4 sm:p-5 shadow-lg text-left transition-all duration-300 hover:border-[#5f682a] hover:shadow-xl">
                 <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#5f682a]/20 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="relative z-10 flex items-center gap-3.5 sm:gap-4.5">

@@ -250,12 +250,116 @@ body {
   .reveal-slide-left,
   .reveal-slide-right,
   .reveal-on-scroll,
-  .reveal-zoom-in {
+  .reveal-zoom-in,
+  .cover-fade-left,
+  .cover-fade-right,
+  .cover-fade-up,
+  .cover-scale-in,
+  .cover-fade-in {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+    animation: none !important;
   }
 }
+
+/* ========================================================================= */
+/* ENVELOPE COVER SCREEN ENTRANCE ANIMATIONS (SMOOTH FADE-LEFT / FADE-RIGHT) */
+/* ========================================================================= */
+
+@keyframes coverFadeLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes coverFadeRight {
+  0% {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes coverFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes coverScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes coverFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cover-fade-left {
+  animation: coverFadeLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cover-fade-right {
+  animation: coverFadeRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cover-fade-up {
+  animation: coverFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cover-scale-in {
+  animation: coverScaleIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.cover-fade-in {
+  animation: coverFadeIn 0.9s ease-out both;
+}
+
+/* Stagger Delays for Cover Screen */
+.cover-delay-75 { animation-delay: 75ms; }
+.cover-delay-100 { animation-delay: 100ms; }
+.cover-delay-150 { animation-delay: 150ms; }
+.cover-delay-200 { animation-delay: 200ms; }
+.cover-delay-250 { animation-delay: 250ms; }
+.cover-delay-300 { animation-delay: 300ms; }
+.cover-delay-350 { animation-delay: 350ms; }
+.cover-delay-400 { animation-delay: 400ms; }
+.cover-delay-450 { animation-delay: 450ms; }
+.cover-delay-500 { animation-delay: 500ms; }
+.cover-delay-550 { animation-delay: 550ms; }
+.cover-delay-600 { animation-delay: 600ms; }
+.cover-delay-650 { animation-delay: 650ms; }
+.cover-delay-700 { animation-delay: 700ms; }
+.cover-delay-750 { animation-delay: 750ms; }
+.cover-delay-800 { animation-delay: 800ms; }
+.cover-delay-850 { animation-delay: 850ms; }
+.cover-delay-900 { animation-delay: 900ms; }
+.cover-delay-950 { animation-delay: 950ms; }
 
 /* Gentle Float Micro-Animation */
 @keyframes gentleFloat {
