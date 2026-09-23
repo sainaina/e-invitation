@@ -60,6 +60,7 @@ export default function Page() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false)
   const [isStampRotating, setIsStampRotating] = useState(false)
   const [isEnvelopeSliding, setIsEnvelopeSliding] = useState(false)
+  const [isOpening, setIsOpening] = useState(false)
   const [copiedAddress, setCopiedAddress] = useState(false)
   const [activeChildhood, setActiveChildhood] = useState<{ groom: boolean; bride: boolean }>({
     groom: true,
@@ -116,23 +117,20 @@ export default function Page() {
 
     const observeAll = () => {
       const elements = document.querySelectorAll(
-        '.fade-left, .fade-right, .reveal-slide-left, .reveal-slide-right, .reveal-on-scroll, .reveal-zoom-in, .timeline-row'
+        '.fade-left, .fade-right, .reveal-slide-left, .reveal-slide-right, .reveal-on-scroll, .reveal-zoom-in'
       )
       elements.forEach((el) => observer.observe(el))
     }
 
-    // Initial check and re-check after envelope opens
     observeAll()
     const timer1 = setTimeout(observeAll, 200)
     const timer2 = setTimeout(observeAll, 600)
     const timer3 = setTimeout(observeAll, 1200)
-    const timer4 = setTimeout(observeAll, 1800)
 
     return () => {
       clearTimeout(timer1)
       clearTimeout(timer2)
       clearTimeout(timer3)
-      clearTimeout(timer4)
       observer.disconnect()
     }
   }, [isEnvelopeOpen])
@@ -178,24 +176,26 @@ END:VCALENDAR`
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('play-wedding-music'))
     }
+    if (isOpening || isEnvelopeOpen) return
+    setIsOpening(true)
     // 1. Immediately trigger 180-degree rotation of the stamp with royal shockwave
     setIsStampRotating(true)
 
-    // 2. Smoothly slide the envelope away after the stamp rotates
+    // 2. Slowly and smoothly dissolve the envelope cover and reveal the home invitation
     setTimeout(() => {
       setIsEnvelopeSliding(true)
-    }, 550)
+    }, 600)
 
-    // 3. Complete transition, open invitation homepage, and smoothly scroll into view
+    // 3. Complete transition, set envelope open and allow full interaction
     setTimeout(() => {
       setIsEnvelopeOpen(true)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 1450)
+      setIsOpening(false)
+    }, 1800)
   }
 
   return (
     <main className="relative min-h-screen text-[#330404] selection:bg-[#FFFFFF]/50 selection:text-white">
-      {/* Immersive Video Background with Crystal Clarity (No Heavy Blur) */}
+      {/* Immersive Video Background with Crystal Clarity (Stable - No Scale on Scroll) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <video
           autoPlay
@@ -205,7 +205,6 @@ END:VCALENDAR`
           className="h-full w-full object-cover"
           style={{
             filter: 'blur(1px)',
-            transform: 'scale(1.02)',
           }}
         >
           <source src="/videos/arch_background.mp4" type="video/mp4" />
@@ -228,11 +227,11 @@ END:VCALENDAR`
         style={{
           background: 'transparent',
         }}
-        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 select-none shadow-2xl transition-all duration-[950ms] ease-[cubic-bezier(0.22,1,0.36,1)] ring-4 ring-[#330404]/15 ${isEnvelopeOpen
-          ? '-translate-y-full opacity-0 pointer-events-none invisible'
+        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 select-none shadow-2xl transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] ring-4 ring-[#330404]/15 ${isEnvelopeOpen
+          ? 'opacity-0 pointer-events-none invisible'
           : isEnvelopeSliding
-            ? '-translate-y-full opacity-0 pointer-events-none scale-[0.98]'
-            : 'translate-y-0 opacity-100 cursor-pointer'
+            ? 'opacity-0 -translate-y-8 pointer-events-none'
+            : 'opacity-100 translate-y-0 cursor-pointer'
           }`}
       >
         {/* Open invitation overlay matching home invitation page */}
@@ -253,7 +252,7 @@ END:VCALENDAR`
           <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
             ROYAL WEDDING INVITATION
           </p>
-          <p className="font-moul-light font-moul text-base sm:text-lg text-[#330404] mt-1 drop-shadow-xs">
+          <p className="font-moulpali text-base sm:text-lg text-[#330404] mt-1 drop-shadow-xs">
             សិរីសួស្តី អាពាហ៍ពិពាហ៍
           </p>
         </div>
@@ -264,7 +263,7 @@ END:VCALENDAR`
             Rithy <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Nihyun
           </h1>
 
-          <p className="mt-1 font-moul-light font-moul text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
+          <p className="mt-1 font-moulpali text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
             រីទ្ធី និង និគុណ
           </p>
 
@@ -331,9 +330,9 @@ END:VCALENDAR`
       {/* MAIN INVITATION: FRAMED WITH CUSTOM ARCH & CLEAN CHANDELIER               */}
       {/* ========================================================================= */}
       <div
-        className={`transition-all duration-700 ${isEnvelopeOpen || isEnvelopeSliding
-          ? 'opacity-100 animate-card-slide-up'
-          : 'opacity-0 pointer-events-none invisible h-0 overflow-hidden'
+        className={`transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${isEnvelopeOpen || isEnvelopeSliding
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-6 pointer-events-none'
           }`}
       >
         <UsefulFrame
@@ -341,6 +340,7 @@ END:VCALENDAR`
             setIsEnvelopeOpen(false)
             setIsEnvelopeSliding(false)
             setIsStampRotating(false)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
         >
           {/* ===================================================================== */}
@@ -356,7 +356,7 @@ END:VCALENDAR`
             {/* Top Ornamental Header */}
             <div className="relative z-10 pt-2 sm:pt-4">
               <span className="text-xs sm:text-sm text-[#5f682a] block select-none">❖ · ❦ · ❖</span>
-              <h1 className="font-moul-light font-moul text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
+              <h1 className="font-moulpali text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
                 សិរីសួស្តី អាពាហ៍ពិពាហ៍
               </h1>
               <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] mt-1 uppercase">
@@ -410,7 +410,7 @@ END:VCALENDAR`
 
               {/* Formal Khmer Invitation Greeting & Body with Kantumruy Pro */}
               <div className="text-center space-y-1.5 px-2">
-                <h2 className="font-moul-light font-moul text-base sm:text-xl text-[#330404] drop-shadow-xs">
+                <h2 className="font-moulpali text-base sm:text-xl text-[#330404] drop-shadow-xs">
                   មានកិត្តិយសសូមគោរពអញ្ជើញ
                 </h2>
                 <p className="font-kantumruy text-xs sm:text-[13px] text-[#260202] font-medium leading-relaxed max-w-md mx-auto">
