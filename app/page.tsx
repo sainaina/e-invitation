@@ -54,7 +54,8 @@ const galleryList: GalleryItem[] = [
 
 export default function Page() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false)
-  const [isOpeningAnim, setIsOpeningAnim] = useState(false)
+  const [isStampRotating, setIsStampRotating] = useState(false)
+  const [isEnvelopeSliding, setIsEnvelopeSliding] = useState(false)
   const [copiedAddress, setCopiedAddress] = useState(false)
   const [activeChildhood, setActiveChildhood] = useState<{ groom: boolean; bride: boolean }>({
     groom: true,
@@ -169,27 +170,41 @@ END:VCALENDAR`
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('play-wedding-music'))
     }
-    setIsOpeningAnim(true)
+    // 1. Immediately trigger 180-degree rotation of the stamp with royal shockwave
+    setIsStampRotating(true)
+
+    // 2. Smoothly slide the envelope away after the stamp rotates
+    setTimeout(() => {
+      setIsEnvelopeSliding(true)
+    }, 550)
+
+    // 3. Complete transition, open invitation homepage, and smoothly scroll into view
     setTimeout(() => {
       setIsEnvelopeOpen(true)
-    }, 1200)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 1450)
   }
 
   return (
     <main className="relative min-h-screen text-[#330404] selection:bg-[#330404] selection:text-white">
-      {/* Immersive Viewport Background using Arch Background Image with Heavy Blur */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/api/arch-bg')",
-          filter: 'blur(36px)',
-          transform: 'scale(1.15)',
-        }}
-      />
-      {/* Primary Color Overlay (#5f682a matcha and #330404 deep red wine wash) */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 bg-gradient-to-b from-[#5f682a]/92 via-[#330404]/88 to-[#5f682a]/94"
-      />
+      {/* Immersive Video Background with Very Subtle Blur (Clear Video Visibility) */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover"
+          style={{
+            filter: 'blur(1.5px)',
+            transform: 'scale(1.02)',
+          }}
+        >
+          <source src="/videos/arch_background.mp4" type="video/mp4" />
+        </video>
+        {/* Soft, minimal neutral overlay so the video is clearly seen */}
+        <div className="absolute inset-0 bg-black/15" />
+      </div>
 
       {/* Floating Rose Petals, Matcha Leaves & Golden Dust Particles */}
       <FloatingPetals />
@@ -198,30 +213,23 @@ END:VCALENDAR`
       <AudioPlayer />
 
       {/* ========================================================================= */}
-      {/* FULL-SCREEN ROYAL WELCOME ENVELOPE (MATCHA/20 COLOR DISPLAY + RED STAMP)  */}
+      {/* FULL-SCREEN ROYAL WELCOME ENVELOPE (ROYAL STATIONERY + RED STAMP)         */}
       {/* ========================================================================= */}
       <div
         onClick={triggerOpenInvitation}
         style={{
-          background: 'radial-gradient(ellipse at 50% 45%, rgba(95,104,42,0.20) 0%, rgba(95,104,42,0.15) 55%, rgba(95,104,42,0.25) 100%), #FAF7F2',
+          background: 'transparent',
         }}
-        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden flex flex-col justify-between items-center text-center p-6 sm:p-10 select-none shadow-2xl transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] ring-4 ring-[#5f682a]/20 ${
-          isEnvelopeOpen || isOpeningAnim
-            ? '-translate-y-full opacity-0 pointer-events-none scale-[0.97]'
+        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 select-none shadow-2xl transition-all duration-[950ms] ease-[cubic-bezier(0.22,1,0.36,1)] ring-4 ring-[#330404]/15 ${
+          isEnvelopeOpen
+            ? '-translate-y-full opacity-0 pointer-events-none invisible'
+            : isEnvelopeSliding
+            ? '-translate-y-full opacity-0 pointer-events-none scale-[0.98]'
             : 'translate-y-0 opacity-100 cursor-pointer'
         }`}
       >
-        {/* Background Arch Graphic with Soft Opacity */}
-        <div
-          className="pointer-events-none absolute inset-0 bg-cover bg-center sm:bg-top opacity-35"
-          style={{ backgroundImage: "url('/api/arch-bg')" }}
-        />
-
-        {/* Matcha/20 Color Display Wash Layer */}
-        <div className="pointer-events-none absolute inset-0 bg-[#5f682a]/20" />
-
-        {/* Soft Central Radial Vignette */}
-        <div className="pointer-events-none absolute inset-0 bg-radial-[ellipse_at_center,_rgba(250,247,242,0.85)_0%,_rgba(250,247,242,0.55)_60%,_rgba(250,247,242,0.15)_100%]" />
+        {/* Soft Central Radial Vignette - Gentle halo for readability over fixed background video */}
+        <div className="pointer-events-none absolute inset-0 bg-radial-[ellipse_at_center,_rgba(250,247,242,0.50)_0%,_rgba(250,247,242,0.20)_65%,_rgba(0,0,0,0.20)_100%]" />
 
         {/* Full-Screen Royal Dual Hairline Framing (Red Wine & Matcha/20) */}
         <div className="pointer-events-none fixed inset-3 sm:inset-5 rounded-2xl sm:rounded-3xl border-2 border-[#330404]/40" />
@@ -235,43 +243,45 @@ END:VCALENDAR`
 
         {/* Top Eyebrow */}
         <div className="relative z-10 pt-2 sm:pt-4">
-          <p className="font-cinzel text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
+          <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
             ROYAL WEDDING INVITATION
           </p>
-          <p className="font-moul-light font-moul text-base sm:text-lg text-[#330404] mt-1.5 drop-shadow-xs">
+          <p className="font-moul-light font-moul text-base sm:text-lg text-[#330404] mt-1 drop-shadow-xs">
             សិរីសួស្តី អាពាហ៍ពិពាហ៍
           </p>
         </div>
 
         {/* Couple Calligraphy & Red Wax Seal Medallion in Center */}
-        <div className="relative z-10 my-auto py-2 w-full max-w-lg">
-          <h1 className="font-great-vibes text-6xl sm:text-7xl md:text-8xl text-[#330404] leading-tight drop-shadow-[0_2px_10px_rgba(250,247,242,0.9)]">
-            Rithy <span className="font-great-vibes text-4xl sm:text-5xl text-[#5f682a]">&amp;</span> Nihyun
+        <div className="relative z-10 my-auto py-1 sm:py-2 w-full max-w-lg">
+          <h1 className="font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#330404] leading-tight drop-shadow-[0_2px_10px_rgba(250,247,242,0.9)]">
+            Rithy <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Nihyun
           </h1>
 
-          <p className="mt-1 font-moulpali text-2xl sm:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
+          <p className="mt-1 font-moulpali text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
             រីទ្ធី និង និគុណ
           </p>
 
-          <p className="mt-2 font-cinzel text-xs tracking-[0.25em] text-[#330404]/80 font-medium">
+          <p className="mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#330404]/80 font-medium">
             18TH DECEMBER 2025 • PHNOM PENH
           </p>
 
           {/* =================================================================== */}
-          {/* CIRCULAR MATCHA MEDALLION WITH RED WAX SEAL (ZERO BEIGE)             */}
+          {/* CIRCULAR MATCHA MEDALLION WITH RED WAX SEAL (SMALL & 180° ROTATION) */}
           {/* =================================================================== */}
-          <div className="my-6 sm:my-7 flex justify-center">
+          <div className="my-4 sm:my-6 flex justify-center">
             <div
-              className={`group/seal relative flex h-48 w-48 sm:h-56 sm:w-56 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_18px_40px_rgba(51,4,4,0.38)] ring-4 ring-[#5f682a]/30 overflow-hidden cursor-pointer transition-all duration-700 ${
-                isOpeningAnim ? 'scale-115 rotate-6 ring-8 ring-[#330404]/60' : 'hover:scale-105 active:scale-95'
+              className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_12px_28px_rgba(51,4,4,0.35)] ring-4 ring-[#5f682a]/30 overflow-hidden cursor-pointer transition-all duration-700 ${
+                isStampRotating
+                  ? 'animate-seal-rotate-180 ring-8 ring-[#330404]/60'
+                  : 'hover:scale-105 active:scale-95'
               }`}
             >
               {/* Luminous Red Pulsing Halo */}
               <div className="seal-pulse absolute inset-0 rounded-full bg-[#330404]/25" />
 
               {/* Golden Shockwave Wave Burst on Click */}
-              {isOpeningAnim && (
-                <div className="animate-seal-break absolute inset-0 rounded-full border-4 border-[#330404] bg-radial-[circle,_rgba(51,4,4,0.4)_0%,_transparent_70%]" />
+              {isStampRotating && (
+                <div className="animate-seal-break absolute inset-0 rounded-full border-4 border-[#330404] bg-radial-[circle,_rgba(51,4,4,0.45)_0%,_transparent_70%]" />
               )}
 
               {/* The Matcha Paper & Red Wax Seal Image (100% matcha, zero beige) */}
@@ -282,8 +292,8 @@ END:VCALENDAR`
               />
 
               {/* Decorative Dual Inner Filigree Rings */}
-              <div className="pointer-events-none absolute inset-2 sm:inset-2.5 rounded-full border border-[#FAF7F2]/40" />
-              <div className="pointer-events-none absolute inset-3 sm:inset-3.5 rounded-full border border-[#330404]/40" />
+              <div className="pointer-events-none absolute inset-1.5 sm:inset-2 rounded-full border border-[#FAF7F2]/40" />
+              <div className="pointer-events-none absolute inset-2.5 sm:inset-3 rounded-full border border-[#330404]/40" />
             </div>
           </div>
 
@@ -291,7 +301,7 @@ END:VCALENDAR`
           <p className="font-moulpali text-xs sm:text-sm text-[#330404] animate-pulse drop-shadow-xs font-semibold">
             សូមចុចលើត្រាដើម្បីបើកលិខិតអញ្ជើញ
           </p>
-          <p className="font-cinzel text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
+          <p className="font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
             TAP SEAL TO UNVEIL INVITATION
           </p>
         </div>
@@ -303,7 +313,7 @@ END:VCALENDAR`
               e.stopPropagation()
               triggerOpenInvitation()
             }}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-[#5f682a]/50 bg-[#330404] px-7 py-3 font-cinzel text-xs font-semibold tracking-widest text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#5f682a] active:scale-95"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-[#5f682a]/50 bg-[#330404] px-7 py-2.5 sm:py-3 font-cinzel text-xs font-semibold tracking-widest text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#5f682a] active:scale-95"
           >
             <span>OPEN INVITATION</span>
             <ChevronDown className="h-4 w-4 animate-bounce" />
@@ -314,31 +324,30 @@ END:VCALENDAR`
       {/* ========================================================================= */}
       {/* MAIN INVITATION: FRAMED WITH CUSTOM ARCH & CLEAN CHANDELIER               */}
       {/* ========================================================================= */}
-      <div className={isEnvelopeOpen ? 'animate-card-slide-up' : ''}>
+      <div
+        className={`transition-all duration-700 ${
+          isEnvelopeOpen || isEnvelopeSliding
+            ? 'opacity-100 animate-card-slide-up'
+            : 'opacity-0 pointer-events-none invisible h-0 overflow-hidden'
+        }`}
+      >
         <UsefulFrame
           onReopenEnvelope={() => {
             setIsEnvelopeOpen(false)
-            setIsOpeningAnim(false)
+            setIsEnvelopeSliding(false)
+            setIsStampRotating(false)
           }}
         >
           {/* ===================================================================== */}
           {/* INVITATION HOMEPAGE: ARCH BACKGROUND & CHANDELIER                      */}
           {/* ===================================================================== */}
           <header className="relative min-h-[100dvh] w-full px-4 sm:px-8 pt-8 pb-14 text-center overflow-hidden flex flex-col justify-between items-center rounded-none sm:rounded-t-[36px]">
-            {/* The Arch Background Image - Sized properly to fill edge-to-edge */}
-            <div
-              className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center sm:bg-top bg-no-repeat opacity-60"
-              style={{
-                backgroundImage: "url('/api/arch-bg')",
-              }}
-            />
-
-            {/* Soft central parchment vignette with matcha/20 tint so all text is crystal clear */}
+            {/* Soft subtle radial vignette under text for readability while the fixed background video shows through */}
             <div
               className="pointer-events-none absolute inset-0 z-0"
               style={{
                 background:
-                  'radial-gradient(ellipse at 50% 50%, rgba(250, 247, 242, 0.90) 0%, rgba(250, 247, 242, 0.70) 65%, rgba(95, 104, 42, 0.15) 90%, transparent 100%)',
+                  'radial-gradient(ellipse at 50% 50%, rgba(250, 247, 242, 0.45) 0%, rgba(250, 247, 242, 0.15) 70%, transparent 100%)',
               }}
             />
 

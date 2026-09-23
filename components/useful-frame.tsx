@@ -31,7 +31,7 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
         Full-screen edge-to-edge on phone, luxury framed stationery on tablet/desktop.
         Curated colors: Primary #330404 (Deep Red Wine) and #5f682a (Matcha Green)
       */}
-      <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(25,5,5,0.85)] border-0 sm:border-2 sm:border-[#330404] bg-[#FAF7F2]">
+      <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(25,5,5,0.85)] border-0 sm:border-2 sm:border-[#330404]/30 bg-[#FAF7F2]/45 backdrop-blur-[2px] ring-4 ring-[#330404]/15">
 
         {/* Corner Filigree Accents in #330404 */}
         <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none">❧</div>
