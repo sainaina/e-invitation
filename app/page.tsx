@@ -15,6 +15,7 @@ import {
   PartyPopper,
   Scissors,
   Utensils,
+  Clock,
 } from 'lucide-react'
 
 import FloatingPetals from '@/components/floating-petals'
@@ -109,12 +110,12 @@ export default function Page() {
           }
         })
       },
-      { threshold: 0.08, rootMargin: '10px 0px -20px 0px' }
+      { threshold: 0.1, rootMargin: '25px 0px -25px 0px' }
     )
 
     const observeAll = () => {
       const elements = document.querySelectorAll(
-        '.fade-left, .fade-right, .reveal-slide-left, .reveal-slide-right, .reveal-on-scroll, .reveal-zoom-in'
+        '.fade-left, .fade-right, .reveal-slide-left, .reveal-slide-right, .reveal-on-scroll, .reveal-zoom-in, .timeline-row'
       )
       elements.forEach((el) => observer.observe(el))
     }
@@ -123,10 +124,14 @@ export default function Page() {
     observeAll()
     const timer1 = setTimeout(observeAll, 200)
     const timer2 = setTimeout(observeAll, 600)
+    const timer3 = setTimeout(observeAll, 1200)
+    const timer4 = setTimeout(observeAll, 1800)
 
     return () => {
       clearTimeout(timer1)
       clearTimeout(timer2)
+      clearTimeout(timer3)
+      clearTimeout(timer4)
       observer.disconnect()
     }
   }, [isEnvelopeOpen])
@@ -211,8 +216,8 @@ END:VCALENDAR`
       {/* Floating Rose Petals, Matcha Leaves & Golden Dust Particles */}
       <FloatingPetals />
 
-      {/* Floating Audio Player */}
-      <AudioPlayer />
+      {/* Floating Audio Player (hidden on open invitation landing page, appears once opened) */}
+      <AudioPlayer isOpen={isEnvelopeOpen} />
 
       {/* ========================================================================= */}
       {/* FULL-SCREEN ROYAL WELCOME ENVELOPE (ROYAL STATIONERY + RED STAMP)         */}
@@ -229,8 +234,8 @@ END:VCALENDAR`
             : 'translate-y-0 opacity-100 cursor-pointer'
           }`}
       >
-        {/* Soft, ultra-sheer white/10 layer */}
-        <div className="pointer-events-none absolute inset-0 bg-white/10" />
+        {/* Exact same capacity (opacity) and white as the home invitation page */}
+        <div className="pointer-events-none absolute inset-0 bg-[#FAF7F2]/60" />
 
         {/* Full-Screen Royal Dual Hairline Framing (Red Wine & Matcha/20) */}
         <div className="pointer-events-none fixed inset-3 sm:inset-5 rounded-2xl sm:rounded-3xl border-2 border-[#330404]/40" />
@@ -722,134 +727,142 @@ END:VCALENDAR`
           {/* ===================================================================== */}
           {/* WEDDING CEREMONY PROGRAM (MATCHING USER REFERENCE PICTURE)            */}
           {/* ===================================================================== */}
-          <section id="schedule" className="relative border-t border-[#330404]/20 px-4 sm:px-8 py-12 text-center overflow-hidden">
-            {/* Top Ornamental Flourish */}
-            <div className="mb-4 flex items-center justify-center gap-3">
-              <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#c5a059]" />
-              <span className="font-cinzel text-xs text-[#330404] select-none">❖ · ❦ · ❖</span>
-              <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#c5a059]" />
+          {/* ===================================================================== */}
+          {/* WEDDING CEREMONY PROGRAM (MATCHING REFERENCE LAYOUT + MODERN ANIMATION) */}
+          {/* ===================================================================== */}
+          <section id="event" className="relative border-t border-[#330404]/20 px-3.5 sm:px-8 py-12 text-center overflow-hidden">
+            {/* Consistent Section Header matching Bride & Groom / Gallery / Venue */}
+            <div className="reveal-on-scroll">
+              <div className="mb-3 flex items-center justify-center gap-3">
+                <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#5f682a]/50" />
+                <span className="font-cinzel text-xs text-[#5f682a] select-none">❖ · ❦ · ❖</span>
+                <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#5f682a]/50" />
+              </div>
+
+              <p className="fade-left font-cinzel text-[10px] tracking-[0.3em] text-[#5f682a] uppercase">
+                WEDDING TIMELINE
+              </p>
+              <h2 className="fade-right delay-100 mt-0.5 font-great-vibes text-5xl sm:text-6xl text-[#330404]">
+                Wedding Events
+              </h2>
+              <p className="fade-left delay-150 font-kantumruy text-xs sm:text-sm font-bold text-[#5f682a] mt-0.5">
+                ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៥
+              </p>
+
+              <div className="filigree-divider">
+                <span className="text-xs text-[#330404]">✦</span>
+              </div>
             </div>
 
-            {/* Header Titles (Exact match to Reference Picture) */}
-            <h3 className="font-moul text-xl sm:text-2xl text-[#330404] tracking-wide">
-              កម្មវិធី
-            </h3>
-            <h2 className="font-moul text-2xl sm:text-4xl text-[#330404] mt-1 drop-shadow-xs">
-              សិរីមង្គលអាពាហ៍ពិពាហ៍
-            </h2>
-            <p className="font-kantumruy text-xs sm:text-sm font-bold text-[#8a6538] mt-1.5">
-              ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៥
-            </p>
-
             {/* Event Timeline Container (Matching Reference Picture Layout) */}
-            <div className="relative mx-auto mt-8 max-w-md px-2 sm:px-6">
+            <div className="relative mx-auto mt-7 max-w-md px-2 sm:px-6">
               <div className="relative space-y-6 sm:space-y-7 text-left">
-                {/* Subtle Vertical Connecting Line */}
-                <div className="absolute left-[22px] sm:left-[26px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-[#a37c54]/60 via-[#c5a059]/40 to-[#a37c54]/60" />
+                {/* Continuous Vertical Connecting Line with Animated Beam */}
+                <div className="timeline-connector-line absolute left-[22px] sm:left-[26px] top-6 bottom-6 w-0.5 rounded-full shadow-[0_0_8px_rgba(95,104,42,0.4)]" />
 
                 {/* Event 1: 06:00 AM */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
-                    <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="timeline-row delay-1 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
+                    <Bell className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-12" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ០៦:០០ ព្រឹក
                     </p>
-                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#5f682a] leading-snug mt-0.5">
                       ពិធីសែនក្រុងពាលី
                     </p>
                   </div>
                 </div>
 
                 {/* Event 2: 07:00 AM */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
-                    <PartyPopper className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="timeline-row delay-2 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
+                    <PartyPopper className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:scale-110" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ០៧:០០ ព្រឹក
                     </p>
-                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#5f682a] leading-snug mt-0.5">
                       ពិធីហែជំនូនចូលរោងជ័យ
                     </p>
                   </div>
                 </div>
 
                 {/* Event 3: 07:30 AM */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
-                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="timeline-row delay-3 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
+                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-12" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ០៧:៣០ ព្រឹក
                     </p>
-                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#5f682a] leading-snug mt-0.5">
                       ពិធីពិសាស្លាកំណត់ និងបំពាក់ចិញ្ចៀន
                     </p>
                   </div>
                 </div>
 
                 {/* Event 4: 08:30 AM */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
-                    <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="timeline-row delay-4 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
+                    <Bell className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:scale-110" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ០៨:៣០ ព្រឹក
                     </p>
-                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#5f682a] leading-snug mt-0.5">
                       ពិធីសូត្រមន្តចម្រើនព្រះបរិត្ត
                     </p>
                   </div>
                 </div>
 
                 {/* Event 5: 09:00 AM */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
-                    <Scissors className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="timeline-row delay-5 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
+                    <Scissors className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-12" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ០៩:០០ ព្រឹក
                     </p>
-                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#5f682a] leading-snug mt-0.5">
                       ពិធីកាត់សក់បង្កក់សិរី
                     </p>
                   </div>
                 </div>
 
                 {/* Event 6: 10:45 AM */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
-                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 fill-current text-white" />
+                <div className="timeline-row delay-6 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
+                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 fill-current text-white transition-transform duration-300 group-hover:scale-110" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ១០:៤៥ ព្រឹក
                     </p>
-                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#5f682a] leading-snug mt-0.5">
                       ពិធីសំពះផ្ទឹម សែនចងដៃ និងបាចផ្កាស្លា
                     </p>
                   </div>
                 </div>
 
                 {/* Event 7: 05:00 PM - Evening Reception */}
-                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
-                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#330404] to-[#520909] text-white shadow-md ring-2 ring-[#c5a059]/80 transition-transform group-hover:scale-105">
-                    <Utensils className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="timeline-row delay-7 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
+                  <div className="timeline-badge timeline-badge-reception relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#330404] to-[#4d0707] text-white shadow-lg ring-2 ring-white/95">
+                    <Utensils className="h-5 w-5 sm:h-6 sm:w-6 text-white transition-transform duration-300 group-hover:rotate-12" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                  <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
                       ០៥:០០ ល្ងាច
                     </p>
                     <p className="font-kantumruy text-xs sm:text-sm font-bold text-[#330404] leading-snug mt-0.5">
                       ពិធីជប់លៀងមហោឡារិកអបអរសាទរអាពាហ៍ពិពាហ៍
                     </p>
-                    <p className="font-cinzel text-[10px] sm:text-xs font-semibold text-[#5f682a]">
+                    <p className="font-cinzel text-[10px] sm:text-xs font-semibold text-[#5f682a] tracking-wider mt-0.5">
                       GRAND WEDDING RECEPTION &amp; DINNER
                     </p>
                   </div>

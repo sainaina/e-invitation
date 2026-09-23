@@ -34,20 +34,20 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
       <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(25,5,5,0.85)] border-0 sm:border-2 sm:border-[#330404]/50 bg-[#FAF7F2]/60 ring-4 ring-[#c5a059]/35">
 
         {/* Corner Filigree Accents in #330404 */}
-        <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none">❧</div>
-        <div className="pointer-events-none absolute top-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-x-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-y-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none rotate-180">❧</div>
+      <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none">❧</div>
+      <div className="pointer-events-none absolute top-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-x-[-1]">❧</div>
+      <div className="pointer-events-none absolute bottom-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-y-[-1]">❧</div>
+      <div className="pointer-events-none absolute bottom-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none rotate-180">❧</div>
 
-        {/* Double inner gold & crimson border */}
-        <div className="pointer-events-none absolute inset-2 sm:inset-2.5 z-20 rounded-none sm:rounded-[32px] border border-[#330404]/35" />
-        <div className="pointer-events-none absolute inset-3 sm:inset-3.5 z-20 rounded-none sm:rounded-[28px] border border-[#5f682a]/35" />
+      {/* Double inner gold & crimson border */}
+      <div className="pointer-events-none absolute inset-2 sm:inset-2.5 z-20 rounded-none sm:rounded-[32px] border border-[#330404]/35" />
+      <div className="pointer-events-none absolute inset-3 sm:inset-3.5 z-20 rounded-none sm:rounded-[28px] border border-[#5f682a]/35" />
 
-        {/* Invitation Content Layer */}
-        <div className="relative z-10 font-moulpali">
-          {children}
-        </div>
+      {/* Invitation Content Layer */}
+      <div className="relative z-10 font-moulpali">
+        {children}
       </div>
+    </div>
 
       {/* Floating Re-Open Envelope Action Button (Discreet at bottom-left) */}
       <button

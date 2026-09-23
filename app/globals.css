@@ -162,6 +162,88 @@ body {
 .is-visible.delay-400 { transition-delay: 400ms !important; }
 .is-visible.delay-500 { transition-delay: 500ms !important; }
 
+/* Animated vertical timeline connector beam */
+@keyframes timelineBeam {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 200%;
+  }
+}
+
+.timeline-connector-line {
+  background: linear-gradient(
+    180deg,
+    rgba(95, 104, 42, 0.75) 0%,
+    rgba(197, 160, 89, 0.95) 25%,
+    rgba(95, 104, 42, 0.65) 50%,
+    rgba(51, 4, 4, 0.95) 80%,
+    rgba(51, 4, 4, 0.4) 100%
+  );
+  background-size: 100% 200%;
+  animation: timelineBeam 5s linear infinite;
+}
+
+/* Modern Wedding Timeline Item Animation (Smooth Bi-Directional Up & Down) */
+.timeline-row {
+  opacity: 0;
+  transform: translateY(22px) scale(0.97);
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+  will-change: opacity, transform;
+}
+
+.timeline-row.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger Delays on Entrance */
+.timeline-row.is-visible.delay-1 { transition-delay: 50ms !important; }
+.timeline-row.is-visible.delay-2 { transition-delay: 110ms !important; }
+.timeline-row.is-visible.delay-3 { transition-delay: 170ms !important; }
+.timeline-row.is-visible.delay-4 { transition-delay: 230ms !important; }
+.timeline-row.is-visible.delay-5 { transition-delay: 290ms !important; }
+.timeline-row.is-visible.delay-6 { transition-delay: 350ms !important; }
+.timeline-row.is-visible.delay-7 { transition-delay: 410ms !important; }
+
+/* Micro-pop on the timeline badge */
+.timeline-row .timeline-badge {
+  transform: scale(0.72);
+  opacity: 0.5;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out, box-shadow 0.35s ease;
+}
+
+.timeline-row.is-visible .timeline-badge {
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease-out, box-shadow 0.35s ease;
+}
+
+/* Smooth slide on the text description */
+.timeline-row .timeline-content {
+  transform: translateX(14px);
+  opacity: 0.3;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+.timeline-row.is-visible .timeline-content {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 60ms, opacity 0.7s ease-out 60ms;
+}
+
+.timeline-row:hover .timeline-badge {
+  transform: scale(1.12) !important;
+  box-shadow: 0 0 20px rgba(95, 104, 42, 0.6) !important;
+}
+
+.timeline-row:hover .timeline-badge-reception {
+  transform: scale(1.14) !important;
+  box-shadow: 0 0 22px rgba(51, 4, 4, 0.7), 0 0 10px rgba(197, 160, 89, 0.5) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fade-left,
   .fade-right,
