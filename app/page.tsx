@@ -193,7 +193,7 @@ END:VCALENDAR`
   }
 
   return (
-    <main className="relative min-h-screen text-[#330404] selection:bg-[#330404]/70 selection:text-white">
+    <main className="relative min-h-screen text-[#330404] selection:bg-[#FFFFFF]/50 selection:text-white">
       {/* Immersive Video Background with Crystal Clarity (No Heavy Blur) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <video
@@ -234,8 +234,8 @@ END:VCALENDAR`
             : 'translate-y-0 opacity-100 cursor-pointer'
           }`}
       >
-        {/* Exact same capacity (opacity) and white as the home invitation page */}
-        <div className="pointer-events-none absolute inset-0 bg-[#FAF7F2]/60" />
+        {/* Open invitation overlay matching home invitation page */}
+        <div className="pointer-events-none absolute inset-0 bg-[#FFFFFF]/50" />
 
         {/* Full-Screen Royal Dual Hairline Framing (Red Wine & Matcha/20) */}
         <div className="pointer-events-none fixed inset-3 sm:inset-5 rounded-2xl sm:rounded-3xl border-2 border-[#330404]/40" />
@@ -263,7 +263,7 @@ END:VCALENDAR`
             Rithy <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Nihyun
           </h1>
 
-          <p className="mt-1 font-moulpali text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
+          <p className="mt-1 font-moul-light font-moul text-xl sm:text-2xl md:text-3xl text-[#5f682a] drop-shadow-[0_1px_4px_rgba(250,247,242,0.8)]">
             រីទ្ធី និង និគុណ
           </p>
 
@@ -352,10 +352,10 @@ END:VCALENDAR`
           {/* TRADITIONAL ROYAL KHMER INVITATION CARD (MODERN LUXURY EDITORIAL)    */}
           {/* ===================================================================== */}
           <header className="relative w-full px-4 sm:px-8 pt-8 sm:pt-12 pb-10 text-center flex flex-col justify-between items-center rounded-none sm:rounded-t-[36px]">
-            {/* Top Ornamental Header (Matching Reference Top Title) */}
+            {/* Top Ornamental Header */}
             <div className="relative z-10 pt-2 sm:pt-4">
-              <span className="text-xs sm:text-sm text-[#c5a059] block select-none">❖ · ❦ · ❖</span>
-              <h1 className="font-moul text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
+              <span className="text-xs sm:text-sm text-[#5f682a] block select-none">❖ · ❦ · ❖</span>
+              <h1 className="font-moul-light font-moul text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
                 សិរីសួស្តី អាពាហ៍ពិពាហ៍
               </h1>
               <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] mt-1 uppercase">
@@ -363,46 +363,63 @@ END:VCALENDAR`
               </p>
             </div>
 
-            {/* 2-Column Honored Parents Section with Kantumruy Pro Typography */}
+            {/* 2-Column Honored Parents Section - Unified Royal Editorial Plaque in Pure Matcha & Red Wine */}
             <div className="relative z-10 w-full max-w-lg my-4 sm:my-6 px-2">
-              <div className="grid grid-cols-2 gap-3 sm:gap-6 text-center">
-                {/* Bride's Parents (Left) */}
-                <div className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#c5a059]/70 bg-white/85 shadow-sm transition-all hover:border-[#c5a059]">
-                  <p className="font-kantumruy text-[11px] sm:text-xs font-bold tracking-wider text-[#5f682a] uppercase">
-                    មាតាបិតាខាងស្រី
-                  </p>
-                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] mt-1.5 font-bold leading-relaxed">
-                    លោក ឈីវ ម៉េង
-                  </p>
-                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] font-bold leading-relaxed">
-                    លោកស្រី លី ហួង
-                  </p>
-                </div>
+              <div className="relative overflow-hidden rounded-2xl border border-[#330404]/30 bg-[#FAF7F2]/85 p-4 sm:p-5 shadow-[0_4px_20px_rgba(51,4,4,0.06)] ring-1 ring-[#5f682a]/30">
+                {/* Inner Matcha Accent Hairline */}
+                <div className="pointer-events-none absolute inset-1.5 rounded-xl border border-[#5f682a]/20" />
 
-                {/* Groom's Parents (Right) */}
-                <div className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#c5a059]/70 bg-white/85 shadow-sm transition-all hover:border-[#c5a059]">
-                  <p className="font-kantumruy text-[11px] sm:text-xs font-bold tracking-wider text-[#5f682a] uppercase">
-                    មាតាបិតាខាងប្រុស
-                  </p>
-                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] mt-1.5 font-bold leading-relaxed">
-                    លោក នីវ សុវណ្ណ
-                  </p>
-                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] font-bold leading-relaxed">
-                    អ្នកស្រី គឹម សុផល
-                  </p>
+                {/* Corner Filigree Glyphs */}
+                <span className="pointer-events-none absolute top-2 left-2 text-[9px] text-[#5f682a]/60 select-none">❧</span>
+                <span className="pointer-events-none absolute top-2 right-2 text-[9px] text-[#5f682a]/60 select-none scale-x-[-1]">❧</span>
+                <span className="pointer-events-none absolute bottom-2 left-2 text-[9px] text-[#5f682a]/60 select-none scale-y-[-1]">❧</span>
+                <span className="pointer-events-none absolute bottom-2 right-2 text-[9px] text-[#5f682a]/60 select-none rotate-180">❧</span>
+
+                <div className="grid grid-cols-2 divide-x divide-[#5f682a]/30 text-center">
+                  {/* Bride's Parents (Left) */}
+                  <div className="px-2 sm:px-4">
+                    <p className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a]">
+                      មាតាបិតាខាងស្រី
+                    </p>
+                    <div className="h-0.5 w-8 mx-auto bg-[#5f682a]/40 my-2 rounded-full" />
+                    <div className="space-y-1">
+                      <p className="font-moul-light font-moul text-sm sm:text-base text-[#330404] leading-relaxed">
+                        លោក ឈីវ ម៉េង
+                      </p>
+                      <p className="font-moul-light font-moul text-sm sm:text-base text-[#330404] leading-relaxed">
+                        លោកស្រី លី ហួង
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Groom's Parents (Right) */}
+                  <div className="px-2 sm:px-4">
+                    <p className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a]">
+                      មាតាបិតាខាងប្រុស
+                    </p>
+                    <div className="h-0.5 w-8 mx-auto bg-[#5f682a]/40 my-2 rounded-full" />
+                    <div className="space-y-1">
+                      <p className="font-moul-light font-moul text-sm sm:text-base text-[#330404] leading-relaxed">
+                        លោក នីវ សុវណ្ណ
+                      </p>
+                      <p className="font-moul-light font-moul text-sm sm:text-base text-[#330404] leading-relaxed">
+                        អ្នកស្រី គឹម សុផល
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Delicate Gold Divider */}
+              {/* Delicate Matcha Divider */}
               <div className="my-5 flex items-center justify-center gap-3">
-                <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#c5a059]" />
-                <span className="font-cinzel text-xs text-[#330404] select-none">✦ · ❦ · ✦</span>
-                <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#c5a059]" />
+                <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#5f682a]/60" />
+                <span className="font-cinzel text-xs text-[#330404] select-none">✦ · ❧ · ✦</span>
+                <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#5f682a]/60" />
               </div>
 
               {/* Formal Khmer Invitation Greeting & Body with Kantumruy Pro */}
               <div className="text-center space-y-1.5 px-2">
-                <h2 className="font-moul text-base sm:text-xl text-[#330404] drop-shadow-xs">
+                <h2 className="font-moul-light font-moul text-base sm:text-xl text-[#330404] drop-shadow-xs">
                   មានកិត្តិយសសូមគោរពអញ្ជើញ
                 </h2>
                 <p className="font-kantumruy text-xs sm:text-[13px] text-[#260202] font-medium leading-relaxed max-w-md mx-auto">
@@ -411,18 +428,18 @@ END:VCALENDAR`
               </div>
             </div>
 
-            {/* The Couple with Center Royal Monogram Emblem */}
-            <div className="relative z-10 w-full max-w-xl my-3 sm:my-5 px-2">
+            {/* The Couple with Center Royal Ampersand */}
+            <div className="relative z-10 w-full max-w-xl my-4 sm:my-6 px-2">
               <div className="flex items-center justify-between sm:justify-center gap-2 sm:gap-6">
                 {/* Bride (Left) */}
                 <div className="flex-1 text-center sm:text-right">
-                  <span className="font-kantumruy text-[11px] sm:text-xs text-[#5f682a] font-semibold block">
+                  <span className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a] block">
                     កូនស្រីនាម
                   </span>
-                  <h3 className="font-moul text-base sm:text-2xl text-[#260202] mt-0.5 leading-snug">
+                  <h3 className="font-moul-light font-moul text-lg sm:text-2xl md:text-3xl text-[#330404] mt-0.5 leading-snug">
                     ឈីវ អិចងី
                   </h3>
-                  <p className="font-kantumruy text-xs sm:text-sm text-[#5f682a] font-semibold">
+                  <p className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a]">
                     (និគុណ)
                   </p>
                   <p className="font-great-vibes text-xl sm:text-2xl text-[#330404] mt-0.5">
@@ -430,31 +447,25 @@ END:VCALENDAR`
                   </p>
                 </div>
 
-                {/* Central Royal RN Monogram Emblem */}
-                <div className="flex-shrink-0 flex flex-col items-center justify-center px-1 sm:px-3">
-                  <div className="relative flex h-20 w-20 sm:h-28 sm:w-28 items-center justify-center rounded-full border-2 border-[#c5a059] bg-gradient-to-b from-white to-[#faf7f2] shadow-md ring-2 ring-[#c5a059]/40 transition-transform duration-500 hover:scale-105">
-                    {/* Inner Ornate Filigree Ring */}
-                    <div className="pointer-events-none absolute inset-1.5 rounded-full border border-dashed border-[#c5a059]/70" />
-                    {/* Monogram Typography */}
-                    <div className="text-center select-none">
-                      <span className="block font-cinzel text-[7px] sm:text-[9px] tracking-[0.25em] text-[#5f682a]">R &amp; N</span>
-                      <span className="font-great-vibes text-3xl sm:text-4xl text-[#330404] font-bold leading-none block my-0.5">
-                        R&amp;N
-                      </span>
-                      <span className="block font-cinzel text-[7px] sm:text-[8px] tracking-[0.3em] text-[#c5a059]">2025</span>
-                    </div>
-                  </div>
+                {/* Central Royal Calligraphic Ampersand */}
+                <div className="flex-shrink-0 flex flex-col items-center justify-center px-2 sm:px-5 select-none">
+                  <span className="font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#5f682a] leading-none drop-shadow-xs transition-transform duration-300 hover:scale-110">
+                    &amp;
+                  </span>
+                  <span className="font-cinzel text-[8px] sm:text-[10px] tracking-[0.25em] text-[#330404] font-bold mt-0.5 sm:mt-1">
+                    2025
+                  </span>
                 </div>
 
                 {/* Groom (Right) */}
                 <div className="flex-1 text-center sm:text-left">
-                  <span className="font-kantumruy text-[11px] sm:text-xs text-[#5f682a] font-semibold block">
+                  <span className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a] block">
                     កូនប្រុសនាម
                   </span>
-                  <h3 className="font-moul text-base sm:text-2xl text-[#260202] mt-0.5 leading-snug">
+                  <h3 className="font-moul-light font-moul text-lg sm:text-2xl md:text-3xl text-[#330404] mt-0.5 leading-snug">
                     នីវ រិទ្ធីវង្ស
                   </h3>
-                  <p className="font-kantumruy text-xs sm:text-sm text-[#5f682a] font-semibold">
+                  <p className="font-moul-light font-moul text-xs sm:text-sm text-[#5f682a]">
                     (រីទ្ធី)
                   </p>
                   <p className="font-great-vibes text-xl sm:text-2xl text-[#330404] mt-0.5">
@@ -466,16 +477,16 @@ END:VCALENDAR`
 
             {/* Event Date, Time & Venue in Khmer */}
             <div className="relative z-10 w-full max-w-md mx-auto my-3 text-center space-y-1">
-              <p className="font-kantumruy text-xs sm:text-sm text-[#260202] font-bold leading-relaxed">
+              <p className="font-moulpali text-xs sm:text-sm text-[#330404] leading-relaxed">
                 ថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែធ្នូ ឆ្នាំ ២០២៥ វេលាម៉ោង ៥:០០ រសៀល
               </p>
-              <p className="font-kantumruy text-xs sm:text-sm text-[#474f20] font-bold leading-relaxed">
+              <p className="font-moulpali text-xs sm:text-sm text-[#5f682a] leading-relaxed">
                 នៅមជ្ឈមណ្ឌល The Premier Sensok Center (អគារ H-I) រាជធានីភ្នំពេញ
               </p>
             </div>
 
             {/* Modern English Wedding Invitation Section */}
-            <div className="relative z-10 w-full max-w-md mx-auto mt-2 pt-3 border-t border-[#c5a059]/25">
+            <div className="relative z-10 w-full max-w-md mx-auto mt-2 pt-3 border-t border-[#5f682a]/30">
               <h2 className="font-cinzel text-base sm:text-lg font-bold tracking-[0.25em] text-[#330404] uppercase">
                 Wedding Invitation
               </h2>
@@ -484,7 +495,7 @@ END:VCALENDAR`
               </p>
 
               {/* Date & Location Pill Badge */}
-              <div className="mt-3.5 inline-flex items-center gap-2 rounded-full border border-[#c5a059]/70 bg-white/90 px-5 py-2 shadow-xs">
+              <div className="mt-3.5 inline-flex items-center gap-2 rounded-full border border-[#5f682a]/50 bg-[#FAF7F2]/90 px-5 py-2 shadow-xs">
                 <Calendar className="h-4 w-4 text-[#330404]" />
                 <span className="font-cinzel text-xs sm:text-sm font-bold tracking-wider text-[#260202]">
                   THURSDAY 18<sup>TH</sup> DECEMBER 2025 • 5:00 PM
@@ -496,36 +507,36 @@ END:VCALENDAR`
             <div className="relative z-10 mt-5 w-full flex flex-col items-center justify-center gap-3.5">
               <button
                 onClick={handleSaveCalendar}
-                className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#c5a059]/80 bg-gradient-to-r from-[#330404] via-[#4d0707] to-[#330404] px-8 py-3 shadow-[0_4px_18px_rgba(51,4,4,0.3)] hover:shadow-[0_6px_25px_rgba(51,4,4,0.45)] transition-all duration-300 hover:scale-105 active:scale-95 text-white ring-1 ring-[#c5a059]/30"
+                className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#5f682a] bg-[#330404] px-8 py-3 shadow-[0_4px_18px_rgba(51,4,4,0.3)] hover:bg-[#5f682a] transition-all duration-300 hover:scale-105 active:scale-95 text-white ring-2 ring-[#5f682a]/30"
               >
-                <span className="text-[#c5a059] text-xs">✦</span>
+                <span className="text-[#5f682a] group-hover:text-white transition-colors text-xs">✦</span>
                 <span className="font-great-vibes text-xl sm:text-2xl font-normal tracking-wide text-white drop-shadow-xs">
                   Save our Date
                 </span>
-                <span className="text-[#c5a059] text-xs">✦</span>
+                <span className="text-[#5f682a] group-hover:text-white transition-colors text-xs">✦</span>
               </button>
 
               {/* Countdown Timer with English & Kantumruy Pro */}
               <div className="grid grid-cols-4 gap-2.5 text-center text-xs">
-                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
-                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.days}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">DAYS</span>
-                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">ថ្ងៃ</span>
+                <div className="rounded-2xl border border-[#5f682a]/40 bg-[#FAF7F2]/90 p-2.5 shadow-xs min-w-[62px] ring-1 ring-[#330404]/10 transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#330404]">{timeLeft.days}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-[#330404]/70 font-bold">DAYS</span>
+                  <span className="block font-moulpali text-[10px] text-[#5f682a]">ថ្ងៃ</span>
                 </div>
-                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
-                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.hours}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">HOURS</span>
-                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">ម៉ោង</span>
+                <div className="rounded-2xl border border-[#5f682a]/40 bg-[#FAF7F2]/90 p-2.5 shadow-xs min-w-[62px] ring-1 ring-[#330404]/10 transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#330404]">{timeLeft.hours}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-[#330404]/70 font-bold">HOURS</span>
+                  <span className="block font-moulpali text-[10px] text-[#5f682a]">ម៉ោង</span>
                 </div>
-                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
-                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.minutes}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">MINS</span>
-                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">នាទី</span>
+                <div className="rounded-2xl border border-[#5f682a]/40 bg-[#FAF7F2]/90 p-2.5 shadow-xs min-w-[62px] ring-1 ring-[#330404]/10 transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#330404]">{timeLeft.minutes}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-[#330404]/70 font-bold">MINS</span>
+                  <span className="block font-moulpali text-[10px] text-[#5f682a]">នាទី</span>
                 </div>
-                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
-                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.seconds}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">SECS</span>
-                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">វិនាទី</span>
+                <div className="rounded-2xl border border-[#5f682a]/40 bg-[#FAF7F2]/90 p-2.5 shadow-xs min-w-[62px] ring-1 ring-[#330404]/10 transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#330404]">{timeLeft.seconds}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-[#330404]/70 font-bold">SECS</span>
+                  <span className="block font-moulpali text-[10px] text-[#5f682a]">វិនាទី</span>
                 </div>
               </div>
             </div>
@@ -537,9 +548,9 @@ END:VCALENDAR`
           <section id="couple" className="relative px-3 sm:px-6 py-10 text-center overflow-hidden">
             {/* Seamless Section Divider */}
             <div className="mb-8 flex items-center justify-center gap-3">
-              <div className="h-px w-20 sm:w-28 bg-gradient-to-r from-transparent to-[#c5a059]/50" />
+              <div className="h-px w-20 sm:w-28 bg-gradient-to-r from-transparent to-[#5f682a]/50" />
               <span className="font-cinzel text-xs text-[#330404]/60 select-none">✦ · ❦ · ✦</span>
-              <div className="h-px w-20 sm:w-28 bg-gradient-to-l from-transparent to-[#c5a059]/50" />
+              <div className="h-px w-20 sm:w-28 bg-gradient-to-l from-transparent to-[#5f682a]/50" />
             </div>
             {/* Soft Ambient Corner Glows in Primary Colors */}
             <div className="pointer-events-none absolute -top-8 -left-8 w-40 h-40 opacity-25 rounded-full bg-radial-[circle,_rgba(95,104,42,0.5)_0%,_transparent_70%]" />
@@ -551,7 +562,7 @@ END:VCALENDAR`
             <h2 className="fade-right delay-100 mt-0.5 font-great-vibes text-5xl sm:text-6xl text-[#330404]">
               Bride &amp; Groom
             </h2>
-            <p className="fade-left delay-150 font-moul-light font-moul text-sm text-[#5f682a] mt-0.5">
+            <p className="fade-left delay-150 font-moulpali text-sm sm:text-base text-[#5f682a] mt-0.5">
               កូនកំលោះ និង កូនក្រមុំ
             </p>
 
@@ -559,7 +570,7 @@ END:VCALENDAR`
               <span className="text-xs text-[#330404]">✦</span>
             </div>
 
-            <p className="fade-right delay-200 font-kantumruy text-xs text-[#5f682a] italic mb-8">
+            <p className="fade-right delay-200 font-moulpali text-xs text-[#5f682a] mb-8">
               ✨ ចុចលើរូបថតដើម្បីផ្លាស់ប្តូររូបថតកុមារភាព និងរូបបច្ចុប្បន្ន
             </p>
 
@@ -595,7 +606,7 @@ END:VCALENDAR`
                       {/* Interactive Childhood / Present Switcher Pill */}
                       <div className="absolute -bottom-3 inset-x-0 mx-auto w-fit flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#330404] hover:bg-[#5f682a] border border-[#FAF7F2] text-white shadow-md backdrop-blur-md transition-all duration-300 transform group-hover:scale-105">
                         <RefreshCw className="h-2.5 w-2.5 text-[#5f682a] group-hover:text-white transition-colors" />
-                        <span className="font-moul-light font-moul text-[10px] tracking-wide text-white">
+                        <span className="font-moulpali text-[10px] tracking-wide text-white">
                           {activeChildhood.groom ? 'កុមារភាព' : 'បច្ចុប្បន្ន'}
                         </span>
                         <span className="text-[8px] tracking-widest text-[#5f682a] group-hover:text-white transition-colors pl-0.5">
@@ -611,7 +622,7 @@ END:VCALENDAR`
                   <p className="font-cinzel text-xs sm:text-sm font-bold tracking-[0.25em] text-[#5f682a]">
                     GROOM
                   </p>
-                  <p className="font-moul-light font-moul text-xs text-[#330404] mt-0.5">
+                  <p className="font-moul-light font-moul text-xs sm:text-sm text-[#330404] mt-0.5">
                     កូនកំលោះ
                   </p>
                   <h3 className="mt-1 font-cinzel text-xl sm:text-2xl font-bold tracking-[0.18em] text-[#330404] leading-tight uppercase">
@@ -620,7 +631,7 @@ END:VCALENDAR`
                   <p className="font-great-vibes text-2xl sm:text-3xl text-[#5f682a] -mt-1 leading-normal">
                     Neou Rithyvong
                   </p>
-                  <p className="font-kantumruy font-semibold text-sm sm:text-base text-[#330404]">
+                  <p className="font-moul-light font-moul text-sm sm:text-base text-[#330404] mt-1">
                     នីវ រិទ្ធីវង្ស (រីទ្ធី)
                   </p>
                 </div>
@@ -642,7 +653,7 @@ END:VCALENDAR`
                   <p className="font-cinzel text-xs sm:text-sm font-bold tracking-[0.25em] text-[#5f682a]">
                     BRIDE
                   </p>
-                  <p className="font-moul-light font-moul text-xs text-[#330404] mt-0.5">
+                  <p className="font-moul-light font-moul text-xs sm:text-sm text-[#330404] mt-0.5">
                     កូនក្រមុំ
                   </p>
                   <h3 className="mt-1 font-cinzel text-xl sm:text-2xl font-bold tracking-[0.18em] text-[#330404] leading-tight uppercase">
@@ -651,7 +662,7 @@ END:VCALENDAR`
                   <p className="font-great-vibes text-2xl sm:text-3xl text-[#5f682a] -mt-1 leading-normal">
                     Chhiv Exngy
                   </p>
-                  <p className="font-kantumruy font-semibold text-sm sm:text-base text-[#330404]">
+                  <p className="font-moul-light font-moul text-sm sm:text-base text-[#330404] mt-1">
                     ឈីវ អិចងី (និគុណ)
                   </p>
                 </div>
@@ -683,7 +694,7 @@ END:VCALENDAR`
                       {/* Interactive Childhood / Present Switcher Pill */}
                       <div className="absolute -bottom-3 inset-x-0 mx-auto w-fit flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#330404] hover:bg-[#5f682a] border border-[#FAF7F2] text-white shadow-md backdrop-blur-md transition-all duration-300 transform group-hover:scale-105">
                         <RefreshCw className="h-2.5 w-2.5 text-[#5f682a] group-hover:text-white transition-colors" />
-                        <span className="font-moul-light font-moul text-[10px] tracking-wide text-white">
+                        <span className="font-moulpali text-[10px] tracking-wide text-white">
                           {activeChildhood.bride ? 'កុមារភាព' : 'បច្ចុប្បន្ន'}
                         </span>
                         <span className="text-[8px] tracking-widest text-[#5f682a] group-hover:text-white transition-colors pl-0.5">
@@ -711,7 +722,7 @@ END:VCALENDAR`
             <h2 className="fade-right delay-100 mt-0.5 font-great-vibes text-4xl sm:text-5xl text-[#330404]">
               Gallery of Moments
             </h2>
-            <p className="fade-left delay-150 font-moul-light font-moul text-xs text-[#5f682a]">
+            <p className="fade-left delay-150 font-moulpali text-xs sm:text-sm text-[#5f682a]">
               កម្រងរូបភាពអនុស្សាវរីយ៍
             </p>
 
@@ -745,7 +756,7 @@ END:VCALENDAR`
               <h2 className="fade-right delay-100 mt-0.5 font-great-vibes text-5xl sm:text-6xl text-[#330404]">
                 Wedding Events
               </h2>
-              <p className="fade-left delay-150 font-kantumruy text-xs sm:text-sm font-bold text-[#5f682a] mt-0.5">
+              <p className="fade-left delay-150 font-moulpali text-xs sm:text-sm text-[#5f682a] mt-0.5">
                 ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៥
               </p>
 
@@ -761,9 +772,9 @@ END:VCALENDAR`
                 <div className="timeline-connector-line absolute left-[22px] sm:left-[26px] top-6 bottom-6 w-0.5 rounded-full shadow-[0_0_8px_rgba(95,104,42,0.4)]" />
 
                 {/* Event 1: 06:00 AM */}
-                <div className="timeline-row delay-1 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
-                    <Bell className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-12" />
+                <div className="timeline-row delay-1 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] shadow-md ring-2 ring-[#330404] border border-[#330404]/40">
+                    <Bell className="h-5 w-5 sm:h-6 sm:w-6 text-[#330404] transition-transform duration-300 group-hover:rotate-12" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -776,9 +787,9 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 2: 07:00 AM */}
-                <div className="timeline-row delay-2 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
-                    <PartyPopper className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:scale-110" />
+                <div className="timeline-row delay-2 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] shadow-md ring-2 ring-[#330404] border border-[#330404]/40">
+                    <PartyPopper className="h-5 w-5 sm:h-6 sm:w-6 text-[#330404] transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -791,9 +802,9 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 3: 07:30 AM */}
-                <div className="timeline-row delay-3 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
-                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-12" />
+                <div className="timeline-row delay-3 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] shadow-md ring-2 ring-[#330404] border border-[#330404]/40">
+                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-[#330404] transition-transform duration-300 group-hover:rotate-12" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -806,9 +817,9 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 4: 08:30 AM */}
-                <div className="timeline-row delay-4 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
-                    <Bell className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:scale-110" />
+                <div className="timeline-row delay-4 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] shadow-md ring-2 ring-[#330404] border border-[#330404]/40">
+                    <Bell className="h-5 w-5 sm:h-6 sm:w-6 text-[#330404] transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -821,9 +832,9 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 5: 09:00 AM */}
-                <div className="timeline-row delay-5 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
-                    <Scissors className="h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-300 group-hover:rotate-12" />
+                <div className="timeline-row delay-5 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] shadow-md ring-2 ring-[#330404] border border-[#330404]/40">
+                    <Scissors className="h-5 w-5 sm:h-6 sm:w-6 text-[#330404] transition-transform duration-300 group-hover:rotate-12" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -836,9 +847,9 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 6: 10:45 AM */}
-                <div className="timeline-row delay-6 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] text-white shadow-md ring-2 ring-white/95">
-                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 fill-current text-white transition-transform duration-300 group-hover:scale-110" />
+                <div className="timeline-row delay-6 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#727d35] to-[#5a6427] shadow-md ring-2 ring-[#330404] border border-[#330404]/40">
+                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 fill-[#330404] text-[#330404] transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -851,9 +862,9 @@ END:VCALENDAR`
                 </div>
 
                 {/* Event 7: 05:00 PM - Evening Reception */}
-                <div className="timeline-row delay-7 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-white/40">
-                  <div className="timeline-badge timeline-badge-reception relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#330404] to-[#4d0707] text-white shadow-lg ring-2 ring-white/95">
-                    <Utensils className="h-5 w-5 sm:h-6 sm:w-6 text-white transition-transform duration-300 group-hover:rotate-12" />
+                <div className="timeline-row delay-7 relative flex items-center gap-3.5 sm:gap-4.5 group -mx-2 px-2 py-1.5 rounded-2xl transition-all duration-300 hover:bg-[#5f682a]/8">
+                  <div className="timeline-badge timeline-badge-reception relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#330404] to-[#4d0707] shadow-lg ring-2 ring-[#5f682a] border border-[#5f682a]/40">
+                    <Utensils className="h-5 w-5 sm:h-6 sm:w-6 text-[#a8b849] transition-transform duration-300 group-hover:rotate-12" />
                   </div>
                   <div className="timeline-content flex-1 transition-transform duration-300 group-hover:translate-x-1.5">
                     <p className="font-kantumruy text-sm sm:text-base font-bold text-[#330404] leading-snug">
@@ -905,11 +916,11 @@ END:VCALENDAR`
                 />
               </div>
 
-              <div className="bg-white p-4 text-left text-xs">
+              <div className="bg-[#FAF7F2] p-4 text-left text-xs border-t border-[#330404]/20">
                 <h4 className="font-cinzel text-sm font-bold text-[#330404]">
                   The Premier Sensok Center (Building H-I)
                 </h4>
-                <p className="mt-1 font-moulpali text-xs text-[#330404]">
+                <p className="mt-1 font-kantumruy text-xs text-[#330404] leading-relaxed">
                   ផ្លូវ ១០០៣ សង្កាត់ភ្នំពេញថ្មី ខណ្ឌសែនសុខ រាជធានីភ្នំពេញ
                 </p>
 
@@ -927,12 +938,12 @@ END:VCALENDAR`
 
                   <button
                     onClick={copyAddressToClipboard}
-                    className="flex items-center gap-1.5 rounded-xl border border-[#5f682a]/50 bg-[#FAF7F2] px-3 py-2 font-moulpali text-xs text-[#5f682a] transition hover:border-[#330404] hover:text-[#330404]"
+                    className="flex items-center gap-1.5 rounded-xl border border-[#5f682a]/50 bg-[#FAF7F2] px-3 py-2 font-kantumruy text-xs text-[#5f682a] transition hover:border-[#330404] hover:text-[#330404]"
                   >
                     {copiedAddress ? (
                       <>
-                        <Check className="h-3.5 w-3.5 text-green-600" />
-                        <span className="text-green-600">បានចម្លង!</span>
+                        <Check className="h-3.5 w-3.5 text-[#5f682a]" />
+                        <span className="text-[#5f682a]">បានចម្លង!</span>
                       </>
                     ) : (
                       <>

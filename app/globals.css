@@ -175,11 +175,11 @@ body {
 .timeline-connector-line {
   background: linear-gradient(
     180deg,
-    rgba(95, 104, 42, 0.75) 0%,
-    rgba(197, 160, 89, 0.95) 25%,
-    rgba(95, 104, 42, 0.65) 50%,
-    rgba(51, 4, 4, 0.95) 80%,
-    rgba(51, 4, 4, 0.4) 100%
+    rgba(51, 4, 4, 0.9) 0%,
+    rgba(95, 104, 42, 0.9) 25%,
+    rgba(51, 4, 4, 0.9) 50%,
+    rgba(95, 104, 42, 0.9) 75%,
+    rgba(51, 4, 4, 0.9) 100%
   );
   background-size: 100% 200%;
   animation: timelineBeam 5s linear infinite;
@@ -241,7 +241,7 @@ body {
 
 .timeline-row:hover .timeline-badge-reception {
   transform: scale(1.14) !important;
-  box-shadow: 0 0 22px rgba(51, 4, 4, 0.7), 0 0 10px rgba(197, 160, 89, 0.5) !important;
+  box-shadow: 0 0 22px rgba(51, 4, 4, 0.7), 0 0 10px rgba(95, 104, 42, 0.6) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
