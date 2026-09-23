@@ -78,7 +78,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
   return (
     <div className="space-y-6 px-3">
       {/* RSVP Form Card */}
-      <div className="fade-left delay-100 rounded-2xl border-2 border-[#330404]/30 bg-white/90 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:border-[#330404]">
+      <div className="fade-left delay-100 rounded-2xl border-2 border-[#330404]/30 bg-white/40 p-5 shadow-sm transition-all duration-300 hover:border-[#330404]">
         <div className="text-center">
           <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#330404]/10 text-[#330404]">
             <MessageSquareHeart className="h-5 w-5" />

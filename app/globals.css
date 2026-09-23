@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Moulpali&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Moul&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
@@ -62,6 +63,11 @@ body {
 .font-moulpali {
   font-family: 'Moulpali', 'Khmer OS Moulpali', 'Khmer OS Muol Light', 'Moul', cursive, serif !important;
   line-height: 1.65;
+}
+
+.font-kantumruy {
+  font-family: 'Kantumruy Pro', 'Montserrat', sans-serif !important;
+  line-height: 1.6;
 }
 
 .font-great-vibes,

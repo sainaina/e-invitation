@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import {
   Calendar,
-  Clock,
   Heart,
   MapPin,
   Sparkles,
@@ -12,13 +11,16 @@ import {
   ExternalLink,
   RefreshCw,
   ChevronDown,
+  Bell,
+  PartyPopper,
+  Scissors,
+  Utensils,
 } from 'lucide-react'
 
 import FloatingPetals from '@/components/floating-petals'
 import AudioPlayer from '@/components/audio-player'
 import UsefulFrame from '@/components/useful-frame'
 import GalleryLightbox, { GalleryItem } from '@/components/gallery-lightbox'
-import RsvpGuestbook from '@/components/rsvp-guestbook'
 
 const galleryList: GalleryItem[] = [
   {
@@ -186,8 +188,8 @@ END:VCALENDAR`
   }
 
   return (
-    <main className="relative min-h-screen text-[#330404] selection:bg-[#330404] selection:text-white">
-      {/* Immersive Video Background with Very Subtle Blur (Clear Video Visibility) */}
+    <main className="relative min-h-screen text-[#330404] selection:bg-[#330404]/70 selection:text-white">
+      {/* Immersive Video Background with Crystal Clarity (No Heavy Blur) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <video
           autoPlay
@@ -196,14 +198,14 @@ END:VCALENDAR`
           playsInline
           className="h-full w-full object-cover"
           style={{
-            filter: 'blur(1.5px)',
+            filter: 'blur(1px)',
             transform: 'scale(1.02)',
           }}
         >
           <source src="/videos/arch_background.mp4" type="video/mp4" />
         </video>
-        {/* Soft, minimal neutral overlay so the video is clearly seen */}
-        <div className="absolute inset-0 bg-black/15" />
+        {/* Ultra-soft, minimal neutral overlay so the video is clearly seen */}
+        <div className="absolute inset-0 bg-black/5" />
       </div>
 
       {/* Floating Rose Petals, Matcha Leaves & Golden Dust Particles */}
@@ -220,16 +222,15 @@ END:VCALENDAR`
         style={{
           background: 'transparent',
         }}
-        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 select-none shadow-2xl transition-all duration-[950ms] ease-[cubic-bezier(0.22,1,0.36,1)] ring-4 ring-[#330404]/15 ${
-          isEnvelopeOpen
-            ? '-translate-y-full opacity-0 pointer-events-none invisible'
-            : isEnvelopeSliding
+        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 select-none shadow-2xl transition-all duration-[950ms] ease-[cubic-bezier(0.22,1,0.36,1)] ring-4 ring-[#330404]/15 ${isEnvelopeOpen
+          ? '-translate-y-full opacity-0 pointer-events-none invisible'
+          : isEnvelopeSliding
             ? '-translate-y-full opacity-0 pointer-events-none scale-[0.98]'
             : 'translate-y-0 opacity-100 cursor-pointer'
-        }`}
+          }`}
       >
-        {/* Soft Central Radial Vignette - Gentle halo for readability over fixed background video */}
-        <div className="pointer-events-none absolute inset-0 bg-radial-[ellipse_at_center,_rgba(250,247,242,0.50)_0%,_rgba(250,247,242,0.20)_65%,_rgba(0,0,0,0.20)_100%]" />
+        {/* Soft, ultra-sheer white/10 layer */}
+        <div className="pointer-events-none absolute inset-0 bg-white/10" />
 
         {/* Full-Screen Royal Dual Hairline Framing (Red Wine & Matcha/20) */}
         <div className="pointer-events-none fixed inset-3 sm:inset-5 rounded-2xl sm:rounded-3xl border-2 border-[#330404]/40" />
@@ -270,11 +271,10 @@ END:VCALENDAR`
           {/* =================================================================== */}
           <div className="my-4 sm:my-6 flex justify-center">
             <div
-              className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_12px_28px_rgba(51,4,4,0.35)] ring-4 ring-[#5f682a]/30 overflow-hidden cursor-pointer transition-all duration-700 ${
-                isStampRotating
-                  ? 'animate-seal-rotate-180 ring-8 ring-[#330404]/60'
-                  : 'hover:scale-105 active:scale-95'
-              }`}
+              className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#330404] shadow-[0_12px_28px_rgba(51,4,4,0.35)] ring-4 ring-[#5f682a]/30 overflow-hidden cursor-pointer transition-all duration-700 ${isStampRotating
+                ? 'animate-seal-rotate-180 ring-8 ring-[#330404]/60'
+                : 'hover:scale-105 active:scale-95'
+                }`}
             >
               {/* Luminous Red Pulsing Halo */}
               <div className="seal-pulse absolute inset-0 rounded-full bg-[#330404]/25" />
@@ -325,11 +325,10 @@ END:VCALENDAR`
       {/* MAIN INVITATION: FRAMED WITH CUSTOM ARCH & CLEAN CHANDELIER               */}
       {/* ========================================================================= */}
       <div
-        className={`transition-all duration-700 ${
-          isEnvelopeOpen || isEnvelopeSliding
-            ? 'opacity-100 animate-card-slide-up'
-            : 'opacity-0 pointer-events-none invisible h-0 overflow-hidden'
-        }`}
+        className={`transition-all duration-700 ${isEnvelopeOpen || isEnvelopeSliding
+          ? 'opacity-100 animate-card-slide-up'
+          : 'opacity-0 pointer-events-none invisible h-0 overflow-hidden'
+          }`}
       >
         <UsefulFrame
           onReopenEnvelope={() => {
@@ -341,181 +340,202 @@ END:VCALENDAR`
           {/* ===================================================================== */}
           {/* INVITATION HOMEPAGE: ARCH BACKGROUND & CHANDELIER                      */}
           {/* ===================================================================== */}
-          <header className="relative min-h-[100dvh] w-full px-4 sm:px-8 pt-8 pb-14 text-center overflow-hidden flex flex-col justify-between items-center rounded-none sm:rounded-t-[36px]">
-            {/* Soft subtle radial vignette under text for readability while the fixed background video shows through */}
-            <div
-              className="pointer-events-none absolute inset-0 z-0"
-              style={{
-                background:
-                  'radial-gradient(ellipse at 50% 50%, rgba(250, 247, 242, 0.45) 0%, rgba(250, 247, 242, 0.15) 70%, transparent 100%)',
-              }}
-            />
-
-            {/* Top Spacing under Arch */}
-            <div className="h-4 sm:h-8" />
-
-            {/* Khmer Royal Greeting in Moul */}
-            <p className="fade-left relative z-10 font-moul text-xs tracking-wider text-[#5f682a]">
-              សូមគោរពអញ្ជើញ
-            </p>
-
-            {/* Luxury English Eyebrow with Spaced Serif */}
-            <p className="fade-right delay-100 relative z-10 mt-1.5 font-cinzel text-[11px] font-semibold tracking-[0.32em] text-[#330404]">
-              THE WEDDING OF
-            </p>
-
-            {/* Couple Calligraphy in Great Vibes & Khmer Moulpali */}
-            <div className="fade-left delay-150 relative z-10 my-2">
-              <h1 className="font-great-vibes text-6xl sm:text-7xl text-[#330404] drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)] leading-none">
-                Rithy <span className="font-great-vibes text-4xl text-[#5f682a]">&amp;</span> Nihyun
+          {/* ===================================================================== */}
+          {/* TRADITIONAL ROYAL KHMER INVITATION CARD (MATCHING REFERENCE LAYOUT)   */}
+          {/* ===================================================================== */}
+          {/* ===================================================================== */}
+          {/* TRADITIONAL ROYAL KHMER INVITATION CARD (MODERN LUXURY EDITORIAL)    */}
+          {/* ===================================================================== */}
+          <header className="relative w-full px-4 sm:px-8 pt-8 sm:pt-12 pb-10 text-center flex flex-col justify-between items-center rounded-none sm:rounded-t-[36px]">
+            {/* Top Ornamental Header (Matching Reference Top Title) */}
+            <div className="relative z-10 pt-2 sm:pt-4">
+              <span className="text-xs sm:text-sm text-[#c5a059] block select-none">❖ · ❦ · ❖</span>
+              <h1 className="font-moul text-2xl sm:text-4xl md:text-5xl text-[#330404] tracking-wide mt-1.5 drop-shadow-[0_2px_8px_rgba(250,247,242,0.95)]">
+                សិរីសួស្តី អាពាហ៍ពិពាហ៍
               </h1>
-              <p className="mt-1 font-moulpali text-xl text-[#5f682a] drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
-                រីទ្ធី និង និគុណ
+              <p className="font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] mt-1 uppercase">
+                Royal Wedding Invitation
               </p>
             </div>
 
-            {/* Modern Luxury Editorial Wedding Portrait Frame */}
-            <div className="fade-right delay-200 relative z-10 my-6 sm:my-8 flex justify-center w-full px-4">
-              <div className="group relative w-full max-w-[320px] sm:max-w-[360px]">
-                {/* Ambient Soft Glow Behind Arch */}
-                <div className="absolute -inset-2 rounded-t-[160px] rounded-b-3xl bg-gradient-to-b from-[#5f682a]/15 via-[#330404]/10 to-transparent blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-700" />
-
-                {/* Main Architectural Arch Frame with Razor-Thin Luxury Hairlines */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-t-[150px] rounded-b-2xl border border-[#330404]/35 bg-stone-100 shadow-[0_22px_50px_-12px_rgba(51,4,4,0.25)] transition-all duration-700 hover:shadow-[0_28px_60px_-12px_rgba(51,4,4,0.35)] ring-1 ring-[#5f682a]/25">
-                  {/* The Wedding Photo */}
-                  <img
-                    src="/images/couple_hero_portrait_1790042546264.jpg"
-                    alt="Rithy & Nihyun Royal Wedding"
-                    className="h-full w-full object-cover object-[center_20%] transition-transform duration-1000 ease-out group-hover:scale-105"
-                  />
-
-                  {/* Delicate Inner Glass Hairline Inset */}
-                  <div className="pointer-events-none absolute inset-2 rounded-t-[140px] rounded-b-[10px] border border-white/45 ring-1 ring-[#330404]/15" />
-
-                  {/* Soft bottom vignette for photo depth */}
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#330404]/45 via-transparent to-transparent" />
-
-                  {/* Minimalist Corner Sparkles */}
-                  <div className="pointer-events-none absolute top-4 left-5 font-cinzel text-[9px] text-[#FAF7F2]/80 select-none">✦</div>
-                  <div className="pointer-events-none absolute top-4 right-5 font-cinzel text-[9px] text-[#FAF7F2]/80 select-none">✦</div>
+            {/* 2-Column Honored Parents Section with Kantumruy Pro Typography */}
+            <div className="relative z-10 w-full max-w-lg my-4 sm:my-6 px-2">
+              <div className="grid grid-cols-2 gap-3 sm:gap-6 text-center">
+                {/* Bride's Parents (Left) */}
+                <div className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#c5a059]/70 bg-white/85 shadow-sm transition-all hover:border-[#c5a059]">
+                  <p className="font-kantumruy text-[11px] sm:text-xs font-bold tracking-wider text-[#5f682a] uppercase">
+                    មាតាបិតាខាងស្រី
+                  </p>
+                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] mt-1.5 font-bold leading-relaxed">
+                    លោក ឈីវ ម៉េង
+                  </p>
+                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] font-bold leading-relaxed">
+                    លោកស្រី លី ហួង
+                  </p>
                 </div>
 
-                {/* Refined Minimalist Editorial Subscript Below Frame (Clean & Modern) */}
-                <div className="mt-3.5 flex items-center justify-center gap-3 text-center">
-                  <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#5f682a]/50" />
-                  <p className="font-cinzel text-[9px] sm:text-[10px] font-semibold tracking-[0.3em] text-[#5f682a] uppercase">
-                    PHNOM PENH • 2025
+                {/* Groom's Parents (Right) */}
+                <div className="p-3.5 sm:p-4 rounded-2xl border-2 border-[#c5a059]/70 bg-white/85 shadow-sm transition-all hover:border-[#c5a059]">
+                  <p className="font-kantumruy text-[11px] sm:text-xs font-bold tracking-wider text-[#5f682a] uppercase">
+                    មាតាបិតាខាងប្រុស
                   </p>
-                  <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#5f682a]/50" />
+                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] mt-1.5 font-bold leading-relaxed">
+                    លោក នីវ សុវណ្ណ
+                  </p>
+                  <p className="font-kantumruy text-sm sm:text-base text-[#260202] font-bold leading-relaxed">
+                    អ្នកស្រី គឹម សុផល
+                  </p>
+                </div>
+              </div>
+
+              {/* Delicate Gold Divider */}
+              <div className="my-5 flex items-center justify-center gap-3">
+                <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#c5a059]" />
+                <span className="font-cinzel text-xs text-[#330404] select-none">✦ · ❦ · ✦</span>
+                <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#c5a059]" />
+              </div>
+
+              {/* Formal Khmer Invitation Greeting & Body with Kantumruy Pro */}
+              <div className="text-center space-y-1.5 px-2">
+                <h2 className="font-moul text-base sm:text-xl text-[#330404] drop-shadow-xs">
+                  មានកិត្តិយសសូមគោរពអញ្ជើញ
+                </h2>
+                <p className="font-kantumruy text-xs sm:text-[13px] text-[#260202] font-medium leading-relaxed max-w-md mx-auto">
+                  ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា និងប្រិយមិត្តជិតឆ្ងាយ អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធពរជ័យសិរីសួស្តី ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស-កូនស្រី របស់យើងខ្ញុំ។
+                </p>
+              </div>
+            </div>
+
+            {/* The Couple with Center Royal Monogram Emblem */}
+            <div className="relative z-10 w-full max-w-xl my-3 sm:my-5 px-2">
+              <div className="flex items-center justify-between sm:justify-center gap-2 sm:gap-6">
+                {/* Bride (Left) */}
+                <div className="flex-1 text-center sm:text-right">
+                  <span className="font-kantumruy text-[11px] sm:text-xs text-[#5f682a] font-semibold block">
+                    កូនស្រីនាម
+                  </span>
+                  <h3 className="font-moul text-base sm:text-2xl text-[#260202] mt-0.5 leading-snug">
+                    ឈីវ អិចងី
+                  </h3>
+                  <p className="font-kantumruy text-xs sm:text-sm text-[#5f682a] font-semibold">
+                    (និគុណ)
+                  </p>
+                  <p className="font-great-vibes text-xl sm:text-2xl text-[#330404] mt-0.5">
+                    Nihyun
+                  </p>
+                </div>
+
+                {/* Central Royal RN Monogram Emblem */}
+                <div className="flex-shrink-0 flex flex-col items-center justify-center px-1 sm:px-3">
+                  <div className="relative flex h-20 w-20 sm:h-28 sm:w-28 items-center justify-center rounded-full border-2 border-[#c5a059] bg-gradient-to-b from-white to-[#faf7f2] shadow-md ring-2 ring-[#c5a059]/40 transition-transform duration-500 hover:scale-105">
+                    {/* Inner Ornate Filigree Ring */}
+                    <div className="pointer-events-none absolute inset-1.5 rounded-full border border-dashed border-[#c5a059]/70" />
+                    {/* Monogram Typography */}
+                    <div className="text-center select-none">
+                      <span className="block font-cinzel text-[7px] sm:text-[9px] tracking-[0.25em] text-[#5f682a]">R &amp; N</span>
+                      <span className="font-great-vibes text-3xl sm:text-4xl text-[#330404] font-bold leading-none block my-0.5">
+                        R&amp;N
+                      </span>
+                      <span className="block font-cinzel text-[7px] sm:text-[8px] tracking-[0.3em] text-[#c5a059]">2025</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Groom (Right) */}
+                <div className="flex-1 text-center sm:text-left">
+                  <span className="font-kantumruy text-[11px] sm:text-xs text-[#5f682a] font-semibold block">
+                    កូនប្រុសនាម
+                  </span>
+                  <h3 className="font-moul text-base sm:text-2xl text-[#260202] mt-0.5 leading-snug">
+                    នីវ រិទ្ធីវង្ស
+                  </h3>
+                  <p className="font-kantumruy text-xs sm:text-sm text-[#5f682a] font-semibold">
+                    (រីទ្ធី)
+                  </p>
+                  <p className="font-great-vibes text-xl sm:text-2xl text-[#330404] mt-0.5">
+                    Rithy
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Formal Royal Khmer & English Invitation Verse */}
-            <div className="fade-left delay-250 relative z-10 mx-auto max-w-sm px-2">
-              <p className="font-cinzel text-[10px] font-semibold tracking-[0.16em] text-[#330404] uppercase leading-relaxed">
-                WE CORDIALLY REQUEST THE HONOR OF YOUR PRESENCE
+            {/* Event Date, Time & Venue in Khmer */}
+            <div className="relative z-10 w-full max-w-md mx-auto my-3 text-center space-y-1">
+              <p className="font-kantumruy text-xs sm:text-sm text-[#260202] font-bold leading-relaxed">
+                ថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែធ្នូ ឆ្នាំ ២០២៥ វេលាម៉ោង ៥:០០ រសៀល
               </p>
-              <p className="mt-1 font-moulpali text-xs leading-relaxed text-[#330404]">
-                យើងខ្ញុំមានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា អញ្ជើញចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយសក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍កូនប្រុស កូនស្រី របស់យើងខ្ញុំ
+              <p className="font-kantumruy text-xs sm:text-sm text-[#474f20] font-bold leading-relaxed">
+                នៅមជ្ឈមណ្ឌល The Premier Sensok Center (អគារ H-I) រាជធានីភ្នំពេញ
               </p>
             </div>
 
-            {/* Filigree Divider */}
-            <div className="filigree-divider">
-              <span className="text-xs text-[#330404]">❦</span>
-            </div>
-
-            {/* Date & Time Highlights */}
-            <div className="fade-left space-y-1">
-              <p className="font-cinzel text-xs tracking-widest text-[#5f682a]">
-                FROM 5:00 PM • វេលាម៉ោង ៥:០០ រសៀល
+            {/* Modern English Wedding Invitation Section */}
+            <div className="relative z-10 w-full max-w-md mx-auto mt-2 pt-3 border-t border-[#c5a059]/25">
+              <h2 className="font-cinzel text-base sm:text-lg font-bold tracking-[0.25em] text-[#330404] uppercase">
+                Wedding Invitation
+              </h2>
+              <p className="font-cinzel text-[10px] sm:text-[11px] tracking-wider text-[#330404]/90 mt-1 max-w-sm mx-auto leading-relaxed">
+                Together with their families, the bride and groom respectfully invite you to celebrate their wedding and share in the joy of this special occasion.
               </p>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#330404]/50 bg-white/90 px-5 py-2 shadow-xs">
+
+              {/* Date & Location Pill Badge */}
+              <div className="mt-3.5 inline-flex items-center gap-2 rounded-full border border-[#c5a059]/70 bg-white/90 px-5 py-2 shadow-xs">
                 <Calendar className="h-4 w-4 text-[#330404]" />
-                <span className="font-cinzel text-xs sm:text-sm font-bold tracking-wider text-[#330404]">
-                  THURSDAY 18<sup>TH</sup> DECEMBER 2025
+                <span className="font-cinzel text-xs sm:text-sm font-bold tracking-wider text-[#260202]">
+                  THURSDAY 18<sup>TH</sup> DECEMBER 2025 • 5:00 PM
                 </span>
               </div>
-              <p className="font-moulpali text-xs text-[#5f682a] mt-1">
-                ត្រូវនឹងថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែធ្នូ ឆ្នាំ ២០២៥
-              </p>
-              <p className="font-cinzel text-[10px] tracking-wider text-stone-600">
-                THE PREMIER SENSOK CENTER (BUILDING H-I)
-              </p>
             </div>
 
-            {/* Save the Date Plaque Button */}
-            <div className="fade-right delay-100 mt-5 flex flex-col items-center justify-center gap-3">
+            {/* Save the Date Button & Countdown Timer (Redesigned & Modern) */}
+            <div className="relative z-10 mt-5 w-full flex flex-col items-center justify-center gap-3.5">
               <button
                 onClick={handleSaveCalendar}
-                className="group relative inline-flex items-center gap-2 rounded-xl border-2 border-[#330404] bg-white/95 px-6 py-2.5 shadow-md transition-all hover:scale-105 hover:bg-[#330404] hover:text-white"
+                className="group relative inline-flex items-center gap-2.5 rounded-full border border-[#c5a059]/80 bg-gradient-to-r from-[#330404] via-[#4d0707] to-[#330404] px-8 py-3 shadow-[0_4px_18px_rgba(51,4,4,0.3)] hover:shadow-[0_6px_25px_rgba(51,4,4,0.45)] transition-all duration-300 hover:scale-105 active:scale-95 text-white ring-1 ring-[#c5a059]/30"
               >
-                <div className="h-1.5 w-1.5 rounded-full bg-[#330404] group-hover:bg-white" />
-                <span className="font-great-vibes text-xl font-normal tracking-wide text-[#330404] group-hover:text-white">
+                <span className="text-[#c5a059] text-xs">✦</span>
+                <span className="font-great-vibes text-xl sm:text-2xl font-normal tracking-wide text-white drop-shadow-xs">
                   Save our Date
                 </span>
-                <div className="h-1.5 w-1.5 rounded-full bg-[#330404] group-hover:bg-white" />
+                <span className="text-[#c5a059] text-xs">✦</span>
               </button>
 
-              {/* Countdown Timer with English & Khmer Moulpali */}
-              <div className="grid grid-cols-4 gap-2 text-center text-xs">
-                <div className="fade-left delay-100 rounded-xl border border-[#330404]/40 bg-white/90 p-2 shadow-2xs min-w-[58px]">
-                  <span className="block font-cinzel text-base font-bold text-[#330404]">{timeLeft.days}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-500">DAYS</span>
-                  <span className="block font-moulpali text-[9px] text-[#5f682a]">ថ្ងៃ</span>
+              {/* Countdown Timer with English & Kantumruy Pro */}
+              <div className="grid grid-cols-4 gap-2.5 text-center text-xs">
+                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.days}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">DAYS</span>
+                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">ថ្ងៃ</span>
                 </div>
-                <div className="fade-left delay-200 rounded-xl border border-[#330404]/40 bg-white/90 p-2 shadow-2xs min-w-[58px]">
-                  <span className="block font-cinzel text-base font-bold text-[#330404]">{timeLeft.hours}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-500">HOURS</span>
-                  <span className="block font-moulpali text-[9px] text-[#5f682a]">ម៉ោង</span>
+                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.hours}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">HOURS</span>
+                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">ម៉ោង</span>
                 </div>
-                <div className="fade-right delay-200 rounded-xl border border-[#330404]/40 bg-white/90 p-2 shadow-2xs min-w-[58px]">
-                  <span className="block font-cinzel text-base font-bold text-[#330404]">{timeLeft.minutes}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-500">MINS</span>
-                  <span className="block font-moulpali text-[9px] text-[#5f682a]">នាទី</span>
+                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.minutes}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">MINS</span>
+                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">នាទី</span>
                 </div>
-                <div className="fade-right delay-100 rounded-xl border border-[#330404]/40 bg-white/90 p-2 shadow-2xs min-w-[58px]">
-                  <span className="block font-cinzel text-base font-bold text-[#330404]">{timeLeft.seconds}</span>
-                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-500">SECS</span>
-                  <span className="block font-moulpali text-[9px] text-[#5f682a]">វិនាទី</span>
+                <div className="rounded-2xl border border-[#c5a059]/60 bg-white/90 p-2.5 shadow-xs min-w-[62px] transition-transform hover:-translate-y-0.5">
+                  <span className="block font-cinzel text-base sm:text-lg font-bold text-[#260202]">{timeLeft.seconds}</span>
+                  <span className="block font-cinzel text-[8px] tracking-wider text-stone-600 font-bold">SECS</span>
+                  <span className="block font-kantumruy text-[10px] font-bold text-[#5f682a]">វិនាទី</span>
                 </div>
               </div>
             </div>
           </header>
 
           {/* ===================================================================== */}
-          {/* PARENTS BLESSINGS                                                     */}
-          {/* ===================================================================== */}
-          <section className="relative border-t border-[#330404]/20 px-6 py-9 text-center">
-            <p className="fade-left font-cinzel text-[10px] tracking-[0.25em] text-[#5f682a]">
-              HONORED FAMILIES
-            </p>
-            <h2 className="fade-right mt-0.5 font-moul text-lg text-[#330404]">
-              មាតាបិតាទាំងសងខាង
-            </h2>
-
-            <div className="filigree-divider">
-              <span className="text-xs text-[#330404]">✦ · ✦ · ✦</span>
-            </div>
-
-            <div className="my-4 space-y-3 text-xs">
-              <div className="fade-left delay-100 rounded-2xl border border-[#330404]/30 bg-white/90 p-4 shadow-xs">
-                <p className="font-great-vibes text-2xl text-[#330404]">Groom&apos;s Parents <span className="font-moulpali text-xs text-[#5f682a]">• មាតាបិតាខាងកូនប្រុស</span></p>
-                <p className="mt-1 font-moulpali text-sm text-[#330404]">លោក នីវ សុវណ្ណ និង លោកស្រី គឹម សុផល</p>
-              </div>
-
-              <div className="fade-right delay-200 rounded-2xl border border-[#330404]/30 bg-white/90 p-4 shadow-xs">
-                <p className="font-great-vibes text-2xl text-[#330404]">Bride&apos;s Parents <span className="font-moulpali text-xs text-[#5f682a]">• មាតាបិតាខាងកូនស្រី</span></p>
-                <p className="mt-1 font-moulpali text-sm text-[#330404]">លោក ឈីវ ម៉េង និង លោកស្រី លី ហួង</p>
-              </div>
-            </div>
-          </section>
-
-          {/* ===================================================================== */}
           {/* THE COUPLE: STAGGERED DIAGONAL VINTAGE CAMEO (MATCHING REFERENCE)     */}
           {/* ===================================================================== */}
-          <section id="couple" className="relative border-t border-[#330404]/20 px-3 sm:px-6 py-12 text-center overflow-hidden">
+          <section id="couple" className="relative px-3 sm:px-6 py-10 text-center overflow-hidden">
+            {/* Seamless Section Divider */}
+            <div className="mb-8 flex items-center justify-center gap-3">
+              <div className="h-px w-20 sm:w-28 bg-gradient-to-r from-transparent to-[#c5a059]/50" />
+              <span className="font-cinzel text-xs text-[#330404]/60 select-none">✦ · ❦ · ✦</span>
+              <div className="h-px w-20 sm:w-28 bg-gradient-to-l from-transparent to-[#c5a059]/50" />
+            </div>
             {/* Soft Ambient Corner Glows in Primary Colors */}
             <div className="pointer-events-none absolute -top-8 -left-8 w-40 h-40 opacity-25 rounded-full bg-radial-[circle,_rgba(95,104,42,0.5)_0%,_transparent_70%]" />
             <div className="pointer-events-none absolute -bottom-8 -right-8 w-40 h-40 opacity-25 rounded-full bg-radial-[circle,_rgba(51,4,4,0.5)_0%,_transparent_70%]" />
@@ -534,7 +554,7 @@ END:VCALENDAR`
               <span className="text-xs text-[#330404]">✦</span>
             </div>
 
-            <p className="fade-right delay-200 font-moulpali text-xs text-[#5f682a] italic mb-8">
+            <p className="fade-right delay-200 font-kantumruy text-xs text-[#5f682a] italic mb-8">
               ✨ ចុចលើរូបថតដើម្បីផ្លាស់ប្តូររូបថតកុមារភាព និងរូបបច្ចុប្បន្ន
             </p>
 
@@ -595,7 +615,7 @@ END:VCALENDAR`
                   <p className="font-great-vibes text-2xl sm:text-3xl text-[#5f682a] -mt-1 leading-normal">
                     Neou Rithyvong
                   </p>
-                  <p className="font-moulpali text-sm sm:text-base text-[#330404]">
+                  <p className="font-kantumruy font-semibold text-sm sm:text-base text-[#330404]">
                     នីវ រិទ្ធីវង្ស (រីទ្ធី)
                   </p>
                 </div>
@@ -626,7 +646,7 @@ END:VCALENDAR`
                   <p className="font-great-vibes text-2xl sm:text-3xl text-[#5f682a] -mt-1 leading-normal">
                     Chhiv Exngy
                   </p>
-                  <p className="font-moulpali text-sm sm:text-base text-[#330404]">
+                  <p className="font-kantumruy font-semibold text-sm sm:text-base text-[#330404]">
                     ឈីវ អិចងី (និគុណ)
                   </p>
                 </div>
@@ -700,140 +720,139 @@ END:VCALENDAR`
           </section>
 
           {/* ===================================================================== */}
-          {/* WEDDING AGENDA / 2-DAY PROGRAM                                        */}
+          {/* WEDDING CEREMONY PROGRAM (MATCHING USER REFERENCE PICTURE)            */}
           {/* ===================================================================== */}
-          <section id="agenda" className="relative border-t border-[#330404]/20 px-5 py-11 text-center">
-            <div className="fade-left mx-auto flex justify-center text-[#330404] mb-1">
-              <Clock className="h-5 w-5" />
+          <section id="schedule" className="relative border-t border-[#330404]/20 px-4 sm:px-8 py-12 text-center overflow-hidden">
+            {/* Top Ornamental Flourish */}
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-[#c5a059]" />
+              <span className="font-cinzel text-xs text-[#330404] select-none">❖ · ❦ · ❖</span>
+              <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-[#c5a059]" />
             </div>
 
-            <p className="fade-left delay-100 font-cinzel text-[10px] tracking-[0.28em] text-[#5f682a]">
-              CELEBRATION TIMELINE
-            </p>
-            <h2 className="fade-right delay-150 mt-0.5 font-great-vibes text-4xl sm:text-5xl text-[#330404]">
-              Wedding Agenda
+            {/* Header Titles (Exact match to Reference Picture) */}
+            <h3 className="font-moul text-xl sm:text-2xl text-[#330404] tracking-wide">
+              កម្មវិធី
+            </h3>
+            <h2 className="font-moul text-2xl sm:text-4xl text-[#330404] mt-1 drop-shadow-xs">
+              សិរីមង្គលអាពាហ៍ពិពាហ៍
             </h2>
-            <p className="fade-left delay-200 font-moul text-xs text-[#5f682a]">
-              កាលវិភាគពិធីមង្គលការ
+            <p className="font-kantumruy text-xs sm:text-sm font-bold text-[#8a6538] mt-1.5">
+              ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៥
             </p>
 
-            <div className="filigree-divider">
-              <span className="text-xs text-[#330404]">❦</span>
-            </div>
+            {/* Event Timeline Container (Matching Reference Picture Layout) */}
+            <div className="relative mx-auto mt-8 max-w-md px-2 sm:px-6">
+              <div className="relative space-y-6 sm:space-y-7 text-left">
+                {/* Subtle Vertical Connecting Line */}
+                <div className="absolute left-[22px] sm:left-[26px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-[#a37c54]/60 via-[#c5a059]/40 to-[#a37c54]/60" />
 
-            {/* DAY 1: WEDNESDAY 17TH DECEMBER 2025 */}
-            <div className="fade-left delay-100 mx-auto my-5 max-w-md rounded-2xl border border-[#330404]/35 bg-white/90 p-5 shadow-xs backdrop-blur">
-              <div className="border-b border-[#330404]/20 pb-3">
-                <h3 className="font-cinzel text-sm sm:text-base font-bold tracking-wider text-[#330404]">
-                  WEDNESDAY 17<sup>TH</sup> DECEMBER 2025
-                </h3>
-                <p className="font-moulpali text-xs text-[#5f682a] mt-0.5">
-                  ថ្ងៃពុធ ទី ១៧ ខែធ្នូ ឆ្នាំ ២០២៥
-                </p>
-                <p className="font-cinzel text-[10px] tracking-wider text-stone-600 mt-0.5">
-                  THE PREMIER SENSOK CENTER (BUILDING H-I)
-                </p>
-              </div>
-
-              <div className="mt-4 space-y-3.5 text-center text-xs">
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">1:30 PM</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">GUEST ARRIVAL</p>
-                  <p className="font-moulpali text-xs text-stone-600">ការទទួលភ្ញៀវកិត្តិយស</p>
+                {/* Event 1: 06:00 AM */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
+                    <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ០៦:០០ ព្រឹក
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                      ពិធីសែនក្រុងពាលី
+                    </p>
+                  </div>
                 </div>
 
-                <div className="h-[1px] w-16 mx-auto bg-[#330404]/20" />
-
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">2:00 PM — 4:00 PM</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">
-                    CAMBODIAN TRADITIONAL WEDDING CEREMONY
-                  </p>
-                  <p className="font-moulpali text-xs text-stone-600">
-                    ពិធីកាត់សក់បង្កក់សិរី និងសំពះផ្ទឹម
-                  </p>
+                {/* Event 2: 07:00 AM */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
+                    <PartyPopper className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ០៧:០០ ព្រឹក
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                      ពិធីហែជំនូនចូលរោងជ័យ
+                    </p>
+                  </div>
                 </div>
 
-                <div className="h-[1px] w-16 mx-auto bg-[#330404]/20" />
-
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">4:00 PM — 5:00 PM</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">CHINESE TEA CEREMONY</p>
-                  <p className="font-moulpali text-xs text-stone-600">ពិធីលើកតែសែនព្រេន</p>
+                {/* Event 3: 07:30 AM */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
+                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ០៧:៣០ ព្រឹក
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                      ពិធីពិសាស្លាកំណត់ និងបំពាក់ចិញ្ចៀន
+                    </p>
+                  </div>
                 </div>
 
-                <div className="h-[1px] w-16 mx-auto bg-[#330404]/20" />
-
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">DINNER IS SERVED</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">FAMILY DINNER CELEBRATION</p>
-                  <p className="font-moulpali text-xs text-stone-600">
-                    ពិធីទទួលទានអាហារពេលល្ងាចជាលក្ខណៈគ្រួសារ
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Flourish Divider */}
-            <div className="reveal-zoom-in delay-150 my-4 flex items-center justify-center text-[#330404]">
-              <svg className="h-6 w-32" viewBox="0 0 160 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M10 12 Q 40 0, 70 12 T 80 12 T 90 12 Q 120 24, 150 12" />
-                <circle cx="80" cy="12" r="3" fill="currentColor" />
-              </svg>
-            </div>
-
-            {/* DAY 2: THURSDAY 18TH DECEMBER 2025 */}
-            <div className="fade-right delay-200 mx-auto my-5 max-w-md rounded-2xl border border-[#330404]/35 bg-white/90 p-5 shadow-xs backdrop-blur">
-              <div className="border-b border-[#330404]/20 pb-3">
-                <h3 className="font-cinzel text-sm sm:text-base font-bold tracking-wider text-[#330404]">
-                  THURSDAY 18<sup>TH</sup> DECEMBER 2025
-                </h3>
-                <p className="font-moulpali text-xs text-[#5f682a] mt-0.5">
-                  ថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែធ្នូ ឆ្នាំ ២០២៥
-                </p>
-                <p className="font-cinzel text-[10px] tracking-wider text-stone-600 mt-0.5">
-                  THE PREMIER SENSOK CENTER (BUILDING H-I)
-                </p>
-              </div>
-
-              <div className="mt-4 space-y-3.5 text-center text-xs">
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">06:30 AM</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">MORNING GUEST ARRIVAL</p>
-                  <p className="font-moulpali text-xs text-stone-600">ការទទួលភ្ញៀវពេលព្រឹកព្រលឹម</p>
+                {/* Event 4: 08:30 AM */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
+                    <Bell className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ០៨:៣០ ព្រឹក
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                      ពិធីសូត្រមន្តចម្រើនព្រះបរិត្ត
+                    </p>
+                  </div>
                 </div>
 
-                <div className="h-[1px] w-16 mx-auto bg-[#330404]/20" />
-
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">07:00 AM — 11:00 AM</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">
-                    CAMBODIAN TRADITIONAL WEDDING CEREMONY
-                  </p>
-                  <p className="font-moulpali text-xs text-stone-600">
-                    ពិធីហែជំនូន រៀបចំផ្ទឹម និងចងដៃ
-                  </p>
+                {/* Event 5: 09:00 AM */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
+                    <Scissors className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ០៩:០០ ព្រឹក
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                      ពិធីកាត់សក់បង្កក់សិរី
+                    </p>
+                  </div>
                 </div>
 
-                <div className="h-[1px] w-16 mx-auto bg-[#330404]/20" />
-
-                <div>
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">LUNCH IS SERVED</span>
-                  <p className="font-cinzel text-[11px] font-semibold text-[#5f682a]">TRADITIONAL LUNCH</p>
-                  <p className="font-moulpali text-xs text-stone-600">ពិធីទទួលទានអាហារថ្ងៃត្រង់</p>
+                {/* Event 6: 10:45 AM */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#b08968] to-[#8a6538] text-white shadow-md ring-2 ring-white/80 transition-transform group-hover:scale-105">
+                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 fill-current text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ១០:៤៥ ព្រឹក
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-semibold text-[#474f20] leading-snug mt-0.5">
+                      ពិធីសំពះផ្ទឹម សែនចងដៃ និងបាចផ្កាស្លា
+                    </p>
+                  </div>
                 </div>
 
-                <div className="h-[1px] w-16 mx-auto bg-[#330404]/20" />
-
-                {/* Grand Evening Reception */}
-                <div className="rounded-xl bg-[#330404]/10 p-3.5 border border-[#330404]/30">
-                  <span className="font-cinzel text-xs font-bold text-[#330404]">05:00 PM ONWARDS</span>
-                  <p className="font-cinzel text-xs font-bold tracking-wider text-[#330404]">
-                    GRAND WEDDING RECEPTION &amp; DINNER
-                  </p>
-                  <p className="font-moulpali text-xs text-[#5f682a] mt-0.5">
-                    ពិធីជប់លៀងមហោឡារិកអបអរសាទរអាពាហ៍ពិពាហ៍
-                  </p>
+                {/* Event 7: 05:00 PM - Evening Reception */}
+                <div className="relative flex items-center gap-3.5 sm:gap-4.5 group">
+                  <div className="relative z-10 flex h-11 w-11 sm:h-13 sm:w-13 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#330404] to-[#520909] text-white shadow-md ring-2 ring-[#c5a059]/80 transition-transform group-hover:scale-105">
+                    <Utensils className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-kantumruy text-sm sm:text-base font-bold text-[#260202]">
+                      ០៥:០០ ល្ងាច
+                    </p>
+                    <p className="font-kantumruy text-xs sm:text-sm font-bold text-[#330404] leading-snug mt-0.5">
+                      ពិធីជប់លៀងមហោឡារិកអបអរសាទរអាពាហ៍ពិពាហ៍
+                    </p>
+                    <p className="font-cinzel text-[10px] sm:text-xs font-semibold text-[#5f682a]">
+                      GRAND WEDDING RECEPTION &amp; DINNER
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -914,12 +933,6 @@ END:VCALENDAR`
             </div>
           </section>
 
-          {/* ===================================================================== */}
-          {/* RSVP & GUESTBOOK SECTION                                              */}
-          {/* ===================================================================== */}
-          <section id="rsvp" className="relative border-t border-[#330404]/20 py-11">
-            <RsvpGuestbook />
-          </section>
 
           {/* ===================================================================== */}
           {/* CLOSING FOOTER                                                        */}
