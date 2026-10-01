@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://YOUR-DOMAIN.com'),
+  metadataBase: new URL('https://e-invitation-pheakdey-munineath.vercel.app/'),
 
   title: 'Pheakdey & Munineath | Royal Wedding E-Invitation',
 
