@@ -25,23 +25,24 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
   }
 
   return (
-    <div className="relative mx-auto w-full min-h-screen sm:min-h-0 sm:max-w-xl md:max-w-2xl lg:max-w-3xl px-0 sm:px-4 sm:py-8">
+    <div className="relative mx-auto w-full min-h-screen px-0 sm:px-6 md:px-8 lg:px-12 py-0 sm:py-6 lg:py-10 max-w-5xl lg:max-w-6xl xl:max-w-7xl">
       {/* 
         Main Royal Invitation Card Container 
-        Full-screen edge-to-edge on phone, luxury framed stationery on tablet/desktop.
+        Full-screen edge-to-edge on mobile phone, expansive luxury framed stationery on tablet/desktop.
         Curated colors: Primary #4A171B (Deep Wine) and #5f682a (Matcha Green)
+        Seamless transparent background matching open invitation cover
       */}
-      <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(74,23,27,0.45)] border-0 sm:border-2 sm:border-[#4A171B]/50 bg-white/80 ring-4 ring-[#5f682a]/30">
+      <div className="relative w-full min-h-screen overflow-hidden rounded-none sm:rounded-[36px] lg:rounded-[44px] shadow-none sm:shadow-[0_20px_60px_-15px_rgba(74,23,27,0.25)] border-0 sm:border-2 sm:border-[#4A171B]/40 bg-transparent ring-0 sm:ring-2 sm:ring-[#5f682a]/25">
 
-        {/* Corner Filigree Accents in #4A171B */}
-        <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none">❧</div>
-        <div className="pointer-events-none absolute top-3 right-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none scale-x-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-3 left-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none scale-y-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-3 right-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none rotate-180">❧</div>
+        {/* Corner Filigree Accents in #5f682a */}
+        <div className="pointer-events-none absolute top-3 sm:top-5 left-3 sm:left-5 z-30 font-cinzel text-xs sm:text-sm text-[#5f682a] select-none">❧</div>
+        <div className="pointer-events-none absolute top-3 sm:top-5 right-3 sm:right-5 z-30 font-cinzel text-xs sm:text-sm text-[#5f682a] select-none scale-x-[-1]">❧</div>
+        <div className="pointer-events-none absolute bottom-3 sm:bottom-5 left-3 sm:left-5 z-30 font-cinzel text-xs sm:text-sm text-[#5f682a] select-none scale-y-[-1]">❧</div>
+        <div className="pointer-events-none absolute bottom-3 sm:bottom-5 right-3 sm:right-5 z-30 font-cinzel text-xs sm:text-sm text-[#5f682a] select-none rotate-180">❧</div>
 
         {/* Double inner matcha & wine border */}
-        <div className="pointer-events-none absolute inset-2 sm:inset-2.5 z-20 rounded-none sm:rounded-[32px] border border-[#4A171B]/35" />
-        <div className="pointer-events-none absolute inset-3 sm:inset-3.5 z-20 rounded-none sm:rounded-[28px] border border-[#5f682a]/35" />
+        <div className="pointer-events-none absolute inset-2 sm:inset-3 lg:inset-4 z-20 rounded-none sm:rounded-[28px] lg:rounded-[36px] border border-[#4A171B]/25" />
+        <div className="pointer-events-none absolute inset-3 sm:inset-4.5 lg:inset-6 z-20 rounded-none sm:rounded-[24px] lg:rounded-[32px] border border-[#5f682a]/25" />
 
         {/* Invitation Content Layer */}
         <div className="relative z-10 font-moulpali">

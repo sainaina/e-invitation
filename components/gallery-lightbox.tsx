@@ -50,15 +50,15 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
 
   return (
     <>
-      {/* Gallery Grid Matching Screenshot 4 */}
-      <div className="space-y-3 px-3">
+      {/* Gallery Grid Matching Screenshot 4 (Responsive on all viewports) */}
+      <div className="space-y-4 sm:space-y-5 px-1 sm:px-4 max-w-4xl lg:max-w-5xl mx-auto">
         {/* Top Horizontal Video / Highlight Image */}
         {items[0] && (
           <div
             onClick={() => openLightbox(0)}
-            className="fade-left delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#4A171B]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#4A171B]"
+            className="fade-left delay-100 group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-[#4A171B]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#4A171B]"
           >
-            <div className="aspect-[16/10] w-full overflow-hidden bg-stone-100">
+            <div className="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-stone-100">
               <img
                 src={items[0].src}
                 alt={items[0].alt}
@@ -71,10 +71,10 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
 
             {/* Video Play Button in Center */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/80 bg-white/30 text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-[#4A171B]">
-                <Play className="h-6 w-6 fill-current ml-1" />
+              <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-white/80 bg-white/30 text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-[#4A171B]">
+                <Play className="h-6 w-6 sm:h-7 sm:w-7 fill-current ml-1" />
               </div>
-              <span className="mt-2 rounded-full bg-black/60 px-3 py-1 font-moulpali text-xs tracking-wider text-white">
+              <span className="mt-2.5 rounded-full bg-black/60 px-3.5 py-1 sm:py-1.5 font-moulpali text-xs sm:text-sm tracking-wider text-white">
                 {lang === 'km' ? 'ទស្សនាវីដេអូរៀបការ' : 'Play Pre-Wedding Film'}
               </span>
             </div>
@@ -82,7 +82,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         )}
 
         {/* 2-Column Split Grid */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5">
           {items.slice(1, 3).map((item, idx) => {
             const actualIdx = idx + 1
             const animClass = idx === 0 ? 'fade-left delay-200' : 'fade-right delay-200'
@@ -90,7 +90,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               <div
                 key={item.id}
                 onClick={() => openLightbox(actualIdx)}
-                className={`${animClass} group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#4A171B]/40 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#4A171B]`}
+                className={`${animClass} group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-[#4A171B]/40 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#4A171B]`}
               >
                 <div className="aspect-[4/5] w-full overflow-hidden bg-stone-100">
                   <img
@@ -100,8 +100,8 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
                       }`}
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100 flex items-end p-2.5">
-                  <p className="font-moulpali text-xs text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100 flex items-end p-2.5 sm:p-4">
+                  <p className="font-moulpali text-xs sm:text-sm text-white">
                     {lang === 'km' ? item.captionKm : item.captionEn}
                   </p>
                 </div>
@@ -114,17 +114,17 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         {items[3] && (
           <div
             onClick={() => openLightbox(3)}
-            className="fade-right delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#4A171B]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#4A171B]"
+            className="fade-right delay-100 group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-[#4A171B]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#4A171B]"
           >
-            <div className="aspect-[16/11] w-full overflow-hidden bg-stone-100">
+            <div className="aspect-[16/11] sm:aspect-[16/9] w-full overflow-hidden bg-stone-100">
               <img
                 src={items[3].src}
                 alt={items[3].alt}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100 flex items-end p-3">
-              <p className="font-moulpali text-xs text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100 flex items-end p-3 sm:p-4">
+              <p className="font-moulpali text-xs sm:text-sm text-white">
                 {lang === 'km' ? items[3].captionKm : items[3].captionEn}
               </p>
             </div>
