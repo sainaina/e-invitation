@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/image.png',
+        url: '/images/image.png?v=2',
         width: 1200,
         height: 630,
         alt: 'The Wedding of Pheakdey & Munineath',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: 'The Wedding of Pheakdey & Munineath',
     description:
       'We cordially invite you to celebrate our special day with us.',
-    images: ['/images/image.png'],
+    images: ['/images/image.png?v=2'],
   },
 }
 
