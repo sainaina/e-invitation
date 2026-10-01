@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Pheakdey & Munineath',
+  title: 'Pheakdey & Munineath | Royal Wedding E-Invitation',
   description:
     'You are cordially invited to celebrate the royal wedding of Pheakdey and Munineath on March 18th, 2027 at The Premier Sensok Center, Phnom Penh.',
   keywords: ['Wedding', 'E-Invitation', 'Pheakdey & Munineath', 'Phnom Penh', 'Premier Sensok Center', 'Cambodian Wedding'],
