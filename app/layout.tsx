@@ -3,14 +3,14 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Pheakdey & Munineath | Royal Wedding E-Invitation',
+  title: 'Pheakdey & Munineath',
   description:
-    'You are cordially invited to celebrate the royal wedding of Pheakdey and Munineath on December 17th – 18th, 2025 at The Premier Sensok Center, Phnom Penh.',
+    'You are cordially invited to celebrate the royal wedding of Pheakdey and Munineath on March 18th, 2027 at The Premier Sensok Center, Phnom Penh.',
   keywords: ['Wedding', 'E-Invitation', 'Pheakdey & Munineath', 'Phnom Penh', 'Premier Sensok Center', 'Cambodian Wedding'],
   openGraph: {
     title: 'The Wedding of Pheakdey & Munineath',
     description: 'We cordially invite you to celebrate our special day with us.',
-    images: ['/images/couple_hero_portrait_1790042546264.jpg'],
+    images: ['/images/image.png'],
   },
 }
 

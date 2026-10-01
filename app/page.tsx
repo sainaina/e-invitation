@@ -68,7 +68,7 @@ export default function Page() {
     bride: true,
   })
 
-  // Countdown timer to Dec 18, 2025
+  // Countdown timer to March 18, 2027
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -77,7 +77,7 @@ export default function Page() {
   })
 
   useEffect(() => {
-    const targetDate = new Date('2025-12-18T17:00:00+07:00').getTime()
+    const targetDate = new Date('2027-03-18T17:00:00+07:00').getTime()
 
     const updateCountdown = () => {
       const now = new Date().getTime()
@@ -160,10 +160,10 @@ PRODID:-//Pheakdey & Munineath Wedding//KH
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-UID:pheakdey-munineath-wedding-2025@royal
-DTSTAMP:20251201T000000Z
-DTSTART:20251218T100000Z
-DTEND:20251218T160000Z
+UID:pheakdey-munineath-wedding-2027@royal
+DTSTAMP:20270301T000000Z
+DTSTART:20270318T100000Z
+DTEND:20270318T160000Z
 SUMMARY:Wedding of Pheakdey & Munineath (ភក្តី និង មុនីនាថ)
 DESCRIPTION:You are cordially invited to celebrate the wedding of Pheakdey & Munineath at The Premier Sensok Center (Building H-I).
 LOCATION:The Premier Sensok Center (Building H-I), Phnom Penh, Cambodia
@@ -272,7 +272,7 @@ END:VCALENDAR`
           </h1>
 
           <p className="cover-fade-left cover-delay-500 mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#5f682a] font-semibold">
-            18TH DECEMBER 2025 • PHNOM PENH
+            18TH MARCH 2027 • PHNOM PENH
           </p>
 
           {/* =================================================================== */}
@@ -295,8 +295,8 @@ END:VCALENDAR`
 
               {/* The Wax Seal Image */}
               <img
-                src="/api/wax-seal"
-                alt="RN Royal Red Wax Seal"
+                src="/images/wax_seal_pm.jpg"
+                alt="P&M Royal Red Wax Seal"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover/seal:scale-105"
               />
 
@@ -442,7 +442,7 @@ END:VCALENDAR`
                     &amp;
                   </span>
                   <span className="font-cinzel text-[9px] sm:text-xs md:text-sm tracking-[0.25em] text-[#4A171B] font-bold mt-0.5 sm:mt-1">
-                    2025
+                    2027
                   </span>
                 </div>
 
@@ -461,7 +461,7 @@ END:VCALENDAR`
             {/* Event Date, Time & Venue in Khmer */}
             <div className="fade-left delay-250 relative z-10 w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto my-3 sm:my-5 text-center space-y-1.5">
               <p className="font-moulpali text-xs sm:text-sm md:text-base lg:text-lg text-[#4A171B] leading-relaxed">
-                ថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែធ្នូ ឆ្នាំ ២០២៥ វេលាម៉ោង ៥:០០ រសៀល
+                ថ្ងៃព្រហស្បតិ៍ ទី ១៨ ខែមីនា ឆ្នាំ ២០២៧ វេលាម៉ោង ៥:០០ រសៀល
               </p>
               <p className="font-moulpali text-xs sm:text-sm md:text-base lg:text-lg text-[#5f682a] leading-relaxed">
                 នៅមជ្ឈមណ្ឌល The Premier Sensok Center (អគារ H-I) រាជធានីភ្នំពេញ
@@ -481,7 +481,7 @@ END:VCALENDAR`
               <div className="fade-right delay-200 mt-4 inline-flex items-center gap-2 sm:gap-2.5 rounded-full border border-[#5f682a]/50 bg-white/70 px-5 sm:px-8 py-2 sm:py-2.5 shadow-xs">
                 <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-[#5f682a]" />
                 <span className="font-cinzel text-xs sm:text-sm md:text-base font-bold tracking-wider text-[#4A171B]">
-                  THURSDAY 18<sup>TH</sup> DECEMBER 2025 • 5:00 PM
+                  THURSDAY 18<sup>TH</sup> MARCH 2027 • 5:00 PM
                 </span>
               </div>
             </div>
@@ -737,7 +737,7 @@ END:VCALENDAR`
                 Wedding Events
               </h2>
               <p className="fade-left delay-200 font-moulpali text-xs sm:text-sm text-[#5f682a] mt-0.5">
-                ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែធ្នូ ឆ្នាំ២០២៥
+                ថ្ងៃព្រហស្បតិ៍ ទី១៨ ខែមីនា ឆ្នាំ២០២៧
               </p>
 
               <div className="filigree-divider">
@@ -1061,14 +1061,14 @@ END:VCALENDAR`
 
             <div className="fade-right delay-300 mt-4 sm:mt-5 flex justify-center">
               <img
-                src="/images/wax_seal_rn_1790042663814.jpg"
-                alt="RN Wax Seal"
+                src="/images/wax_seal_pm.jpg"
+                alt="P&M Wax Seal"
                 className="h-14 w-14 sm:h-16 sm:w-16 rounded-full border border-[#5f682a] object-cover shadow-lg"
               />
             </div>
 
             <p className="fade-left delay-300 mt-4 sm:mt-5 font-cinzel text-[9px] sm:text-[11px] tracking-widest text-[#5f682a]/80">
-              17 · 18 · DECEMBER · 2025 • PHNOM PENH, CAMBODIA
+              17 · 18 · MARCH · 2027 • PHNOM PENH, CAMBODIA
             </p>
           </footer>
         </UsefulFrame>
