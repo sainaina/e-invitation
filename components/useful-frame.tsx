@@ -29,18 +29,18 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
       {/* 
         Main Royal Invitation Card Container 
         Full-screen edge-to-edge on phone, luxury framed stationery on tablet/desktop.
-        Curated colors: Primary #330404 (Deep Red Wine) and #5f682a (Matcha Green)
+        Curated colors: Primary #4A171B (Deep Wine) and #5f682a (Matcha Green)
       */}
-      <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(25,5,5,0.85)] border-0 sm:border-2 sm:border-[#330404]/50 bg-[#FFFFFF]/50 ring-4 ring-[#5f682a]/30">
+      <div className="relative w-full min-h-screen sm:min-h-0 overflow-hidden rounded-none sm:rounded-[40px] shadow-none sm:shadow-[0_30px_90px_-15px_rgba(74,23,27,0.45)] border-0 sm:border-2 sm:border-[#4A171B]/50 bg-white/80 ring-4 ring-[#5f682a]/30">
 
-        {/* Corner Filigree Accents in #330404 */}
-        <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none">❧</div>
-        <div className="pointer-events-none absolute top-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-x-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-3 left-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none scale-y-[-1]">❧</div>
-        <div className="pointer-events-none absolute bottom-3 right-3 z-30 font-cinzel text-xs text-[#330404]/60 select-none rotate-180">❧</div>
+        {/* Corner Filigree Accents in #4A171B */}
+        <div className="pointer-events-none absolute top-3 left-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none">❧</div>
+        <div className="pointer-events-none absolute top-3 right-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none scale-x-[-1]">❧</div>
+        <div className="pointer-events-none absolute bottom-3 left-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none scale-y-[-1]">❧</div>
+        <div className="pointer-events-none absolute bottom-3 right-3 z-30 font-cinzel text-xs text-[#4A171B]/60 select-none rotate-180">❧</div>
 
-        {/* Double inner gold & crimson border */}
-        <div className="pointer-events-none absolute inset-2 sm:inset-2.5 z-20 rounded-none sm:rounded-[32px] border border-[#330404]/35" />
+        {/* Double inner matcha & wine border */}
+        <div className="pointer-events-none absolute inset-2 sm:inset-2.5 z-20 rounded-none sm:rounded-[32px] border border-[#4A171B]/35" />
         <div className="pointer-events-none absolute inset-3 sm:inset-3.5 z-20 rounded-none sm:rounded-[28px] border border-[#5f682a]/35" />
 
         {/* Invitation Content Layer */}
@@ -52,7 +52,7 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
       {/* Floating Re-Open Envelope Action Button (Discreet at bottom-left) */}
       <button
         onClick={onReopenEnvelope}
-        className="fixed bottom-4 left-4 z-40 flex items-center gap-1.5 rounded-full border border-[#330404] bg-[#FAF7F2]/95 px-3 py-1.5 text-xs font-moulpali text-[#330404] shadow-lg backdrop-blur transition-all hover:scale-105 hover:bg-[#330404] hover:text-white"
+        className="fixed bottom-4 left-4 z-40 flex items-center gap-1.5 rounded-full border border-[#4A171B] bg-[#FAF7F2] px-3 py-1.5 text-xs font-moulpali text-[#4A171B] shadow-lg transition-all hover:scale-105 hover:bg-[#4A171B] hover:text-white"
         title="បត់លិខិតអញ្ជើញឡើងវិញ"
         aria-label="Re-fold envelope"
       >
@@ -64,7 +64,7 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-16 right-4 z-40 flex h-9 w-9 items-center justify-center rounded-full border border-[#330404]/60 bg-[#FAF7F2]/95 text-[#330404] shadow-md backdrop-blur transition-all hover:scale-110 hover:bg-[#330404] hover:text-white"
+          className="fixed bottom-16 right-4 z-40 flex h-9 w-9 items-center justify-center rounded-full border border-[#4A171B]/60 bg-[#FAF7F2] text-[#4A171B] shadow-md transition-all hover:scale-110 hover:bg-[#4A171B] hover:text-white"
           aria-label="Back to top"
         >
           <ArrowUp className="h-4 w-4" />

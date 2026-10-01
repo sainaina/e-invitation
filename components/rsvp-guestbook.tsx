@@ -41,7 +41,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
       id: '2',
       name: 'Dara & Sophea',
       relation: 'University Friends',
-      message: 'Congratulations Rithy & Nihyun! So thrilled to witness your royal celebration at Premier Sensok Center. You two are made for each other!',
+      message: 'Congratulations Pheakdey & Munineath! So thrilled to witness your royal celebration at Premier Sensok Center. You two are made for each other!',
       attending: true,
       guests: 2,
       date: '1 hour ago',
@@ -78,12 +78,12 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
   return (
     <div className="space-y-6 px-3">
       {/* RSVP Form Card */}
-      <div className="fade-left delay-100 rounded-2xl border-2 border-[#330404]/30 bg-white/40 p-5 shadow-sm transition-all duration-300 hover:border-[#330404]">
+      <div className="fade-left delay-100 rounded-2xl border-2 border-[#4A171B]/30 bg-white/40 p-5 shadow-sm transition-all duration-300 hover:border-[#4A171B]">
         <div className="text-center">
-          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#330404]/10 text-[#330404]">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#4A171B]/10 text-[#4A171B]">
             <MessageSquareHeart className="h-5 w-5" />
           </div>
-          <h3 className="mt-2 font-moul text-lg text-[#330404]">
+          <h3 className="mt-2 font-moul text-lg text-[#4A171B]">
             {lang === 'km' ? 'ការបញ្ជាក់វត្តមានចូលរួម' : 'RSVP & Guest Attendance'}
           </h3>
           <p className="mt-1 font-moulpali text-xs text-[#5f682a]">
@@ -96,7 +96,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
         {submitted ? (
           <div className="mt-5 rounded-xl border border-[#5f682a]/30 bg-[#FAF7F2] p-4 text-center">
             <CheckCircle2 className="mx-auto h-8 w-8 text-[#5f682a]" />
-            <h4 className="mt-2 font-moul text-base text-[#330404]">
+            <h4 className="mt-2 font-moul text-base text-[#4A171B]">
               {lang === 'km' ? 'សូមអរគុណសម្រាប់ការឆ្លើយតប!' : 'Thank You for Confirming!'}
             </h4>
             <p className="mt-1 font-moulpali text-xs text-[#5f682a]">
@@ -106,7 +106,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
             </p>
             <button
               onClick={() => setSubmitted(false)}
-              className="mt-3 font-moulpali text-xs font-medium text-[#330404] underline hover:text-[#5f682a]"
+              className="mt-3 font-moulpali text-xs font-medium text-[#4A171B] underline hover:text-[#5f682a]"
             >
               {lang === 'km' ? 'កែសម្រួលការឆ្លើយតប' : 'Submit another response'}
             </button>
@@ -123,7 +123,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={lang === 'km' ? 'ឧ. លោក / លោកស្រី...' : 'e.g. Mr. John Doe & Guest'}
-                className="mt-1 w-full rounded-xl border border-[#330404]/40 bg-white px-3 py-2 text-sm text-[#330404] placeholder-stone-400 focus:border-[#330404] focus:outline-none focus:ring-1 focus:ring-[#330404]"
+                className="mt-1 w-full rounded-xl border border-[#4A171B]/40 bg-white px-3 py-2 text-sm text-[#4A171B] placeholder-stone-400 focus:border-[#4A171B] focus:outline-none focus:ring-1 focus:ring-[#4A171B]"
               />
             </div>
 
@@ -137,7 +137,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="012 345 678"
-                  className="mt-1 w-full rounded-xl border border-[#330404]/40 bg-white px-3 py-2 text-sm text-[#330404] placeholder-stone-400 focus:border-[#330404] focus:outline-none focus:ring-1 focus:ring-[#330404]"
+                  className="mt-1 w-full rounded-xl border border-[#4A171B]/40 bg-white px-3 py-2 text-sm text-[#4A171B] placeholder-stone-400 focus:border-[#4A171B] focus:outline-none focus:ring-1 focus:ring-[#4A171B]"
                 />
               </div>
 
@@ -148,7 +148,7 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                 <select
                   value={guestsCount}
                   onChange={(e) => setGuestsCount(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-[#330404]/40 bg-white px-3 py-2 text-sm text-[#330404] focus:border-[#330404] focus:outline-none focus:ring-1 focus:ring-[#330404]"
+                  className="mt-1 w-full rounded-xl border border-[#4A171B]/40 bg-white px-3 py-2 text-sm text-[#4A171B] focus:border-[#4A171B] focus:outline-none focus:ring-1 focus:ring-[#4A171B]"
                 >
                   <option value="1">1 Person</option>
                   <option value="2">2 Persons</option>
@@ -167,8 +167,8 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                   type="button"
                   onClick={() => setAttending('yes')}
                   className={`rounded-xl border px-3 py-2 text-xs font-moulpali transition ${attending === 'yes'
-                      ? 'border-[#330404] bg-[#330404] text-white shadow-xs'
-                      : 'border-stone-300 bg-white text-stone-700 hover:border-[#330404]'
+                    ? 'border-[#4A171B] bg-[#4A171B] text-white shadow-xs'
+                    : 'border-stone-300 bg-white text-stone-700 hover:border-[#4A171B]'
                     }`}
                 >
                   {lang === 'km' ? '✓ ខ្ញុំរីករាយចូលរួម' : '✓ Joyfully Attend'}
@@ -177,8 +177,8 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                   type="button"
                   onClick={() => setAttending('no')}
                   className={`rounded-xl border px-3 py-2 text-xs font-moulpali transition ${attending === 'no'
-                      ? 'border-[#330404] bg-[#330404] text-white shadow-xs'
-                      : 'border-stone-300 bg-white text-stone-700 hover:border-[#330404]'
+                    ? 'border-[#4A171B] bg-[#4A171B] text-white shadow-xs'
+                    : 'border-stone-300 bg-white text-stone-700 hover:border-[#4A171B]'
                     }`}
                 >
                   {lang === 'km' ? '✕ សុំទោស មិនអាចចូលរួម' : '✕ Regretfully Decline'}
@@ -196,8 +196,8 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                     type="button"
                     onClick={() => setAttendanceDay('both')}
                     className={`rounded-xl border p-1.5 transition ${attendanceDay === 'both'
-                        ? 'border-[#5f682a] bg-[#5f682a] text-white'
-                        : 'border-stone-200 bg-white text-stone-700'
+                      ? 'border-[#5f682a] bg-[#5f682a] text-white'
+                      : 'border-stone-200 bg-white text-stone-700'
                       }`}
                   >
                     {lang === 'km' ? 'ទាំងពីរថ្ងៃ' : 'Both Days'}
@@ -206,8 +206,8 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                     type="button"
                     onClick={() => setAttendanceDay('day1')}
                     className={`rounded-xl border p-1.5 transition ${attendanceDay === 'day1'
-                        ? 'border-[#5f682a] bg-[#5f682a] text-white'
-                        : 'border-stone-200 bg-white text-stone-700'
+                      ? 'border-[#5f682a] bg-[#5f682a] text-white'
+                      : 'border-stone-200 bg-white text-stone-700'
                       }`}
                   >
                     {lang === 'km' ? 'ថ្ងៃ ១៧ (សែន)' : 'Dec 17 (Tea)'}
@@ -216,8 +216,8 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                     type="button"
                     onClick={() => setAttendanceDay('day2')}
                     className={`rounded-xl border p-1.5 transition ${attendanceDay === 'day2'
-                        ? 'border-[#5f682a] bg-[#5f682a] text-white'
-                        : 'border-stone-200 bg-white text-stone-700'
+                      ? 'border-[#5f682a] bg-[#5f682a] text-white'
+                      : 'border-stone-200 bg-white text-stone-700'
                       }`}
                   >
                     {lang === 'km' ? 'ថ្ងៃ ១៨ (ជប់លៀង)' : 'Dec 18 (Reception)'}
@@ -237,15 +237,15 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
                 placeholder={
                   lang === 'km'
                     ? 'សូមសរសេរសារជូនពរដល់កូនកំលោះ និងកូនក្រមុំ...'
-                    : 'Write a warm blessing to Rithy & Nihyun...'
+                    : 'Write a warm blessing to Pheakdey & Munineath...'
                 }
-                className="mt-1 w-full rounded-xl border border-[#330404]/40 bg-white px-3 py-2 text-sm text-[#330404] placeholder-stone-400 focus:border-[#330404] focus:outline-none focus:ring-1 focus:ring-[#330404]"
+                className="mt-1 w-full rounded-xl border border-[#4A171B]/40 bg-white px-3 py-2 text-sm text-[#4A171B] placeholder-stone-400 focus:border-[#4A171B] focus:outline-none focus:ring-1 focus:ring-[#4A171B]"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#330404] py-2.5 font-cinzel text-xs font-semibold tracking-wider text-white shadow-md transition-all hover:scale-[1.02] hover:bg-[#5f682a]"
+              className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#4A171B] py-2.5 font-cinzel text-xs font-semibold tracking-wider text-white shadow-md transition-all hover:scale-[1.02] hover:bg-[#5f682a]"
             >
               <Send className="h-4 w-4" />
               <span>{lang === 'km' ? 'ផ្ញើការឆ្លើយតប និងពរជ័យ' : 'Send RSVP & Blessing'}</span>
@@ -255,10 +255,10 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
       </div>
 
       {/* Digital Red Envelope / Wedding Gift Box */}
-      <div className="fade-right delay-150 rounded-2xl border-2 border-[#330404]/30 bg-white/90 p-4 shadow-xs text-center">
-        <div className="flex items-center justify-center gap-2 text-[#330404]">
+      <div className="fade-right delay-150 rounded-2xl border-2 border-[#4A171B]/30 bg-white/90 p-4 shadow-xs text-center">
+        <div className="flex items-center justify-center gap-2 text-[#4A171B]">
           <Gift className="h-4 w-4" />
-          <h4 className="font-moul text-sm tracking-wider text-[#330404]">
+          <h4 className="font-moul text-sm tracking-wider text-[#4A171B]">
             {lang === 'km' ? 'ចំណងដៃអាពាហ៍ពិពាហ៍ (Digital Gift)' : 'Wedding Blessing Gift'}
           </h4>
         </div>
@@ -270,23 +270,23 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
 
         <button
           onClick={() => setShowQr(!showQr)}
-          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#330404]/50 bg-white px-4 py-1.5 font-moulpali text-xs text-[#330404] shadow-2xs transition hover:bg-[#330404] hover:text-white"
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#4A171B]/50 bg-white px-4 py-1.5 font-moulpali text-xs text-[#4A171B] shadow-2xs transition hover:bg-[#4A171B] hover:text-white"
         >
           <QrCode className="h-3.5 w-3.5" />
           <span>{showQr ? (lang === 'km' ? 'បិទ QR' : 'Hide QR') : (lang === 'km' ? 'បង្ហាញ QR ធនាគារ (ABA / ACLEDA)' : 'View Digital Gift QR')}</span>
         </button>
 
         {showQr && (
-          <div className="mt-3 rounded-xl border border-[#330404]/30 bg-[#FAF7F2] p-3 shadow-inner max-w-xs mx-auto animate-in zoom-in-95 duration-200">
-            <div className="mx-auto flex h-36 w-36 items-center justify-center rounded-xl border-2 border-dashed border-[#330404]/40 bg-white">
+          <div className="mt-3 rounded-xl border border-[#4A171B]/30 bg-[#FAF7F2] p-3 shadow-inner max-w-xs mx-auto animate-in zoom-in-95 duration-200">
+            <div className="mx-auto flex h-36 w-36 items-center justify-center rounded-xl border-2 border-dashed border-[#4A171B]/40 bg-white">
               <div className="text-center p-2">
-                <QrCode className="mx-auto h-12 w-12 text-[#330404]" />
-                <p className="mt-1 font-cinzel text-[10px] font-bold text-[#330404]">KHQR • ABA / ACLEDA</p>
-                <p className="text-[9px] font-cinzel text-[#5f682a]">001 234 567 (RITHY &amp; NIHYUN)</p>
+                <QrCode className="mx-auto h-12 w-12 text-[#4A171B]" />
+                <p className="mt-1 font-cinzel text-[10px] font-bold text-[#4A171B]">KHQR • ABA / ACLEDA</p>
+                <p className="text-[9px] font-cinzel text-[#5f682a]">001 234 567 (PHEAKDEY &amp; MUNINEATH)</p>
               </div>
             </div>
             <p className="mt-2 font-cinzel text-[10px] text-stone-600">
-              Account Name: NEOU RITHYVONG &amp; CHHIV EXNGY
+              Account Name: PHEAKDEY &amp; MUNINEATH
             </p>
           </div>
         )}
@@ -296,8 +296,8 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
       <div className="fade-left delay-200 space-y-2.5">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-1.5">
-            <Heart className="h-4 w-4 fill-current text-[#330404]" />
-            <span className="font-moul text-sm text-[#330404]">
+            <Heart className="h-4 w-4 fill-current text-[#4A171B]" />
+            <span className="font-moul text-sm text-[#4A171B]">
               {lang === 'km' ? 'ពាក្យជូនពរពីភ្ញៀវកិត្តិយស' : 'Wishes from Family & Friends'}
             </span>
           </div>
@@ -310,13 +310,13 @@ export default function RsvpGuestbook({ lang = 'km' }: RsvpGuestbookProps) {
           {blessings.map((b) => (
             <div
               key={b.id}
-              className="rounded-xl border border-[#330404]/20 bg-white/80 p-3 shadow-2xs backdrop-blur transition hover:border-[#330404]/40"
+              className="rounded-xl border border-[#4A171B]/20 bg-white/80 p-3 shadow-2xs transition hover:border-[#4A171B]/40"
             >
               <div className="flex items-center justify-between">
-                <span className="font-moul text-xs text-[#330404]">{b.name}</span>
+                <span className="font-moul text-xs text-[#4A171B]">{b.name}</span>
                 <span className="text-[10px] text-stone-500">{b.date}</span>
               </div>
-              <p className="mt-1 font-moulpali text-xs leading-relaxed text-[#330404] italic">
+              <p className="mt-1 font-moulpali text-xs leading-relaxed text-[#4A171B] italic">
                 &ldquo;{b.message}&rdquo;
               </p>
             </div>

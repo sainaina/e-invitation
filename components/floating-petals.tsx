@@ -74,34 +74,34 @@ export default function FloatingPetals() {
         ctx.globalAlpha = p.opacity
 
         if (p.type === 'rose') {
-          // Soft pink/crimson rose petal
+          // Romantic wine rose petal
           ctx.beginPath()
-          ctx.fillStyle = '#E89CA8'
+          ctx.fillStyle = 'rgba(74, 23, 27, 0.65)'
           ctx.ellipse(0, 0, p.size * 0.7, p.size * 1.1, 0, 0, Math.PI * 2)
           ctx.fill()
           // Inner gradient vein
           ctx.beginPath()
-          ctx.fillStyle = 'rgba(180, 50, 70, 0.25)'
+          ctx.fillStyle = 'rgba(74, 23, 27, 0.85)'
           ctx.ellipse(0, 0, p.size * 0.4, p.size * 0.8, 0, 0, Math.PI * 2)
           ctx.fill()
         } else if (p.type === 'matcha') {
           // Matcha green leaf
           ctx.beginPath()
-          ctx.fillStyle = '#7A9A70'
+          ctx.fillStyle = '#5f682a'
           ctx.moveTo(0, -p.size)
           ctx.quadraticCurveTo(p.size * 0.8, 0, 0, p.size)
           ctx.quadraticCurveTo(-p.size * 0.8, 0, 0, -p.size)
           ctx.fill()
           // Leaf vein
-          ctx.strokeStyle = 'rgba(46, 68, 42, 0.35)'
+          ctx.strokeStyle = 'rgba(74, 23, 27, 0.35)'
           ctx.lineWidth = 1
           ctx.beginPath()
           ctx.moveTo(0, -p.size * 0.8)
           ctx.lineTo(0, p.size * 0.8)
           ctx.stroke()
         } else {
-          // Gilded gold sparkle
-          ctx.fillStyle = '#E6C975'
+          // Matcha sparkle
+          ctx.fillStyle = '#5f682a'
           ctx.beginPath()
           ctx.arc(0, 0, p.size * 0.25, 0, Math.PI * 2)
           ctx.fill()
@@ -133,10 +133,10 @@ export default function FloatingPetals() {
       <button
         onClick={() => setEnabled(!enabled)}
         title={enabled ? 'Pause floating petals' : 'Play floating petals'}
-        className="fixed bottom-4 left-4 z-40 flex h-9 w-9 items-center justify-center rounded-full border border-[#D4AF37]/50 bg-[#FAF7F2]/90 text-[#4E6B47] shadow-md backdrop-blur transition-all hover:scale-110 hover:border-[#8E2134] hover:text-[#8E2134]"
+        className="fixed bottom-16 left-4 z-40 flex h-9 w-9 items-center justify-center rounded-full border border-[#5f682a] bg-white text-[#4A171B] shadow-md transition-all hover:scale-110 hover:bg-[#4A171B] hover:text-white"
         aria-label="Toggle floating petals"
       >
-        <Sparkles className={`h-4 w-4 ${enabled ? 'text-[#8E2134]' : 'opacity-40'}`} />
+        <Sparkles className={`h-4 w-4 ${enabled ? 'text-[#4A171B]' : 'opacity-40'}`} />
       </button>
     </>
   )

@@ -170,11 +170,10 @@ export default function AudioPlayer({ isOpen = true }: AudioPlayerProps) {
           {/* Single Luxury Floating Play/Pause Button */}
           <button
             onClick={togglePlay}
-            className={`group relative flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 ${
-              isPlaying
-                ? 'bg-[#330404] text-white border-2 border-[#5f682a] ring-2 ring-[#5f682a]/50 shadow-[0_4px_20px_rgba(51,4,4,0.4)]'
-                : 'bg-[#FAF7F2]/95 text-[#330404] border-2 border-[#330404]/70 backdrop-blur-md ring-2 ring-[#5f682a]/30 hover:border-[#330404] shadow-lg'
-            }`}
+            className={`group relative flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 ${isPlaying
+              ? 'bg-[#4A171B] text-white border-2 border-[#5f682a] ring-2 ring-[#5f682a]/50 shadow-[0_4px_20px_rgba(74,23,27,0.4)]'
+              : 'bg-[#FAF7F2] text-[#4A171B] border-2 border-[#4A171B]/70 ring-2 ring-[#5f682a]/30 hover:border-[#4A171B] shadow-lg'
+              }`}
             aria-label={isPlaying ? 'ផ្អាកតន្ត្រី (Pause music)' : 'ចាក់តន្ត្រី (Play music)'}
             title={isPlaying ? 'Pause music' : 'Play music'}
           >
@@ -190,15 +189,15 @@ export default function AudioPlayer({ isOpen = true }: AudioPlayerProps) {
             {isPlaying && (
               <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5f682a] opacity-75" />
-                <span className="relative inline-flex h-3 w-3 rounded-full border border-[#330404] bg-[#5f682a]" />
+                <span className="relative inline-flex h-3 w-3 rounded-full border border-[#4A171B] bg-[#5f682a]" />
               </span>
             )}
 
             {/* Icon */}
             {isPlaying ? (
-              <Pause className="h-4 w-4 sm:h-5 sm:w-5 fill-current text-[#a4b248] transition-transform group-hover:scale-110" />
+              <Pause className="h-4 w-4 sm:h-5 sm:w-5 fill-current text-[#5f682a] transition-transform group-hover:scale-110" />
             ) : (
-              <Play className="h-4 w-4 sm:h-5 sm:w-5 ml-0.5 fill-current text-[#330404] transition-transform group-hover:scale-110" />
+              <Play className="h-4 w-4 sm:h-5 sm:w-5 ml-0.5 fill-current text-[#4A171B] transition-transform group-hover:scale-110" />
             )}
           </button>
         </div>

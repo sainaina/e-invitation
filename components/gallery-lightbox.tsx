@@ -56,7 +56,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         {items[0] && (
           <div
             onClick={() => openLightbox(0)}
-            className="fade-left delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#330404]"
+            className="fade-left delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#4A171B]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#4A171B]"
           >
             <div className="aspect-[16/10] w-full overflow-hidden bg-stone-100">
               <img
@@ -71,10 +71,10 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
 
             {/* Video Play Button in Center */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/80 bg-white/30 text-white shadow-lg backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-[#330404]">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/80 bg-white/30 text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-[#4A171B]">
                 <Play className="h-6 w-6 fill-current ml-1" />
               </div>
-              <span className="mt-2 rounded-full bg-black/50 px-3 py-1 font-moulpali text-xs tracking-wider text-white backdrop-blur">
+              <span className="mt-2 rounded-full bg-black/60 px-3 py-1 font-moulpali text-xs tracking-wider text-white">
                 {lang === 'km' ? 'ទស្សនាវីដេអូរៀបការ' : 'Play Pre-Wedding Film'}
               </span>
             </div>
@@ -90,7 +90,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               <div
                 key={item.id}
                 onClick={() => openLightbox(actualIdx)}
-                className={`${animClass} group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/40 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#330404]`}
+                className={`${animClass} group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#4A171B]/40 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[#4A171B]`}
               >
                 <div className="aspect-[4/5] w-full overflow-hidden bg-stone-100">
                   <img
@@ -114,7 +114,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
         {items[3] && (
           <div
             onClick={() => openLightbox(3)}
-            className="fade-right delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#330404]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#330404]"
+            className="fade-right delay-100 group relative cursor-pointer overflow-hidden rounded-2xl border-2 border-[#4A171B]/60 shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#4A171B]"
           >
             <div className="aspect-[16/11] w-full overflow-hidden bg-stone-100">
               <img
@@ -135,12 +135,12 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
       {/* Lightbox Modal for Photos */}
       {currentItem && !isVideoModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200"
           onClick={closeLightbox}
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur hover:bg-[#330404]"
+            className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white hover:bg-[#4A171B]"
             aria-label="Close photo"
           >
             <X className="h-5 w-5" />
@@ -151,7 +151,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               e.stopPropagation()
               prevPhoto()
             }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur hover:bg-[#330404]"
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-white hover:bg-[#4A171B]"
             aria-label="Previous photo"
           >
             <ChevronLeft className="h-6 w-6" />
@@ -162,14 +162,14 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               e.stopPropagation()
               nextPhoto()
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur hover:bg-[#330404]"
+            className="absolute right-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-white/20 text-white hover:bg-[#4A171B]"
             aria-label="Next photo"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
 
           <div
-            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-2xl border border-[#330404]"
+            className="relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-2xl border border-[#4A171B]"
             onClick={(e) => e.stopPropagation()}
           >
             <img
@@ -177,7 +177,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               alt={currentItem.alt}
               className="max-h-[75vh] w-auto object-contain"
             />
-            <div className="bg-[#330404] p-3 text-center text-white">
+            <div className="bg-[#4A171B] p-3 text-center text-white">
               <p className="font-moulpali text-sm text-[#FAF7F2]">
                 {lang === 'km' ? currentItem.captionKm : currentItem.captionEn}
               </p>
@@ -189,23 +189,23 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
       {/* Video Preview Modal */}
       {isVideoModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200"
           onClick={closeLightbox}
         >
           <div
-            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border-2 border-[#330404] bg-[#FAF7F2] shadow-2xl"
+            className="relative w-full max-w-2xl overflow-hidden rounded-2xl border-2 border-[#4A171B] bg-[#FAF7F2] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#330404]/30 bg-[#330404] px-4 py-3 text-white">
+            <div className="flex items-center justify-between border-b border-[#4A171B]/30 bg-[#4A171B] px-4 py-3 text-white">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-[#5f682a]" />
                 <span className="font-moulpali text-sm tracking-wider text-[#FAF7F2]">
-                  {lang === 'km' ? 'វីដេអូអនុស្សាវរីយ៍ • Rithy & Nihyun' : 'Pre-Wedding Highlight • Rithy & Nihyun'}
+                  {lang === 'km' ? 'វីដេអូអនុស្សាវរីយ៍ • Pheakdey & Munineath' : 'Pre-Wedding Highlight • Pheakdey & Munineath'}
                 </span>
               </div>
               <button
                 onClick={closeLightbox}
-                className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-white hover:bg-[#330404]"
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-white hover:bg-[#4A171B]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -228,7 +228,7 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               </div>
             </div>
 
-            <div className="p-4 text-center bg-[#330404] text-white">
+            <div className="p-4 text-center bg-[#4A171B] text-white">
               <p className="font-moulpali text-xs text-[#FAF7F2]">
                 {lang === 'km'
                   ? 'សូមអរគុណភ្ញៀវកិត្តិយសទាំងអស់ដែលបានចូលរួមអបអរសាទរ'

@@ -3,12 +3,12 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Rithy & Nihyun | Royal Wedding E-Invitation',
+  title: 'Pheakdey & Munineath | Royal Wedding E-Invitation',
   description:
-    'You are cordially invited to celebrate the royal wedding of Rithy and Nihyun on December 17th – 18th, 2025 at The Premier Sensok Center, Phnom Penh.',
-  keywords: ['Wedding', 'E-Invitation', 'Rithy & Nihyun', 'Phnom Penh', 'Premier Sensok Center', 'Cambodian Wedding'],
+    'You are cordially invited to celebrate the royal wedding of Pheakdey and Munineath on December 17th – 18th, 2025 at The Premier Sensok Center, Phnom Penh.',
+  keywords: ['Wedding', 'E-Invitation', 'Pheakdey & Munineath', 'Phnom Penh', 'Premier Sensok Center', 'Cambodian Wedding'],
   openGraph: {
-    title: 'The Wedding of Rithy & Nihyun',
+    title: 'The Wedding of Pheakdey & Munineath',
     description: 'We cordially invite you to celebrate our special day with us.',
     images: ['/images/couple_hero_portrait_1790042546264.jpg'],
   },
@@ -18,7 +18,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#5f682a',
+  themeColor: '#4A171B',
 }
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body className="antialiased selection:bg-[#330404] selection:text-white">
+      <body className="antialiased selection:bg-[#4A171B] selection:text-white">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
