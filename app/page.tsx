@@ -97,24 +97,28 @@ export default function Page() {
     bride: true,
   })
 
-  // Lock page scrolling while the open invitation cover is active so the home invitation cannot scroll underneath
+  // Lock scrolling completely while on the open invitation cover so the page CANNOT scroll
+  // Unlocks immediately when user clicks to open the invitation
   useEffect(() => {
-    if (!isEnvelopeOpen) {
+    const isCoverActive = !isEnvelopeOpen && !isOpening && !isEnvelopeSliding
+    if (isCoverActive) {
       const prevBodyOverflow = document.body.style.overflow
       const prevHtmlOverflow = document.documentElement.style.overflow
       document.body.style.overflow = 'hidden'
       document.documentElement.style.overflow = 'hidden'
-      window.scrollTo(0, 0)
+      document.body.style.touchAction = 'none'
 
       return () => {
         document.body.style.overflow = prevBodyOverflow
         document.documentElement.style.overflow = prevHtmlOverflow
+        document.body.style.touchAction = ''
       }
     } else {
       document.body.style.overflow = ''
       document.documentElement.style.overflow = ''
+      document.body.style.touchAction = ''
     }
-  }, [isEnvelopeOpen])
+  }, [isEnvelopeOpen, isOpening, isEnvelopeSliding])
 
   // Countdown timer to March 18, 2027
   const [timeLeft, setTimeLeft] = useState({
@@ -232,32 +236,23 @@ END:VCALENDAR`
 
   const triggerOpenInvitation = () => {
     if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0)
       window.dispatchEvent(new CustomEvent('play-wedding-music'))
     }
     if (isOpening || isEnvelopeOpen) return
     setIsOpening(true)
-
-    // 1. Immediately trigger 180-degree rotation of the wax seal with royal shockwave pop
     setIsStampRotating(true)
+    setIsEnvelopeSliding(true)
 
-    // 2. Majestic, slow royal separation starts (2400ms duration)
-    setTimeout(() => {
-      setIsEnvelopeSliding(true)
-    }, 450)
-
-    // 3. Complete transition after doors fully glide off-screen
+    // Smooth, majestic royal gatefold separation (~4000ms - refined royal pace)
     setTimeout(() => {
       setIsEnvelopeOpen(true)
       setIsOpening(false)
-    }, 2900)
+      setIsEnvelopeSliding(false)
+    }, 4150)
   }
 
   return (
-    <main
-      className={`relative min-h-screen text-[#4A171B] selection:bg-[#4A171B] selection:text-white ${!isEnvelopeOpen ? 'h-[100dvh] overflow-hidden' : ''
-        }`}
-    >
+    <main className="relative min-h-screen text-[#4A171B] selection:bg-[#4A171B] selection:text-white">
       {/* Immersive Video Background with Crystal Clarity (Stable - No Scale on Scroll) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <video
@@ -280,24 +275,24 @@ END:VCALENDAR`
       <ButterflyFlight />
 
       {/* Floating Audio Player (hidden on open invitation landing page, appears once opened) */}
-      <AudioPlayer isOpen={isEnvelopeOpen} />
+      <AudioPlayer isOpen={isEnvelopeOpen || isEnvelopeSliding} />
 
       {/* ========================================================================= */}
-      {/* ROYAL GATEFOLD SEPARATING PANELS (BACKGROUND SPLITS LEFT & RIGHT ON OPEN) */}
+      {/* ROYAL GATEFOLD SEPARATING PANELS (ORIGINAL BACKGROUND SEPARATES SMOOTHLY)  */}
       {/* ========================================================================= */}
       <div
         key={envelopeKey}
         onClick={triggerOpenInvitation}
-        className={`fixed inset-0 z-50 w-full h-[100dvh] overflow-hidden select-none transition-all duration-[1300ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${isEnvelopeOpen
-          ? 'opacity-0 pointer-events-none invisible'
-          : 'opacity-100 cursor-pointer'
-          }`}
+        className={`fixed inset-0 z-50 w-full h-[100dvh] select-none overflow-hidden touch-none transition-opacity duration-1000 ease-out ${isOpening || isEnvelopeSliding || isEnvelopeOpen
+          ? 'pointer-events-none'
+          : 'cursor-pointer'
+          } ${isEnvelopeOpen ? 'opacity-0 invisible' : 'opacity-100'}`}
       >
         {/* ===================================================================== */}
-        {/* LEFT SEPARATING HALF OF BACKGROUND IMAGE (MATCHING OPACITY)          */}
+        {/* LEFT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES LEFT - 4.0S)         */}
         {/* ===================================================================== */}
         <div
-          className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${isEnvelopeSliding ? '-translate-x-[102%] scale-[1.01]' : 'translate-x-0 scale-100'
+          className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${isEnvelopeSliding ? '-translate-x-[102%]' : 'translate-x-0'
             }`}
           style={{
             clipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
@@ -312,18 +307,13 @@ END:VCALENDAR`
           {/* Ambient overlay matching home background exactly (/30 opacity) */}
           <div className="absolute inset-0 bg-black/5" />
           <div className="absolute inset-0 bg-white/30" />
-          {/* Subtle 3D Inner Edge Depth Shadow along the Parting Seam */}
-          <div
-            className={`absolute top-0 right-[49.92%] w-10 sm:w-16 h-full pointer-events-none transition-opacity duration-1000 bg-gradient-to-l from-black/25 via-black/10 to-transparent ${isEnvelopeSliding ? 'opacity-100' : 'opacity-0'
-              }`}
-          />
         </div>
 
         {/* ===================================================================== */}
-        {/* RIGHT SEPARATING HALF OF BACKGROUND IMAGE (MATCHING OPACITY)         */}
+        {/* RIGHT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES RIGHT - 4.0S)        */}
         {/* ===================================================================== */}
         <div
-          className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${isEnvelopeSliding ? 'translate-x-[102%] scale-[1.01]' : 'translate-x-0 scale-100'
+          className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${isEnvelopeSliding ? 'translate-x-[102%]' : 'translate-x-0'
             }`}
           style={{
             clipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
@@ -338,18 +328,13 @@ END:VCALENDAR`
           {/* Ambient overlay matching home background exactly (/30 opacity) */}
           <div className="absolute inset-0 bg-black/5" />
           <div className="absolute inset-0 bg-white/30" />
-          {/* Subtle 3D Inner Edge Depth Shadow along the Parting Seam */}
-          <div
-            className={`absolute top-0 left-[49.92%] w-10 sm:w-16 h-full pointer-events-none transition-opacity duration-1000 bg-gradient-to-r from-black/25 via-black/10 to-transparent ${isEnvelopeSliding ? 'opacity-100' : 'opacity-0'
-              }`}
-          />
         </div>
 
         {/* ===================================================================== */}
         {/* CENTER CONTENT LAYER (FLOATS ON TOP OF BOTH PANELS)                   */}
         {/* ===================================================================== */}
         <div
-          className={`relative z-20 w-full h-full flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] ${isEnvelopeSliding ? 'opacity-0 scale-105 pointer-events-none' : 'opacity-100 scale-100'
+          className={`relative z-20 w-full h-full flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 transition-all duration-[950ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpening || isEnvelopeSliding ? 'opacity-0 -translate-y-4 scale-95 pointer-events-none' : 'opacity-100 translate-y-0 scale-100'
             }`}
         >
           {/* Top Eyebrow */}
@@ -437,12 +422,7 @@ END:VCALENDAR`
       {/* ========================================================================= */}
       {/* MAIN INVITATION: FRAMED WITH CUSTOM ARCH & CLEAN CHANDELIER               */}
       {/* ========================================================================= */}
-      <div
-        className={`transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${isEnvelopeOpen || isEnvelopeSliding
-          ? 'opacity-100 translate-y-0 scale-100 filter-none'
-          : 'opacity-0 translate-y-12 scale-[0.88] blur-[2px] pointer-events-none h-[100dvh] overflow-hidden'
-          }`}
-      >
+      <div className="relative w-full">
         <UsefulFrame
           onReopenEnvelope={() => {
             window.scrollTo({ top: 0, behavior: 'instant' })
