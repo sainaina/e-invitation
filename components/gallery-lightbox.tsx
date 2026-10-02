@@ -178,6 +178,32 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
     return result
   }, [items])
 
+  // Scroll reveal animation observer for gallery cards (fade left & fade right)
+  useEffect(() => {
+    if (!isMounted) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+          }
+        })
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    )
+
+    const targets = document.querySelectorAll('.gallery-fade-item')
+    targets.forEach((el) => observer.observe(el))
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [isMounted, rows])
+
   return (
     <>
       {/* ===================================================================== */}
@@ -189,12 +215,14 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
           if (row.type === 'landscape') {
             const item = row.item
             const isVideo = item.isVideo
+            const isEven = rowIdx % 2 === 0
+            const animClass = isEven ? 'fade-left delay-100' : 'fade-right delay-100'
 
             return (
               <div
                 key={item.id || `landscape-${rowIdx}`}
                 onClick={() => openItem(item)}
-                className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]"
+                className={`gallery-fade-item ${animClass} group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]`}
               >
                 <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-stone-900 rounded-2xl sm:rounded-3xl">
                   {isVideo ? (
@@ -244,22 +272,26 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
                 row.items.length === 1 ? 'grid-cols-1 max-w-sm sm:max-w-md mx-auto' : 'grid-cols-2'
               }`}
             >
-              {row.items.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => openItem(item)}
-                  className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]"
-                >
-                  <div className="aspect-[4/5] sm:aspect-[3/4] w-full overflow-hidden bg-stone-100 rounded-2xl sm:rounded-3xl">
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
+              {row.items.map((item, itemIdx) => {
+                const animClass = itemIdx === 0 ? 'fade-left delay-100' : 'fade-right delay-200'
+
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => openItem(item)}
+                    className={`gallery-fade-item ${animClass} group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.12)] transition-all duration-500 hover:shadow-2xl hover:scale-[1.01]`}
+                  >
+                    <div className="aspect-[4/5] sm:aspect-[3/4] w-full overflow-hidden bg-stone-100 rounded-2xl sm:rounded-3xl">
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )
         })}
@@ -364,18 +396,16 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
               ) : (
                 /* High-Res Photo Display with Zoom */
                 <div
-                  className={`relative flex items-center justify-center max-h-[72dvh] sm:max-h-[76dvh] max-w-[94vw] transition-transform duration-300 ${
-                    isZoomed ? 'scale-125 sm:scale-140 cursor-zoom-out' : 'scale-100 cursor-zoom-in'
-                  }`}
+                  className={`relative flex items-center justify-center max-h-[72dvh] sm:max-h-[76dvh] max-w-[94vw] transition-transform duration-300 ${isZoomed ? 'scale-125 sm:scale-140 cursor-zoom-out' : 'scale-100 cursor-zoom-in'
+                    }`}
                   onClick={() => setIsZoomed((prev) => !prev)}
                 >
                   <img
                     src={currentItem.src}
                     alt={currentItem.alt}
                     onLoad={() => setIsImageLoading(false)}
-                    className={`max-h-[70dvh] sm:max-h-[74dvh] w-auto max-w-[92vw] object-contain rounded-xl sm:rounded-2xl shadow-2xl transition-opacity duration-300 ${
-                      isImageLoading ? 'opacity-0' : 'opacity-100'
-                    }`}
+                    className={`max-h-[70dvh] sm:max-h-[74dvh] w-auto max-w-[92vw] object-contain rounded-xl sm:rounded-2xl shadow-2xl transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'
+                      }`}
                   />
                 </div>
               )}
@@ -422,11 +452,10 @@ export default function GalleryLightbox({ items, lang }: GalleryLightboxProps) {
                         setIsZoomed(false)
                         setIsImageLoading(true)
                       }}
-                      className={`relative flex-shrink-0 h-10 w-10 sm:h-12 sm:w-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                        isCurrent
-                          ? 'border-[#EAD29A] ring-2 ring-[#4A171B] scale-110'
-                          : 'border-white/20 opacity-55 hover:opacity-100'
-                      }`}
+                      className={`relative flex-shrink-0 h-10 w-10 sm:h-12 sm:w-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${isCurrent
+                        ? 'border-[#EAD29A] ring-2 ring-[#4A171B] scale-110'
+                        : 'border-white/20 opacity-55 hover:opacity-100'
+                        }`}
                     >
                       <img src={item.src} alt={item.alt} className="h-full w-full object-cover" />
                       {item.isVideo && (

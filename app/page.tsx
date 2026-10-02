@@ -247,12 +247,18 @@ END:VCALENDAR`
     setTimeout(() => {
       setIsEnvelopeOpen(true)
       setIsOpening(false)
-      setIsEnvelopeSliding(false)
+      // When isEnvelopeOpen becomes true, the cover unmounts completely from the DOM
     }, 4150)
   }
 
   return (
-    <main className="relative min-h-screen text-[#4A171B] selection:bg-[#4A171B] selection:text-white">
+    <main
+      className={`relative text-[#4A171B] selection:bg-[#4A171B] selection:text-white ${
+        !isEnvelopeOpen && !isOpening && !isEnvelopeSliding
+          ? 'h-[100dvh] max-h-[100dvh] overflow-hidden'
+          : 'min-h-screen'
+      }`}
+    >
       {/* Immersive Video Background with Crystal Clarity (Stable - No Scale on Scroll) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <video
@@ -280,144 +286,155 @@ END:VCALENDAR`
       {/* ========================================================================= */}
       {/* ROYAL GATEFOLD SEPARATING PANELS (ORIGINAL BACKGROUND SEPARATES SMOOTHLY)  */}
       {/* ========================================================================= */}
-      <div
-        key={envelopeKey}
-        onClick={triggerOpenInvitation}
-        className={`fixed inset-0 z-50 w-full h-[100dvh] select-none overflow-hidden touch-none transition-opacity duration-1000 ease-out ${isOpening || isEnvelopeSliding || isEnvelopeOpen
-          ? 'pointer-events-none'
-          : 'cursor-pointer'
-          } ${isEnvelopeOpen ? 'opacity-0 invisible' : 'opacity-100'}`}
-      >
-        {/* ===================================================================== */}
-        {/* LEFT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES LEFT - 4.0S)         */}
-        {/* ===================================================================== */}
+      {!isEnvelopeOpen && (
         <div
-          className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${isEnvelopeSliding ? '-translate-x-[102%]' : 'translate-x-0'
-            }`}
-          style={{
-            clipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
-            WebkitClipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
-          }}
+          key={envelopeKey}
+          onClick={triggerOpenInvitation}
+          className={`fixed inset-0 z-50 w-full h-[100dvh] select-none overflow-hidden touch-none transition-opacity duration-1000 ease-out ${
+            isOpening || isEnvelopeSliding
+              ? 'pointer-events-none'
+              : 'cursor-pointer'
+          }`}
+          style={{ display: isEnvelopeOpen ? 'none' : 'block' }}
         >
-          <img
-            src="/images/wedding_floral_bg.jpg"
-            alt="Floral Background Left"
-            className="w-full h-full object-cover"
-          />
-          {/* Ambient overlay matching home background exactly (/30 opacity) */}
-          <div className="absolute inset-0 bg-black/5" />
-          <div className="absolute inset-0 bg-white/30" />
-        </div>
-
-        {/* ===================================================================== */}
-        {/* RIGHT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES RIGHT - 4.0S)        */}
-        {/* ===================================================================== */}
-        <div
-          className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${isEnvelopeSliding ? 'translate-x-[102%]' : 'translate-x-0'
+          {/* ===================================================================== */}
+          {/* LEFT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES LEFT - 4.0S)         */}
+          {/* ===================================================================== */}
+          <div
+            className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${
+              isEnvelopeSliding ? '-translate-x-[102%]' : 'translate-x-0'
             }`}
-          style={{
-            clipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
-            WebkitClipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
-          }}
-        >
-          <img
-            src="/images/wedding_floral_bg.jpg"
-            alt="Floral Background Right"
-            className="w-full h-full object-cover"
-          />
-          {/* Ambient overlay matching home background exactly (/30 opacity) */}
-          <div className="absolute inset-0 bg-black/5" />
-          <div className="absolute inset-0 bg-white/30" />
-        </div>
-
-        {/* ===================================================================== */}
-        {/* CENTER CONTENT LAYER (FLOATS ON TOP OF BOTH PANELS)                   */}
-        {/* ===================================================================== */}
-        <div
-          className={`relative z-20 w-full h-full flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 transition-all duration-[950ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpening || isEnvelopeSliding ? 'opacity-0 -translate-y-4 scale-95 pointer-events-none' : 'opacity-100 translate-y-0 scale-100'
-            }`}
-        >
-          {/* Top Eyebrow */}
-          <div className="pt-2 sm:pt-4">
-            <p className="cover-fade-left cover-delay-100 font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
-              ROYAL WEDDING INVITATION
-            </p>
-            <p className="cover-fade-right cover-delay-200 font-moulpali text-base sm:text-lg text-[#4A171B] mt-1 drop-shadow-xs">
-              សិរីសួស្តី អាពាហ៍ពិពាហ៍
-            </p>
+            style={{
+              clipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
+              WebkitClipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
+            }}
+          >
+            <img
+              src="/images/wedding_floral_bg.jpg"
+              alt="Floral Background Left"
+              className="w-full h-full object-cover"
+            />
+            {/* Ambient overlay matching home background exactly (/30 opacity) */}
+            <div className="absolute inset-0 bg-black/5" />
+            <div className="absolute inset-0 bg-white/30" />
           </div>
 
-          {/* Couple Calligraphy & Red Wax Seal Medallion in Center */}
-          <div className="my-auto py-1 sm:py-2 w-full max-w-lg">
-            <h1 className="cover-fade-left cover-delay-300 font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#4A171B] leading-tight drop-shadow-[0_2px_10px_rgba(255,255,255,0.9)]">
-              Pheakdey <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Munineath
-            </h1>
+          {/* ===================================================================== */}
+          {/* RIGHT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES RIGHT - 4.0S)        */}
+          {/* ===================================================================== */}
+          <div
+            className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${
+              isEnvelopeSliding ? 'translate-x-[102%]' : 'translate-x-0'
+            }`}
+            style={{
+              clipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
+              WebkitClipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
+            }}
+          >
+            <img
+              src="/images/wedding_floral_bg.jpg"
+              alt="Floral Background Right"
+              className="w-full h-full object-cover"
+            />
+            {/* Ambient overlay matching home background exactly (/30 opacity) */}
+            <div className="absolute inset-0 bg-black/5" />
+            <div className="absolute inset-0 bg-white/30" />
+          </div>
 
-            <p className="cover-fade-left cover-delay-500 mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#5f682a] font-semibold">
-              18TH MARCH 2027 • PHNOM PENH
-            </p>
-
-            {/* CIRCULAR MEDALLION WITH RED WAX SEAL (Centered Over Seam) */}
-            <div className="cover-scale-in cover-delay-650 my-4 sm:my-6 flex justify-center">
-              <div
-                className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#4A171B] shadow-[0_12px_28px_rgba(74,23,27,0.35)] ring-4 ring-[#5f682a]/40 overflow-hidden cursor-pointer transition-all duration-700 ${isStampRotating
-                  ? 'animate-seal-open-pop ring-8 ring-[#4A171B]/70 shadow-[0_0_35px_rgba(74,23,27,0.5)]'
-                  : 'hover:scale-105 active:scale-95'
-                  }`}
-              >
-                {/* Luminous Red Pulsing Halo */}
-                <div className="seal-pulse absolute inset-0 rounded-full bg-[#4A171B]/25" />
-
-                {/* Royal Shockwave Wave Burst on Click */}
-                {isStampRotating && (
-                  <div className="animate-seal-break absolute inset-0 rounded-full border-4 border-[#4A171B] bg-radial-[circle,_rgba(74,23,27,0.45)_0%,_transparent_70%]" />
-                )}
-
-                {/* Royal Burgundy & Pearl Starburst on Click */}
-                {isStampRotating && (
-                  <div className="animate-seal-royal-burst pointer-events-none absolute -inset-10 rounded-full border-2 border-[#4A171B]/60 bg-radial-[circle,_rgba(74,23,27,0.35)_0%,_rgba(255,248,240,0.3)_40%,_transparent_75%]" />
-                )}
-
-                {/* The Wax Seal Image */}
-                <img
-                  src="/images/wax_seal_pm.jpg"
-                  alt="P&M Royal Red Wax Seal"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover/seal:scale-105"
-                />
-
-                {/* Decorative Dual Inner Filigree Rings */}
-                <div className="pointer-events-none absolute inset-1.5 sm:inset-2 rounded-full border border-[#5f682a]/40" />
-                <div className="pointer-events-none absolute inset-2.5 sm:inset-3 rounded-full border border-[#4A171B]/40" />
-              </div>
+          {/* ===================================================================== */}
+          {/* CENTER CONTENT LAYER (FLOATS ON TOP OF BOTH PANELS)                   */}
+          {/* ===================================================================== */}
+          <div
+            className={`relative z-20 w-full h-full flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 transition-all duration-[950ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${
+              isOpening || isEnvelopeSliding
+                ? 'opacity-0 -translate-y-4 scale-95 pointer-events-none'
+                : 'opacity-100 translate-y-0 scale-100'
+            }`}
+          >
+            {/* Top Eyebrow */}
+            <div className="pt-2 sm:pt-4">
+              <p className="cover-fade-left cover-delay-100 font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
+                ROYAL WEDDING INVITATION
+              </p>
+              <p className="cover-fade-right cover-delay-200 font-moulpali text-base sm:text-lg text-[#4A171B] mt-1 drop-shadow-xs">
+                សិរីសួស្តី អាពាហ៍ពិពាហ៍
+              </p>
             </div>
 
-            {/* Tap Hint */}
-            <p className="cover-fade-left cover-delay-750 font-moulpali text-xs sm:text-sm text-[#4A171B] animate-pulse drop-shadow-xs font-semibold">
-              {isOpening ? 'កំពុងបើកស្រោមសំបុត្រ...' : 'សូមចុចលើត្រាដើម្បីបើកលិខិតអញ្ជើញ'}
-            </p>
-            <p className="cover-fade-right cover-delay-850 font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
-              {isOpening ? 'UNVEILING INVITATION...' : 'TAP SEAL TO UNVEIL INVITATION'}
-            </p>
-          </div>
+            {/* Couple Calligraphy & Red Wax Seal Medallion in Center */}
+            <div className="my-auto py-1 sm:py-2 w-full max-w-lg">
+              <h1 className="cover-fade-left cover-delay-300 font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#4A171B] leading-tight drop-shadow-[0_2px_10px_rgba(255,255,255,0.9)]">
+                Pheakdey <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Munineath
+              </h1>
 
-          {/* Bottom Button */}
-          <div className="cover-fade-up cover-delay-950 pb-2 sm:pb-4 w-full max-w-xs">
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                triggerOpenInvitation()
-              }}
-              className={`w-full inline-flex items-center justify-center gap-2 rounded-full border border-[#5f682a] bg-[#4A171B] px-7 py-2.5 sm:py-3 font-cinzel text-xs font-semibold tracking-widest text-white shadow-xl transition-all duration-300 ${isOpening
-                ? 'scale-95 bg-[#5f682a] ring-4 ring-[#5f682a]/50 ring-offset-2 ring-offset-[#FAF7F2]'
-                : 'hover:scale-105 hover:bg-[#5f682a] active:scale-95'
+              <p className="cover-fade-left cover-delay-500 mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#5f682a] font-semibold">
+                18TH MARCH 2027 • PHNOM PENH
+              </p>
+
+              {/* CIRCULAR MEDALLION WITH RED WAX SEAL (Centered Over Seam) */}
+              <div className="cover-scale-in cover-delay-650 my-4 sm:my-6 flex justify-center">
+                <div
+                  className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#4A171B] shadow-[0_12px_28px_rgba(74,23,27,0.35)] ring-4 ring-[#5f682a]/40 overflow-hidden cursor-pointer transition-all duration-700 ${
+                    isStampRotating
+                      ? 'animate-seal-open-pop ring-8 ring-[#4A171B]/70 shadow-[0_0_35px_rgba(74,23,27,0.5)]'
+                      : 'hover:scale-105 active:scale-95'
+                  }`}
+                >
+                  {/* Luminous Red Pulsing Halo */}
+                  <div className="seal-pulse absolute inset-0 rounded-full bg-[#4A171B]/25" />
+
+                  {/* Royal Shockwave Wave Burst on Click */}
+                  {isStampRotating && (
+                    <div className="animate-seal-break absolute inset-0 rounded-full border-4 border-[#4A171B] bg-radial-[circle,_rgba(74,23,27,0.45)_0%,_transparent_70%]" />
+                  )}
+
+                  {/* Royal Burgundy & Pearl Starburst on Click */}
+                  {isStampRotating && (
+                    <div className="animate-seal-royal-burst pointer-events-none absolute -inset-10 rounded-full border-2 border-[#4A171B]/60 bg-radial-[circle,_rgba(74,23,27,0.35)_0%,_rgba(255,248,240,0.3)_40%,_transparent_75%]" />
+                  )}
+
+                  {/* The Wax Seal Image */}
+                  <img
+                    src="/images/wax_seal_pm.jpg"
+                    alt="P&M Royal Red Wax Seal"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover/seal:scale-105"
+                  />
+
+                  {/* Decorative Dual Inner Filigree Rings */}
+                  <div className="pointer-events-none absolute inset-1.5 sm:inset-2 rounded-full border border-[#5f682a]/40" />
+                  <div className="pointer-events-none absolute inset-2.5 sm:inset-3 rounded-full border border-[#4A171B]/40" />
+                </div>
+              </div>
+
+              {/* Tap Hint */}
+              <p className="cover-fade-left cover-delay-750 font-moulpali text-xs sm:text-sm text-[#4A171B] animate-pulse drop-shadow-xs font-semibold">
+                {isOpening ? 'កំពុងបើកស្រោមសំបុត្រ...' : 'សូមចុចលើត្រាដើម្បីបើកលិខិតអញ្ជើញ'}
+              </p>
+              <p className="cover-fade-right cover-delay-850 font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
+                {isOpening ? 'UNVEILING INVITATION...' : 'TAP SEAL TO UNVEIL INVITATION'}
+              </p>
+            </div>
+
+            {/* Bottom Button */}
+            <div className="cover-fade-up cover-delay-950 pb-2 sm:pb-4 w-full max-w-xs">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  triggerOpenInvitation()
+                }}
+                className={`w-full inline-flex items-center justify-center gap-2 rounded-full border border-[#5f682a] bg-[#4A171B] px-7 py-2.5 sm:py-3 font-cinzel text-xs font-semibold tracking-widest text-white shadow-xl transition-all duration-300 ${
+                  isOpening
+                    ? 'scale-95 bg-[#5f682a] ring-4 ring-[#5f682a]/50 ring-offset-2 ring-offset-[#FAF7F2]'
+                    : 'hover:scale-105 hover:bg-[#5f682a] active:scale-95'
                 }`}
-            >
-              <span>{isOpening ? 'OPENING INVITATION...' : 'OPEN INVITATION'}</span>
-              <ChevronDown className={`h-4 w-4 ${isOpening ? 'rotate-180 transition-transform duration-500' : 'animate-bounce'}`} />
-            </button>
+              >
+                <span>{isOpening ? 'OPENING INVITATION...' : 'OPEN INVITATION'}</span>
+                <ChevronDown className={`h-4 w-4 ${isOpening ? 'rotate-180 transition-transform duration-500' : 'animate-bounce'}`} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ========================================================================= */}
       {/* MAIN INVITATION: FRAMED WITH CUSTOM ARCH & CLEAN CHANDELIER               */}
