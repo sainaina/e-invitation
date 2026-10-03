@@ -23,6 +23,7 @@ import ButterflyFlight from '@/components/butterfly-flight'
 import AudioPlayer from '@/components/audio-player'
 import UsefulFrame from '@/components/useful-frame'
 import GalleryLightbox, { GalleryItem } from '@/components/gallery-lightbox'
+import RoyalIntroShowcase from '@/components/royal-intro-showcase'
 
 const galleryList: GalleryItem[] = [
   {
@@ -90,6 +91,8 @@ export default function Page() {
   const [isStampRotating, setIsStampRotating] = useState(false)
   const [isEnvelopeSliding, setIsEnvelopeSliding] = useState(false)
   const [isOpening, setIsOpening] = useState(false)
+  const [showIntroShowcase, setShowIntroShowcase] = useState(false)
+  const [isTransitioningToHome, setIsTransitioningToHome] = useState(false)
   const [envelopeKey, setEnvelopeKey] = useState(0)
   const [copiedAddress, setCopiedAddress] = useState(false)
   const [activeChildhood, setActiveChildhood] = useState<{ groom: boolean; bride: boolean }>({
@@ -97,10 +100,17 @@ export default function Page() {
     bride: true,
   })
 
-  // Lock scrolling completely while on the open invitation cover so the page CANNOT scroll
-  // Unlocks immediately when user clicks to open the invitation
+  const coupleNames = {
+    groom: 'Pheakdey',
+    bride: 'Munineath',
+    date: '18TH MARCH 2027 • PHNOM PENH',
+    dateKm: '១៨ មីនា ២០២៧',
+  }
+
+  // Lock scrolling completely while on the open invitation cover or intro showcase
+  // Unlocks smoothly when browsing to the home page of the invitation
   useEffect(() => {
-    const isCoverActive = !isEnvelopeOpen && !isOpening && !isEnvelopeSliding
+    const isCoverActive = !isEnvelopeOpen && !isTransitioningToHome
     if (isCoverActive) {
       const prevBodyOverflow = document.body.style.overflow
       const prevHtmlOverflow = document.documentElement.style.overflow
@@ -118,7 +128,7 @@ export default function Page() {
       document.documentElement.style.overflow = ''
       document.body.style.touchAction = ''
     }
-  }, [isEnvelopeOpen, isOpening, isEnvelopeSliding])
+  }, [isEnvelopeOpen, isTransitioningToHome])
 
   // Countdown timer to March 18, 2027
   const [timeLeft, setTimeLeft] = useState({
@@ -238,26 +248,36 @@ END:VCALENDAR`
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('play-wedding-music'))
     }
-    if (isOpening || isEnvelopeOpen) return
+    if (isOpening || isEnvelopeOpen || isTransitioningToHome) return
     setIsOpening(true)
     setIsStampRotating(true)
     setIsEnvelopeSliding(true)
+    setShowIntroShowcase(true)
+  }
 
-    // Smooth, majestic royal gatefold separation (~4000ms - refined royal pace)
+  const handleBrowseToHome = () => {
+    if (isTransitioningToHome || isEnvelopeOpen) return
+    setIsTransitioningToHome(true)
+
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+
     setTimeout(() => {
       setIsEnvelopeOpen(true)
+      setShowIntroShowcase(false)
       setIsOpening(false)
-      // When isEnvelopeOpen becomes true, the cover unmounts completely from the DOM
-    }, 4150)
+      setIsEnvelopeSliding(false)
+      setIsTransitioningToHome(false)
+    }, 1000)
   }
 
   return (
     <main
-      className={`relative text-[#4A171B] selection:bg-[#4A171B] selection:text-white ${
-        !isEnvelopeOpen && !isOpening && !isEnvelopeSliding
-          ? 'h-[100dvh] max-h-[100dvh] overflow-hidden'
-          : 'min-h-screen'
-      }`}
+      className={`relative text-[#4A171B] selection:bg-[#4A171B] selection:text-white ${!isEnvelopeOpen && !isTransitioningToHome
+        ? 'h-[100dvh] max-h-[100dvh] overflow-hidden'
+        : 'min-h-screen'
+        }`}
     >
       {/* Immersive Video Background with Crystal Clarity (Stable - No Scale on Scroll) */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -266,119 +286,136 @@ END:VCALENDAR`
           loop
           muted
           playsInline
-          poster="/images/wedding_floral_bg.jpg"
+          poster="/images/arch_background.jpg"
           className="h-full w-full object-cover"
         >
           <source src="/videos/floral_background.mp4" type="video/mp4" />
           <source src="/videos/arch_background.mp4" type="video/mp4" />
         </video>
-        {/* Ambient overlay with /30 opacity */}
+        {/* Ambient overlay with /20 opacity */}
         <div className="absolute inset-0 bg-black/5" />
-        <div className="absolute inset-0 bg-white/30" />
+        <div className="absolute inset-0 bg-white/20" />
       </div>
 
       {/* Elegant 3D Royal Butterfly Flight Animation on Invitation (elevated to z-[60] so visible on all screens) */}
       <ButterflyFlight />
 
-      {/* Floating Audio Player (hidden on open invitation landing page, appears once opened) */}
-      <AudioPlayer isOpen={isEnvelopeOpen || isEnvelopeSliding} />
+      {/* Floating Audio Player (hidden on open invitation landing page and intro showcase, appears once opened) */}
+      <AudioPlayer isOpen={isEnvelopeOpen && !isTransitioningToHome} />
 
       {/* ========================================================================= */}
-      {/* ROYAL GATEFOLD SEPARATING PANELS (ORIGINAL BACKGROUND SEPARATES SMOOTHLY)  */}
+      {/* REVEALED PAGE (UNDERNEATH SEPARATING DOORS): NAME & DATE SLOW ANIMATION   */}
+      {/* ========================================================================= */}
+      {(!isEnvelopeOpen || isTransitioningToHome) && (
+        <RoyalIntroShowcase
+          isActive={showIntroShowcase || isTransitioningToHome}
+          onBrowseToHome={handleBrowseToHome}
+          groomName={coupleNames.groom}
+          brideName={coupleNames.bride}
+          weddingDate={coupleNames.date}
+        />
+      )}
+
+      {/* ========================================================================= */}
+      {/* ROYAL GATEFOLD SEPARATING DOORS (SLIDE OPEN TO REVEAL CARD UNDERNEATH)    */}
       {/* ========================================================================= */}
       {!isEnvelopeOpen && (
         <div
           key={envelopeKey}
           onClick={triggerOpenInvitation}
-          className={`fixed inset-0 z-50 w-full h-[100dvh] select-none overflow-hidden touch-none transition-opacity duration-1000 ease-out ${
-            isOpening || isEnvelopeSliding
-              ? 'pointer-events-none'
-              : 'cursor-pointer'
-          }`}
+          className={`fixed inset-0 z-50 w-full h-[100dvh] select-none overflow-hidden touch-none transition-opacity duration-1000 ease-out ${isOpening || isEnvelopeSliding
+            ? 'pointer-events-none'
+            : 'cursor-pointer'
+            }`}
           style={{ display: isEnvelopeOpen ? 'none' : 'block' }}
         >
           {/* ===================================================================== */}
-          {/* LEFT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES LEFT - 4.0S)         */}
+          {/* LEFT SEPARATING HALF OF ARCH BACKGROUND IMAGE (SLIDES LEFT)            */}
           {/* ===================================================================== */}
           <div
-            className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${
-              isEnvelopeSliding ? '-translate-x-[102%]' : 'translate-x-0'
-            }`}
+            className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[3200ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${isEnvelopeSliding ? '-translate-x-[102%]' : 'translate-x-0'
+              }`}
             style={{
               clipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
               WebkitClipPath: 'polygon(0% 0%, 50.08% 0%, 50.08% 100%, 0% 100%)',
             }}
           >
             <img
-              src="/images/wedding_floral_bg.jpg"
-              alt="Floral Background Left"
+              src="/images/arch_background.jpg"
+              alt="Arch Background Left"
               className="w-full h-full object-cover"
             />
-            {/* Ambient overlay matching home background exactly (/30 opacity) */}
+            {/* Ambient overlay matching home background exactly (/20 opacity) */}
             <div className="absolute inset-0 bg-black/5" />
-            <div className="absolute inset-0 bg-white/30" />
+            <div className="absolute inset-0 bg-white/20" />
           </div>
 
           {/* ===================================================================== */}
-          {/* RIGHT SEPARATING HALF OF BACKGROUND IMAGE (SLIDES RIGHT - 4.0S)        */}
+          {/* RIGHT SEPARATING HALF OF ARCH BACKGROUND IMAGE (SLIDES RIGHT)           */}
           {/* ===================================================================== */}
           <div
-            className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[4000ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${
-              isEnvelopeSliding ? 'translate-x-[102%]' : 'translate-x-0'
-            }`}
+            className={`absolute inset-0 w-full h-[100dvh] pointer-events-none will-change-transform transform-gpu transition-transform duration-[3200ms] ease-[cubic-bezier(0.35,0.45,0.35,1)] ${isEnvelopeSliding ? 'translate-x-[102%]' : 'translate-x-0'
+              }`}
             style={{
               clipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
               WebkitClipPath: 'polygon(49.92% 0%, 100% 0%, 100% 100%, 49.92% 100%)',
             }}
           >
             <img
-              src="/images/wedding_floral_bg.jpg"
-              alt="Floral Background Right"
+              src="/images/arch_background.jpg"
+              alt="Arch Background Right"
               className="w-full h-full object-cover"
             />
-            {/* Ambient overlay matching home background exactly (/30 opacity) */}
+            {/* Ambient overlay matching home background exactly (/20 opacity) */}
             <div className="absolute inset-0 bg-black/5" />
-            <div className="absolute inset-0 bg-white/30" />
+            <div className="absolute inset-0 bg-white/20" />
           </div>
 
           {/* ===================================================================== */}
-          {/* CENTER CONTENT LAYER (FLOATS ON TOP OF BOTH PANELS)                   */}
+          {/* CENTER CONTENT LAYER (WAX SEAL & OPEN INVITATION BUTTON)               */}
           {/* ===================================================================== */}
           <div
-            className={`relative z-20 w-full h-full flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 transition-all duration-[950ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${
-              isOpening || isEnvelopeSliding
-                ? 'opacity-0 -translate-y-4 scale-95 pointer-events-none'
-                : 'opacity-100 translate-y-0 scale-100'
-            }`}
+            className={`relative z-20 w-full h-full flex flex-col justify-between items-center text-center p-4 sm:p-8 md:p-10 transition-all duration-[950ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${isOpening || isEnvelopeSliding
+              ? 'opacity-0 -translate-y-4 scale-95 pointer-events-none'
+              : 'opacity-100 translate-y-0 scale-100'
+              }`}
           >
-            {/* Top Eyebrow */}
+            {/* Top Eyebrow (Modern Frosted Glass Badge) */}
             <div className="pt-2 sm:pt-4">
-              <p className="cover-fade-left cover-delay-100 font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a] drop-shadow-xs">
-                ROYAL WEDDING INVITATION
-              </p>
-              <p className="cover-fade-right cover-delay-200 font-moulpali text-base sm:text-lg text-[#4A171B] mt-1 drop-shadow-xs">
-                សិរីសួស្តី អាពាហ៍ពិពាហ៍
-              </p>
+              <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-full px-5 py-2 shadow-[0_6px_20px_rgba(74,23,27,0.06)] inline-flex flex-col items-center">
+                <p className="cover-fade-left cover-delay-100 font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.35em] text-[#5f682a]">
+                  ROYAL WEDDING INVITATION
+                </p>
+                <p className="cover-fade-right cover-delay-200 font-moulpali text-sm sm:text-base text-[#4A171B] mt-0.5">
+                  សិរីសួស្តី អាពាហ៍ពិពាហ៍
+                </p>
+              </div>
             </div>
 
-            {/* Couple Calligraphy & Red Wax Seal Medallion in Center */}
-            <div className="my-auto py-1 sm:py-2 w-full max-w-lg">
-              <h1 className="cover-fade-left cover-delay-300 font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#4A171B] leading-tight drop-shadow-[0_2px_10px_rgba(255,255,255,0.9)]">
-                Pheakdey <span className="font-great-vibes text-3xl sm:text-5xl text-[#5f682a]">&amp;</span> Munineath
+            {/* Couple Calligraphy & Red Wax Seal Medallion (Clean, balanced & royal) */}
+            <div className="my-auto py-2 w-full max-w-lg flex flex-col items-center justify-center">
+              {/* Groom Name */}
+              <h1 className="cover-fade-left cover-delay-200 font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#4A171B] leading-tight drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
+                {coupleNames.groom}
               </h1>
 
-              <p className="cover-fade-left cover-delay-500 mt-1.5 font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#5f682a] font-semibold">
-                18TH MARCH 2027 • PHNOM PENH
-              </p>
+              {/* Ampersand & */}
+              <span className="cover-fade-up cover-delay-300 font-great-vibes text-3xl sm:text-5xl text-[#5f682a] my-0.5 sm:my-1 inline-block">
+                &amp;
+              </span>
+
+              {/* Bride Name */}
+              <h2 className="cover-fade-right cover-delay-400 font-great-vibes text-5xl sm:text-7xl md:text-8xl text-[#4A171B] leading-tight drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
+                {coupleNames.bride}
+              </h2>
 
               {/* CIRCULAR MEDALLION WITH RED WAX SEAL (Centered Over Seam) */}
-              <div className="cover-scale-in cover-delay-650 my-4 sm:my-6 flex justify-center">
+              <div className="cover-scale-in cover-delay-500 my-4 sm:my-5 flex justify-center">
                 <div
-                  className={`group/seal relative flex h-28 w-28 sm:h-34 sm:w-34 items-center justify-center rounded-full border-2 border-[#4A171B] shadow-[0_12px_28px_rgba(74,23,27,0.35)] ring-4 ring-[#5f682a]/40 overflow-hidden cursor-pointer transition-all duration-700 ${
-                    isStampRotating
-                      ? 'animate-seal-open-pop ring-8 ring-[#4A171B]/70 shadow-[0_0_35px_rgba(74,23,27,0.5)]'
-                      : 'hover:scale-105 active:scale-95'
-                  }`}
+                  className={`group/seal relative flex h-22 w-22 sm:h-26 sm:w-26 items-center justify-center rounded-full border-2 border-[#4A171B] shadow-[0_12px_28px_rgba(74,23,27,0.35)] ring-4 ring-[#5f682a]/40 overflow-hidden cursor-pointer transition-all duration-700 ${isStampRotating
+                    ? 'animate-seal-open-pop ring-8 ring-[#4A171B]/70 shadow-[0_0_35px_rgba(74,23,27,0.5)]'
+                    : 'hover:scale-105 active:scale-95'
+                    }`}
                 >
                   {/* Luminous Red Pulsing Halo */}
                   <div className="seal-pulse absolute inset-0 rounded-full bg-[#4A171B]/25" />
@@ -407,46 +444,68 @@ END:VCALENDAR`
               </div>
 
               {/* Tap Hint */}
-              <p className="cover-fade-left cover-delay-750 font-moulpali text-xs sm:text-sm text-[#4A171B] animate-pulse drop-shadow-xs font-semibold">
+              <p className="cover-fade-left cover-delay-600 font-moulpali text-xs sm:text-sm text-[#4A171B] animate-pulse drop-shadow-xs font-semibold">
                 {isOpening ? 'កំពុងបើកស្រោមសំបុត្រ...' : 'សូមចុចលើត្រាដើម្បីបើកលិខិតអញ្ជើញ'}
               </p>
-              <p className="cover-fade-right cover-delay-850 font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
+              <p className="cover-fade-right cover-delay-700 font-cinzel text-[9px] sm:text-[10px] tracking-widest text-[#5f682a] mt-1 font-bold">
                 {isOpening ? 'UNVEILING INVITATION...' : 'TAP SEAL TO UNVEIL INVITATION'}
               </p>
             </div>
 
-            {/* Bottom Button */}
-            <div className="cover-fade-up cover-delay-950 pb-2 sm:pb-4 w-full max-w-xs">
+            {/* Bottom Button (Glass and Modern Style) */}
+            <div className="cover-fade-up cover-delay-800 pb-2 sm:pb-4 w-full max-w-xs flex flex-col items-center gap-2">
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   triggerOpenInvitation()
                 }}
-                className={`w-full inline-flex items-center justify-center gap-2 rounded-full border border-[#5f682a] bg-[#4A171B] px-7 py-2.5 sm:py-3 font-cinzel text-xs font-semibold tracking-widest text-white shadow-xl transition-all duration-300 ${
-                  isOpening
-                    ? 'scale-95 bg-[#5f682a] ring-4 ring-[#5f682a]/50 ring-offset-2 ring-offset-[#FAF7F2]'
-                    : 'hover:scale-105 hover:bg-[#5f682a] active:scale-95'
-                }`}
+                className={`group/btn relative w-full inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-3.5 font-cinzel text-xs sm:text-sm font-semibold tracking-[0.25em] transition-all duration-500 overflow-hidden cursor-pointer ${isOpening
+                  ? 'scale-95 bg-[#4A171B] text-white border border-white/40 ring-4 ring-[#5f682a]/40 shadow-[0_0_30px_rgba(74,23,27,0.4)]'
+                  : 'bg-white/50 backdrop-blur-2xl border border-white/75 text-[#4A171B] shadow-[0_12px_32px_rgba(74,23,27,0.15),inset_0_1px_2px_rgba(255,255,255,0.95),inset_0_-1px_1px_rgba(74,23,27,0.08)] hover:scale-[1.03] hover:bg-white/75 hover:border-white hover:shadow-[0_16px_40px_rgba(74,23,27,0.22),inset_0_1px_2px_rgba(255,255,255,1)] active:scale-95'
+                  }`}
               >
-                <span>{isOpening ? 'OPENING INVITATION...' : 'OPEN INVITATION'}</span>
-                <ChevronDown className={`h-4 w-4 ${isOpening ? 'rotate-180 transition-transform duration-500' : 'animate-bounce'}`} />
+                {/* Specular Diagonal Glass Sheen Reflection */}
+                <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
+                {/* Glass Inner Rim Highlight */}
+                <div className="pointer-events-none absolute inset-0.5 rounded-full border border-white/40 opacity-70" />
+
+                <Sparkles className="h-3.5 w-3.5 text-[#b8860b] opacity-90 group-hover/btn:rotate-12 transition-transform duration-300 relative z-10" />
+                <span className="relative z-10 font-bold">{isOpening ? 'OPENING INVITATION...' : 'OPEN INVITATION'}</span>
+                <ChevronDown className={`h-4 w-4 text-[#5f682a] relative z-10 ${isOpening ? 'rotate-180 transition-transform duration-500' : 'animate-bounce'}`} />
               </button>
+
+              {/* Subtitle in matching Modern Glass Capsule */}
+              <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-full px-4 py-1 shadow-[0_4px_16px_rgba(74,23,27,0.06)]">
+                <p className="font-moulpali text-[10px] sm:text-[11px] text-[#4A171B]/90">
+                  {isOpening ? 'កំពុងបើកលិខិត...' : 'សូមចុចដើម្បីបើកលិខិតអញ្ជើញ'}
+                </p>
+              </div>
             </div>
           </div>
+
         </div>
       )}
 
       {/* ========================================================================= */}
       {/* MAIN INVITATION: FRAMED WITH CUSTOM ARCH & CLEAN CHANDELIER               */}
       {/* ========================================================================= */}
-      <div className="relative w-full">
+      <div
+        className={`relative w-full transition-opacity duration-1000 ease-out ${!isEnvelopeOpen && !isTransitioningToHome
+          ? 'opacity-0 pointer-events-none'
+          : 'opacity-100'
+          }`}
+      >
         <UsefulFrame
+          showActions={isEnvelopeOpen && !isTransitioningToHome}
           onReopenEnvelope={() => {
             window.scrollTo({ top: 0, behavior: 'instant' })
             setIsEnvelopeOpen(false)
             setIsEnvelopeSliding(false)
             setIsStampRotating(false)
             setIsOpening(false)
+            setShowIntroShowcase(false)
+            setIsTransitioningToHome(false)
             setEnvelopeKey((prev) => prev + 1)
           }}
         >

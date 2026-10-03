@@ -6,9 +6,10 @@ import { ArrowUp, Mail } from 'lucide-react'
 interface UsefulFrameProps {
   children: React.ReactNode
   onReopenEnvelope: () => void
+  showActions?: boolean
 }
 
-export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameProps) {
+export default function UsefulFrame({ children, onReopenEnvelope, showActions = true }: UsefulFrameProps) {
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
@@ -50,22 +51,24 @@ export default function UsefulFrame({ children, onReopenEnvelope }: UsefulFrameP
         </div>
       </div>
 
-      {/* Floating Re-Open Envelope Action Button (Discreet at bottom-left) */}
-      <button
-        onClick={onReopenEnvelope}
-        className="fixed bottom-4 left-4 z-40 flex items-center gap-1.5 rounded-full border border-[#4A171B] bg-[#FAF7F2] px-3 py-1.5 text-xs font-moulpali text-[#4A171B] shadow-lg transition-all hover:scale-105 hover:bg-[#4A171B] hover:text-white"
-        title="បត់លិខិតអញ្ជើញឡើងវិញ"
-        aria-label="Re-fold envelope"
-      >
-        <Mail className="h-3.5 w-3.5" />
-        <span className="text-[11px]">បើកស្រោមសំបុត្រឡើងវិញ</span>
-      </button>
+      {/* Floating Re-Open Envelope Action Button (Discreet at bottom-left, only shown when fully open) */}
+      {showActions && (
+        <button
+          onClick={onReopenEnvelope}
+          className="fixed bottom-4 left-4 z-40 flex items-center gap-2 rounded-full border-2 border-[#5f682a]/70 bg-[#FAF7F2]/95 backdrop-blur-md px-3.5 py-1.5 text-xs font-moulpali text-[#4A171B] shadow-[0_8px_20px_rgba(74,23,27,0.2)] transition-all duration-500 hover:scale-105 hover:bg-[#4A171B] hover:text-white hover:border-[#4A171B]"
+          title="បត់លិខិតអញ្ជើញឡើងវិញ"
+          aria-label="Re-fold envelope"
+        >
+          <Mail className="h-3.5 w-3.5 text-[#5f682a] group-hover:text-white" />
+          <span className="text-[11px]">បើកស្រោមសំបុត្រឡើងវិញ</span>
+        </button>
+      )}
 
       {/* Back to Top Floating Button */}
-      {showScrollTop && (
+      {showActions && showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-16 right-4 z-40 flex h-9 w-9 items-center justify-center rounded-full border border-[#4A171B]/60 bg-[#FAF7F2] text-[#4A171B] shadow-md transition-all hover:scale-110 hover:bg-[#4A171B] hover:text-white"
+          className="fixed bottom-16 right-4 z-40 flex h-9 w-9 items-center justify-center rounded-full border border-[#4A171B]/60 bg-[#FAF7F2]/95 backdrop-blur-md text-[#4A171B] shadow-md transition-all hover:scale-110 hover:bg-[#4A171B] hover:text-white"
           aria-label="Back to top"
         >
           <ArrowUp className="h-4 w-4" />

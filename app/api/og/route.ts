@@ -25,7 +25,7 @@ export async function GET() {
     const candidateSources = [
       path.join(publicDir, 'images', 'image1.png'),
       path.join(publicDir, 'images', 'image.png'),
-      path.join(publicDir, 'images', 'wedding_floral_bg.jpg'),
+      path.join(publicDir, 'images', 'arch_background.jpg'),
     ]
 
     const existingSrc = candidateSources.find((p) => fs.existsSync(p))

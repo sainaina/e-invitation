@@ -1,6 +1,19 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import fs from 'fs'
+import path from 'path'
 import './globals.css'
+
+// Ensure user original arch_background.jpg is preserved for vertical_arch_background.jpg
+try {
+  const origArch = path.join(process.cwd(), 'public', 'images', 'arch_background.jpg')
+  const verticalArch = path.join(process.cwd(), 'public', 'images', 'vertical_arch_background.jpg')
+  if (fs.existsSync(origArch)) {
+    fs.copyFileSync(origArch, verticalArch)
+  }
+} catch (e) {
+  // Ignore serverless write errors
+}
 
 // Dynamically resolve site domain for Vercel production, preview branches, and custom domains
 const defaultSiteUrl =
@@ -125,7 +138,7 @@ export default function RootLayout({
         />
 
         <link
-          href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alex+Brush&family=Pinyon+Script&display=swap"
           rel="stylesheet"
         />
 
